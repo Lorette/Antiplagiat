@@ -8,7 +8,7 @@
 #ifndef GOOGLE_H
 #define	GOOGLE_H
 
-#include <MoteurRecherche.h>
+#include "MoteurRecherche.h"
 #include <QString>
 #include <QFile>
 #include <QUrl>
