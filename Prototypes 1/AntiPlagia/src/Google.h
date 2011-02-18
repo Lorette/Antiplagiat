@@ -24,7 +24,7 @@ public:
    ~Google();
    bool rechercheText();
    void sendRequest();
-
+   void recupUrl();
 
 };
 

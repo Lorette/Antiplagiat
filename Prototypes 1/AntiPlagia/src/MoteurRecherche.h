@@ -34,6 +34,7 @@ public:
    QString getUrl();
    virtual void sendRequest();
    bool traiterDOM();
+   virtual void recupUrl();
    virtual bool rechercheText();
    void HttpRequest(QString urlrequete);
 

@@ -90,7 +90,8 @@ void Document::traiterDocument()
 void Document::traiterReponse(bool error,QString errorString){
 
     if(!error){
-        m_ihm->result(m_moteurRecherche->traiterDOM(),m_moteurRecherche->getUrl());
+        bool b=m_moteurRecherche->traiterDOM();
+        m_ihm->result(b,m_moteurRecherche->getUrl());
     }
     else
         QMessageBox::critical(0, "Erreur", "Erreur lors du chargement. Vérifiez votre connexion internet ou réessayez plus tard <br /><br /> Code de l'erreur : <br /><em>" + errorString + "</em>");

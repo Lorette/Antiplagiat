@@ -55,4 +55,25 @@ void Google::sendRequest()
     HttpRequest("http://www.google.fr/search?hl=fr&q=\""+m_text+"\"");
 }
 
+////////////////////////////////////////////////////////////////////////
+// Name:       Google::recupUrl()
+// Purpose:    Implementation of Google::recupUrl()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void Google::recupUrl()
+{
+    int pos=m_DOM.indexOf("<em>"+m_text+"</em>",0,Qt::CaseInsensitive);
+    QString s(m_DOM);
+    s.resize(pos);
+    pos=0;
+    while(pos != -1){
+        pos=s.indexOf("<a",0,Qt::CaseInsensitive);
+        s=s.right(s.size()-pos-2);
+    }
+    s=s.right(s.size()-6);
+    pos=s.indexOf("\"",0,Qt::CaseInsensitive);
+    s.resize(pos);
+    m_url=s;
+}
 

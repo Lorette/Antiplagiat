@@ -105,6 +105,16 @@ void MoteurRecherche::sendRequest()
 }
 
 ////////////////////////////////////////////////////////////////////////
+// Name:       MoteurRecherche::recupUrl()
+// Purpose:    Implementation of MoteurRecherche::recupUrl()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void MoteurRecherche::recupUrl()
+{
+}
+
+////////////////////////////////////////////////////////////////////////
 // Name:       MoteurRecherche::traiterDOM()
 // Purpose:    Implementation of MoteurRecherche::traiterDOM()
 // Return:     boolean
@@ -114,7 +124,7 @@ bool MoteurRecherche::traiterDOM()
 {
     bool b = rechercheText();
     if ( b )
-        ;// recupere l'url d'ou vien le plagia
+        recupUrl();// recupere l'url d'ou vien le plagia
     return b;
 }
 
