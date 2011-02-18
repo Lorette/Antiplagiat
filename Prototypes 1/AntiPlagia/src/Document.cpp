@@ -39,7 +39,7 @@ Document::~Document()
 
 QString Document::getText()
 {
-   return text;
+   return m_text;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -50,7 +50,7 @@ QString Document::getText()
 
 void Document::setText()
 {
-   text = m_ihm->getText();
+   m_text = m_ihm->getText();
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -70,12 +70,14 @@ void Document::setIhm(Ihm* interface)
 // Return:     boolean
 ////////////////////////////////////////////////////////////////////////
 
-bool Document::traiterDocument()
+void Document::traiterDocument()
 {
+    // Initialiser les varriables et objets
     m_moteurRecherche = new Google();
     setText();
-    bool b = false;
-    if(m_moteurRecherche->sendRequest(getText()))
-        b=m_moteurRecherche->traiterDOM(getText());
-    return b;
+    m_moteurRecherche->setText(m_text);
+    m_moteurRecherche->setIhm(m_ihm);
+
+    // Envoi la requette est si elle c'est bien dérouler elle traite la réponse
+    m_moteurRecherche->sendRequest();
 }

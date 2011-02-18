@@ -16,6 +16,7 @@
 
 class MoteurRecherche;
 class Ihm;
+class Google;
 
 class Document
 {
@@ -26,11 +27,11 @@ public:
    QString getText();
    void setText();
    void setIhm(Ihm* interface);
-   bool traiterDocument();
+   void traiterDocument();
 
 private:
-   QString text;
-   MoteurRecherche *m_moteurRecherche;
+   QString m_text;
+   Google *m_moteurRecherche;
    Ihm *m_ihm;
 
 };

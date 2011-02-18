@@ -18,15 +18,10 @@
 Ihm::Ihm(QWidget *parent) : QMainWindow(parent), ui(new Ui::Ihm)
 {
     ui->setupUi(this);
-    setFixedSize(230, 120);
+    m_document = new Document();
+    m_document->setIhm(this);
 
-    m_boutonDialogue = new QPushButton("Test", this);
-    m_boutonDialogue->move(30,80);
-
-    m_QLineEdit = new QLineEdit(this);
-    m_QLineEdit->move(30,30);
-
-    QObject::connect(m_boutonDialogue, SIGNAL(clicked()), this, SLOT(ouvrirDialogue()));
+    QObject::connect(ui->buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked()), this, SLOT(traitement()));
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -38,25 +33,20 @@ Ihm::Ihm(QWidget *parent) : QMainWindow(parent), ui(new Ui::Ihm)
 Ihm::~Ihm()
 {
     delete ui;
-    delete m_QLineEdit;
-    delete m_boutonDialogue;
     delete m_document;
 }
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       Ihm::ouvrirDialogue()
-// Purpose:    Implementation of Ihm::ouvrirDialogue()
+// Name:       Ihm::traitement()
+// Purpose:    Implementation of Ihm::traitement()
 // Return:     void
 ////////////////////////////////////////////////////////////////////////
 
-void Ihm::ouvrirDialogue()
+void Ihm::traitement()
 {
-    m_document = new Document();
-    m_document->setIhm(this);
-    if (m_document->traiterDocument())
-        QMessageBox::information(this, "Résultat", "Cette phrase à été plagié");
-    else
-        QMessageBox::information(this, "Résultat", "Ce n'est pas du plagia");
+    ui->label->setText("");
+
+    m_document->traiterDocument();
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -66,5 +56,22 @@ void Ihm::ouvrirDialogue()
 ////////////////////////////////////////////////////////////////////////
 
 QString Ihm::getText(){
-    return m_QLineEdit->text();
+    return ui->lineEdit_3->text();
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Ihm::result(bool plagier, QString url)
+// Purpose:    Implementation of Ihm::result()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void Ihm::result(bool plagier, QString url)
+{
+    QString reponse;
+    if(plagier)
+        reponse="<br/><h3>Ce text a été plagier</h3>\nSource :<a href=\"\""+url+"\">"+url+"</a>";
+    else
+        reponse="<br/><h3>Ce text n'a pas été plagier</h3>";
+
+    ui->label->setText(reponse);
 }

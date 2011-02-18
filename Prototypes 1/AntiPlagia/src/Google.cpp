@@ -30,46 +30,29 @@ Google::~Google()
 
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       Google::rechercheText(QString text)
+// Name:       Google::rechercheText()
 // Purpose:    Implementation of Google::rechercheText()
 // Return:     boolean
 ////////////////////////////////////////////////////////////////////////
 
-bool Google::rechercheText(QString text)
+bool Google::rechercheText()
 {
-    return true;
-}
-
-////////////////////////////////////////////////////////////////////////
-// Name:       Google::traiterDOM(QString text)
-// Purpose:    Implementation of Google::traiterDOM()
-// Return:     boolean
-////////////////////////////////////////////////////////////////////////
-
-bool Google::traiterDOM(QString text)
-{
-    bool b=rechercheText(text);
+    //QMessageBox::critical(0, "Erreur", m_DOM);
+    bool b = m_DOM.contains("<em>"+m_text+"</em>",Qt::CaseInsensitive);
     return b;
 }
 
-////////////////////////////////////////////////////////////////////////
-// Name:       Google::HttpRequest(QString requete)
-// Purpose:    Implementation of Google::HttpRequest()
-// Return:     QFile
-////////////////////////////////////////////////////////////////////////
-
-QFile Google::HttpRequest(QString requete)
-{
-}
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       Google::sendRequest(QString text)
+// Name:       Google::sendRequest()
 // Purpose:    Implementation of Google::sendRequest()
-// Return:     boolean
+// Return:     void
 ////////////////////////////////////////////////////////////////////////
 
-bool Google::sendRequest(QString text)
+void Google::sendRequest()
 {
-    HttpRequest("http://www.google.fr/search?hl=fr&q=%22"+text+"%22");
-    return true;
+    // Recupère la page web de la requette google et la met dans m_DOM
+    HttpRequest("http://www.google.fr/search?hl=fr&q=\""+m_text+"\"");
 }
+
+

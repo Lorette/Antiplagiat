@@ -11,6 +11,10 @@
 #include <MoteurRecherche.h>
 #include <QString>
 #include <QFile>
+#include <QUrl>
+#include <QTextDocument>
+#include <QRegExp>
+#include <QWebView>
 
 class Google : public MoteurRecherche
 {
@@ -18,10 +22,8 @@ class Google : public MoteurRecherche
 public:
    Google();
    ~Google();
-   bool rechercheText(QString text);
-   bool traiterDOM(QString text);
-   QFile HttpRequest(QString requete);
-   bool sendRequest(QString text);
+   bool rechercheText();
+   void sendRequest();
 
 
 };

@@ -12,6 +12,7 @@
 #include <QPushButton>
 #include <QLineEdit>
 #include <QMessageBox>
+#include <QString>
 #include "Document.h"
 
 namespace Ui {
@@ -27,13 +28,12 @@ public:
     explicit Ihm(QWidget *parent = 0);
     ~Ihm();
     QString getText();
+    void result(bool plagier, QString url);
 public slots:
-    void ouvrirDialogue();
+    void traitement();
 
 private:
     Ui::Ihm *ui;
-    QLineEdit *m_QLineEdit;
-    QPushButton *m_boutonDialogue;
     Document *m_document;
 };
 
