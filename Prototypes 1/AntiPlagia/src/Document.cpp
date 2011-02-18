@@ -17,6 +17,7 @@
 
 Document::Document() : QObject()
 {
+    m_moteurRecherche = NULL;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -27,8 +28,8 @@ Document::Document() : QObject()
 
 Document::~Document()
 {
-   delete m_ihm;
-   delete m_moteurRecherche;
+   if(m_moteurRecherche != NULL)
+       delete m_moteurRecherche;
 }
 
 ////////////////////////////////////////////////////////////////////////
