@@ -15,7 +15,7 @@
 // Return:
 ////////////////////////////////////////////////////////////////////////
 
-Document::Document()
+Document::Document() : QObject()
 {
 }
 
@@ -67,7 +67,7 @@ void Document::setIhm(Ihm* interface)
 ////////////////////////////////////////////////////////////////////////
 // Name:       Document::traiterDocument()
 // Purpose:    Implementation of Document::traiterDocument()
-// Return:     boolean
+// Return:     void
 ////////////////////////////////////////////////////////////////////////
 
 void Document::traiterDocument()
@@ -76,8 +76,22 @@ void Document::traiterDocument()
     m_moteurRecherche = new Google();
     setText();
     m_moteurRecherche->setText(m_text);
-    m_moteurRecherche->setIhm(m_ihm);
-
+    QObject::connect(m_moteurRecherche, SIGNAL(requetFini(bool,QString)), this, SLOT(traiterReponse(bool,QString)));
     // Envoi la requette est si elle c'est bien dérouler elle traite la réponse
     m_moteurRecherche->sendRequest();
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Document::traiterReponse(bool error,QString errorString)
+// Purpose:    Implementation of Document::traiterReponse()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void Document::traiterReponse(bool error,QString errorString){
+
+    if(!error){
+        m_ihm->result(m_moteurRecherche->traiterDOM(),m_moteurRecherche->getUrl());
+    }
+    else
+        QMessageBox::critical(0, "Erreur", "Erreur lors du chargement. Vérifiez votre connexion internet ou réessayez plus tard <br /><br /> Code de l'erreur : <br /><em>" + errorString + "</em>");
 }

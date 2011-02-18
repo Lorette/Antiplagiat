@@ -14,7 +14,7 @@
 // Return:
 ////////////////////////////////////////////////////////////////////////
 
-Google::Google()
+Google::Google() : MoteurRecherche()
 {
 }
 
@@ -37,7 +37,7 @@ Google::~Google()
 
 bool Google::rechercheText()
 {
-    //QMessageBox::critical(0, "Erreur", m_DOM);
+    //QMessageBox::critical(0, "Contenu DOM", m_DOM);
     bool b = m_DOM.contains("<em>"+m_text+"</em>",Qt::CaseInsensitive);
     return b;
 }

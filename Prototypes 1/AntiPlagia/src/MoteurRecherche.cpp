@@ -6,7 +6,6 @@
  ***********************************************************************/
 
 #include "MoteurRecherche.h"
-#include "ihm.h"
 
 ////////////////////////////////////////////////////////////////////////
 // Name:       MoteurRecherche::MoteurRecherche()
@@ -14,7 +13,7 @@
 // Return:
 ////////////////////////////////////////////////////////////////////////
 
-MoteurRecherche::MoteurRecherche()
+MoteurRecherche::MoteurRecherche() : QObject()
 {
 }
 
@@ -96,17 +95,6 @@ QString MoteurRecherche::getUrl()
 
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       MoteurRecherche::setIhm(Ihm* interface)
-// Purpose:    Implementation of MoteurRecherche:setIhm()
-// Return:     void
-////////////////////////////////////////////////////////////////////////
-
-void MoteurRecherche::setIhm(Ihm* interface)
-{
-   m_ihm = interface;
-}
-
-////////////////////////////////////////////////////////////////////////
 // Name:       MoteurRecherche::sendRequest()
 // Purpose:    Implementation of MoteurRecherche::sendRequest()
 // Return:     void
@@ -122,9 +110,12 @@ void MoteurRecherche::sendRequest()
 // Return:     boolean
 ////////////////////////////////////////////////////////////////////////
 
-void MoteurRecherche::traiterDOM()
+bool MoteurRecherche::traiterDOM()
 {
-    m_ihm->result(rechercheText(),m_url);
+    bool b = rechercheText();
+    if ( b )
+        ;// recupere l'url d'ou vien le plagia
+    return b;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -166,20 +157,11 @@ void MoteurRecherche::downloadFinish()
     QNetworkReply *r = qobject_cast<QNetworkReply*>(sender()); //On récupère la réponse du serveur
 
     if (!r->error()){
-        // Création et ouverture du fichier
-        //QFile file("tmp/google.html");
-        //file.open(QIODevice::ReadWrite);
 
-        m_DOM=r->readAll();//file.write(r->readAll()); //On lit la réponse du serveur que l'on met dans un fichier
-
-        // Met la réponse dans m_DOM est suprime le fichier
-        //setDOM(file);
-        //file.remove();
-        //file.close();
-
+        m_DOM=r->readAll();//On lit la réponse du serveur que l'on met dans m_DOM
         r->deleteLater(); //Supprime la réponse.
 
-        traiterDOM();
+        emit requetFini(false);
     }
 }
 
@@ -191,5 +173,5 @@ void MoteurRecherche::downloadFinish()
 
 void MoteurRecherche::downloadError(QNetworkReply::NetworkError){
     QNetworkReply *r = qobject_cast<QNetworkReply*>(sender());
-    QMessageBox::critical(0, "Erreur", "Erreur lors du chargement. Vérifiez votre connexion internet ou réessayez plus tard <br /><br /> Code de l'erreur : <br /><em>" + r->errorString() + "</em>");
+    emit requetFini(false,r->errorString());
 }

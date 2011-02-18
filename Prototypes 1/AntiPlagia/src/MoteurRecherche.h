@@ -17,7 +17,6 @@
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 
-class Ihm;
 
 class MoteurRecherche : public QObject
 {
@@ -27,7 +26,6 @@ Q_OBJECT
 public:
    MoteurRecherche();
    ~MoteurRecherche();
-   void setIhm(Ihm* interface);
    QString getDOM();
    void setDOM(QString dom);
    void setText(QString text);
@@ -35,7 +33,7 @@ public:
    void setUrl(QString url);
    QString getUrl();
    virtual void sendRequest();
-   void traiterDOM();
+   bool traiterDOM();
    virtual bool rechercheText();
    void HttpRequest(QString urlrequete);
 
@@ -43,11 +41,13 @@ public slots :
    void downloadFinish();
    void downloadError(QNetworkReply::NetworkError);
 
+signals:
+    void requetFini(bool error,QString errorString = QString());
+
 protected:
    QString m_DOM;
    QString m_text;
    QString m_url;
-   Ihm *m_ihm;
 
 };
 

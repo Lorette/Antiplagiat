@@ -13,14 +13,17 @@
 #include "Ihm.h"
 #include "Google.h"
 #include <QWidget>
+#include <QObject>
 
 class MoteurRecherche;
 class Ihm;
 class Google;
 
-class Document
+class Document : public QObject
 {
-    
+
+Q_OBJECT
+
 public:
    Document();
    ~Document();
@@ -33,6 +36,9 @@ private:
    QString m_text;
    Google *m_moteurRecherche;
    Ihm *m_ihm;
+
+public slots:
+   void traiterReponse(bool error,QString errorString);
 
 };
 
