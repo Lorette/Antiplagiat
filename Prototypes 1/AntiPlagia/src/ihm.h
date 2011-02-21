@@ -13,6 +13,7 @@
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QString>
+#include <QFileDialog>
 #include "Document.h"
 
 namespace Ui {
@@ -28,9 +29,19 @@ public:
     explicit Ihm(QWidget *parent = 0);
     ~Ihm();
     QString getText();
-    void result(bool plagier, QString url);
+    QString getNameFile();
+    QString getDocument();
+    int focusTab();
+    void enabelDisabel(bool b);
+    bool erreurChamp();
+
 public slots:
     void traitement();
+    void aPropos();
+    void preference();
+    void documentation();
+    void selectFile();
+    void result(bool error = false , QString errorString = QString());
 
 private:
     Ui::Ihm *ui;

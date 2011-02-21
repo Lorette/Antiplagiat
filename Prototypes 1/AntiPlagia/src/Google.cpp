@@ -16,6 +16,7 @@
 
 Google::Google() : MoteurRecherche()
 {
+    m_id=0;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -35,9 +36,11 @@ Google::~Google()
 // Return:     boolean
 ////////////////////////////////////////////////////////////////////////
 
+
+
 bool Google::rechercheText()
 {
-    //QMessageBox::critical(0, "Contenu DOM", m_DOM);
+    m_DOM=m_DOM.QString::replace("&#39;","'");
     bool b = m_DOM.contains("<em>"+m_text+"</em>",Qt::CaseInsensitive);
     return b;
 }

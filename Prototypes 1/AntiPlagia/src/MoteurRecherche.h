@@ -43,12 +43,14 @@ public slots :
    void downloadError(QNetworkReply::NetworkError);
 
 signals:
-    void requetFini(bool error,QString errorString = QString());
+    void requetFini(int idMoteurRecherche);
+    void erreurRequet(bool error,QString errorString);
 
 protected:
    QString m_DOM;
    QString m_text;
    QString m_url;
+   int m_id;
 
 };
 

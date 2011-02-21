@@ -122,6 +122,7 @@ void MoteurRecherche::recupUrl()
 
 bool MoteurRecherche::traiterDOM()
 {
+    setUrl("");
     bool b = rechercheText();
     if ( b )
         recupUrl();// recupere l'url d'ou vien le plagia
@@ -171,7 +172,7 @@ void MoteurRecherche::downloadFinish()
         m_DOM=r->readAll();//On lit la réponse du serveur que l'on met dans m_DOM
         r->deleteLater(); //Supprime la réponse.
 
-        emit requetFini(false);
+        emit requetFini(m_id);
     }
 }
 
@@ -183,5 +184,5 @@ void MoteurRecherche::downloadFinish()
 
 void MoteurRecherche::downloadError(QNetworkReply::NetworkError){
     QNetworkReply *r = qobject_cast<QNetworkReply*>(sender());
-    emit requetFini(false,r->errorString());
+    emit erreurRequet(true,"Erreur lors du chargement. Vérifiez votre connexion internet ou réessayez plus tard <br /><br /> Code de l'erreur : <br /><em>" + r->errorString()+"</em>");
 }

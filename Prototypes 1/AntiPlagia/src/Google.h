@@ -16,6 +16,8 @@
 #include <QRegExp>
 #include <QWebView>
 
+class MoteurRecherche;
+
 class Google : public MoteurRecherche
 {
     

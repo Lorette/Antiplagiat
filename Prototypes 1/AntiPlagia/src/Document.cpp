@@ -15,9 +15,17 @@
 // Return:
 ////////////////////////////////////////////////////////////////////////
 
-Document::Document() : QObject()
+Document::Document(Ihm* interface) : QObject()
 {
-    m_moteurRecherche = NULL;
+    m_moteurRecherche = new Google();
+    m_ihm = interface;
+
+    // Quand la requete est terminer, execute traiterReponse
+    QObject::connect(m_moteurRecherche, SIGNAL(requetFini(int)), this, SLOT(traiterReponse(int)));
+    // Quand le traitement est fini
+    QObject::connect(this, SIGNAL(traitementFini()), m_ihm, SLOT(result()));
+    // Si il y a une erreur lors de la requete
+    QObject::connect(m_moteurRecherche, SIGNAL(erreurRequet(bool,QString)), m_ihm, SLOT(result(bool,QString)));
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -28,7 +36,6 @@ Document::Document() : QObject()
 
 Document::~Document()
 {
-   if(m_moteurRecherche != NULL)
        delete m_moteurRecherche;
 }
 
@@ -44,26 +51,16 @@ QString Document::getText()
 }
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       Document::setText()
+// Name:       Document::setText(QString text)
 // Purpose:    Implementation of Document::setText()
 // Return:     void
 ////////////////////////////////////////////////////////////////////////
 
-void Document::setText()
+void Document::setText(QString text)
 {
-   m_text = m_ihm->getText();
+   m_text = text;
 }
 
-////////////////////////////////////////////////////////////////////////
-// Name:       Document::setIhm(Ihm* interface)
-// Purpose:    Implementation of Document:setIhm()
-// Return:     void
-////////////////////////////////////////////////////////////////////////
-
-void Document::setIhm(Ihm* interface)
-{
-   m_ihm = interface;
-}
 
 ////////////////////////////////////////////////////////////////////////
 // Name:       Document::traiterDocument()
@@ -73,13 +70,29 @@ void Document::setIhm(Ihm* interface)
 
 void Document::traiterDocument()
 {
-    // Initialiser les varriables et objets
-    m_moteurRecherche = new Google();
-    setText();
-    m_moteurRecherche->setText(m_text);
-    QObject::connect(m_moteurRecherche, SIGNAL(requetFini(bool,QString)), this, SLOT(traiterReponse(bool,QString)));
-    // Envoi la requette est si elle c'est bien dérouler elle traite la réponse
-    m_moteurRecherche->sendRequest();
+    // Récupere les donné de l'ihm
+    initialisation();
+    // traite l'envoi la 1er requete
+    traiterEnvoie();
+
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Document::traiterEnvoie()
+// Purpose:    Implementation of Document::traiterEnvoie()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void Document::traiterEnvoie()
+{
+    indiceCible++;
+    if(indiceCible == m_textCible.size()) // Toute les requete on été traiter
+        emit traitementFini();//signal de fin
+    else{
+        m_moteurRecherche->setText(m_textCible[indiceCible].getText());
+        // Envoi la requette
+        m_moteurRecherche->sendRequest();
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -88,12 +101,80 @@ void Document::traiterDocument()
 // Return:     void
 ////////////////////////////////////////////////////////////////////////
 
-void Document::traiterReponse(bool error,QString errorString){
-
-    if(!error){
+void Document::traiterReponse(int idMoteurRecherche)
+{
+        // Détermine si le texte est plagier
         bool b=m_moteurRecherche->traiterDOM();
-        m_ihm->result(b,m_moteurRecherche->getUrl());
-    }
-    else
-        QMessageBox::critical(0, "Erreur", "Erreur lors du chargement. Vérifiez votre connexion internet ou réessayez plus tard <br /><br /> Code de l'erreur : <br /><em>" + errorString + "</em>");
+        // Stock le résulta
+        m_textCible[indiceCible].setResult(b,m_moteurRecherche->getUrl(),idMoteurRecherche);
+        // Passe a la requete suivante
+        traiterEnvoie();
 }
+
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Document::initialisation()
+// Purpose:    Implementation of Document::initialisation()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void Document::initialisation()
+{
+    m_textCible.clear();
+    indiceCible=-1;
+    int focus=m_ihm->focusTab();
+    if(focus == 1){//Par texte
+        m_text=m_ihm->getText();
+        m_textCible << TextCible(m_text);
+    }
+    else{
+        if(focus == 2) // Par document
+            m_text=m_ihm->getDocument();
+        else  // Par fichier
+            extractTextFile();
+        determinTextCible();
+    }
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Document::extractTextFile()
+// Purpose:    Implementation of Document::extractTextFile()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void Document::extractTextFile()
+{
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Document::determinTextCible()
+// Purpose:    Implementation of Document::determinTextCible()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void Document::determinTextCible()
+{
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Document::textIsPlagier()
+// Purpose:    Implementation of Document::textIsPlagier()
+// Return:     bool
+////////////////////////////////////////////////////////////////////////
+
+bool Document::textIsPlagier()
+{
+    return m_textCible[0].isPlagier();
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Document::getUrlTextPlagier()
+// Purpose:    Implementation of Document::getUrlTextPlagier()
+// Return:     QString
+////////////////////////////////////////////////////////////////////////
+
+QString Document::getUrlTextPlagier()
+{
+    return m_textCible[0].getUrl();
+}
+
