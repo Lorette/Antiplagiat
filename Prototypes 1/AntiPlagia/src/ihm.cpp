@@ -121,12 +121,13 @@ void Ihm::aPropos()
 {
      QDialog* action_propos = new QDialog (this);
      QVBoxLayout *layout = new QVBoxLayout;
-     QString propos = "<strong>Projet Antiplagia</strong>:<br/><br/><u><i>Réalisé par</i></u>:<ul><li>Fabien RONGIARD</li><li>Brice DUREUIL</li><li>Elkader FATNI</li><li>Soufi&egrave;ne NAJAR</li><li>Thomas CRESSON</li></ul><br/><u><i>Langage de programmation utilisé</u></i>:<ul><li>Langage C++</li></ul><br/><u><i>Librairie Graphique utilisée</u></i>:<ul><li>Qt 4.7</li></ul><br/><br/>Pour de plus amples informations visitez notre <a href=\"http://94.23.244.98/antiplagia/\">site web</a>.";
+     QString propos = "<strong>Projet Antiplagia</strong>:<br/><br/><u><i>Réalisé par</i></u>:<ul><li>Fabien RONGIARD</li><li>Brice DUREUIL</li><li>Elkader FATNI</li><li>Soufi&egrave;ne NAJAR</li><li>Thomas CRESSON</li></ul><br/><u><i>Langage de programmation utilisé</u></i>:<ul><li>Langage C++</li></ul><br/><u><i>Framework utilisée</u></i>:<ul><li>Qt 4.7</li></ul><br/><br/>Pour de plus amples informations visitez notre <a href=\"http://94.23.244.98/antiplagia/\">site web</a>.";
      QLabel *text = new QLabel(propos);
      layout->addWidget(text);
      action_propos->setLayout(layout);
+     action_propos->setMinimumSize(300,350);
+     action_propos->setMaximumSize(300,350);
      action_propos->show();
-
 }
 
 
