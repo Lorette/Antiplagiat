@@ -126,6 +126,7 @@ void Ihm::aPropos()
      layout->addWidget(text);
      action_propos->setLayout(layout);
      action_propos->show();
+
 }
 
 
