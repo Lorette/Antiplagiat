@@ -79,4 +79,3 @@ void Google::recupUrl()
     s.resize(pos);
     m_url=s;
 }
-

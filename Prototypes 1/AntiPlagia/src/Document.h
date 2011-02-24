@@ -40,11 +40,12 @@ public:
    void extractTextFile();
    void determinTextCible();
    bool textIsPlagier();
+   QString getDocumentEnrichi();
    QString getUrlTextPlagier();
 
 private:
    QString m_text;
-   int indiceCible;
+   int m_indiceCible;
    ListTextCicble m_textCible;
    MoteurRecherche *m_moteurRecherche;
    Ihm *m_ihm;
@@ -54,6 +55,7 @@ public slots:
 
 signals:
     void traitementFini();
+    void progress(int valeur,QString text = QString(""));
 
 };
 

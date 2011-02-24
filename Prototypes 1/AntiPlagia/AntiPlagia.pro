@@ -19,14 +19,16 @@ SOURCES += src/Document.cpp \
            src/main.cpp \
            src/MoteurRecherche.cpp \
 		   src/TextCible.cpp \
-		   src/ListTextCicble.cpp
+		   src/ListTextCicble.cpp \
+		   src/IhmPopup.cpp
 
 HEADERS += src/Document.h \
 		   src/Google.h \
 		   src/ihm.h \
 		   src/MoteurRecherche.h \
 		   src/TextCible.h \
-		   src/ListTextCicble.h
+		   src/ListTextCicble.h \
+		   src/IhmPopup.h
 
 
 FORMS += src/ihm.ui

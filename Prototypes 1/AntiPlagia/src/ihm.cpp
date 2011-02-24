@@ -19,7 +19,9 @@ Ihm::Ihm(QWidget *parent) : QMainWindow(parent), ui(new Ui::Ihm)
 {
     ui->setupUi(this);
     m_document = new Document(this);
+    m_popup = new IhmPopup();
 
+    QObject::connect(m_document,SIGNAL(progress(int,QString)),m_popup,SLOT(progressDL(int,QString)));
     QObject::connect(ui->buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked()), this, SLOT(traitement()));
     QObject::connect(ui->actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
     QObject::connect(ui->buttonBox->button(QDialogButtonBox::Close), SIGNAL(clicked()), qApp, SLOT(quit()));
@@ -39,6 +41,7 @@ Ihm::~Ihm()
 {
     delete ui;
     delete m_document;
+    delete m_popup;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -51,8 +54,12 @@ void Ihm::traitement()
 {
     enabelDisabel(false);
     ui->label->setText("");
-    if(!erreurChamp()) // Si les champ son bien entrer
+    m_popup->close();
+    if(!erreurChamp()){ // Si les champ son bien entrer
+        if(focusTab() != 1)
+            m_popup->startDL();
         m_document->traiterDocument();
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -103,9 +110,10 @@ void Ihm::result(bool error, QString errorString)
             else
                 ui->label->setText("<br/><h3>Ce text n'a pas été plagier</h3>");
         }
-        else // Par document ou fichier
-            QMessageBox::critical(this, "Erreur", "Indisponible");
-
+        else if (n == 2)// Par document
+            m_popup->result(m_document->getDocumentEnrichi());
+        else // Par fichier
+            QMessageBox::critical(this, "Erreur", "Indisponible ");
     }
     enabelDisabel(true);
 }
@@ -119,15 +127,14 @@ void Ihm::result(bool error, QString errorString)
 
 void Ihm::aPropos()
 {
-     QDialog* action_propos = new QDialog (this);
-     QVBoxLayout *layout = new QVBoxLayout;
-     QString propos = "<strong>Projet Antiplagia</strong>:<br/><br/><u><i>Réalisé par</i></u>:<ul><li>Fabien RONGIARD</li><li>Brice DUREUIL</li><li>Elkader FATNI</li><li>Soufi&egrave;ne NAJAR</li><li>Thomas CRESSON</li></ul><br/><u><i>Langage de programmation utilisé</u></i>:<ul><li>Langage C++</li></ul><br/><u><i>Framework utilisée</u></i>:<ul><li>Qt 4.7</li></ul><br/><br/>Pour de plus amples informations visitez notre <a href=\"http://94.23.244.98/antiplagia/\">site web</a>.";
-     QLabel *text = new QLabel(propos);
-     layout->addWidget(text);
-     action_propos->setLayout(layout);
-     action_propos->setMinimumSize(300,350);
-     action_propos->setMaximumSize(300,350);
-     action_propos->show();
+    QDialog* action_propos = new QDialog (this);
+    QVBoxLayout *layout = new QVBoxLayout;
+    QString propos = "<strong>Projet Antiplagia</strong>:<br/><br/><u><i>Réalisé par</i></u>:<ul><li>Fabien RONGIARD</li><li>Brice DUREUIL</li><li>Elkader FATNI</li><li>Soufi&egrave;ne NAJAR</li><li>Thomas CRESSON</li></ul><br/><u><i>Langage de programmation utilisé</u></i>:<ul><li>Langage C++</li></ul><br/><u><i>Framework utilisée</u></i>:<ul><li>Qt 4.7</li></ul><br/><br/>Pour de plus amples informations visitez notre <a href=\"http://94.23.244.98/antiplagia/\">site web</a>.";
+    QLabel *text = new QLabel(propos);
+    layout->addWidget(text);
+    action_propos->setLayout(layout);
+    action_propos->setFixedSize(300,350);
+    action_propos->show();
 }
 
 
@@ -139,6 +146,8 @@ void Ihm::aPropos()
 
 void Ihm::preference()
 {
+    QMessageBox::critical(this, "Indisponible", "Disponible prochainement !");
+
 }
 
 
@@ -150,6 +159,7 @@ void Ihm::preference()
 
 void Ihm::documentation()
 {
+    QMessageBox::critical(this, "Indisponible", "Disponible prochainement !");
 }
 
 ////////////////////////////////////////////////////////////////////////

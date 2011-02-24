@@ -15,11 +15,13 @@
 #include <QString>
 #include <QFileDialog>
 #include "Document.h"
+#include "IhmPopup.h"
 
 namespace Ui {
     class Ihm;
 }
 class Document;
+class IhmPopup;
 
 class Ihm : public QMainWindow
 {
@@ -46,6 +48,8 @@ public slots:
 private:
     Ui::Ihm *ui;
     Document *m_document;
+    IhmPopup *m_popup;
+
 };
 
 #endif /* IHM_H */

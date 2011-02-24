@@ -85,11 +85,14 @@ void Document::traiterDocument()
 
 void Document::traiterEnvoie()
 {
-    indiceCible++;
-    if(indiceCible == m_textCible.size()) // Toute les requete on été traiter
+    m_indiceCible++;
+    if(m_indiceCible == m_textCible.size()) // Toute les requete on été traiter
         emit traitementFini();//signal de fin
     else{
-        m_moteurRecherche->setText(m_textCible[indiceCible].getText());
+        //QMessageBox::critical(0, "Erreur", QString::number(5+m_indiceCible/m_textCible.size()*90));
+        if(m_ihm->focusTab() != 1)
+            emit progress(5+(int)((float)m_indiceCible/(float)m_textCible.size()*90),"Envoi des requetes... "+QString::number(m_indiceCible)+"/"+QString::number(m_textCible.size()));
+        m_moteurRecherche->setText(m_textCible[m_indiceCible].getText());
         // Envoi la requette
         m_moteurRecherche->sendRequest();
     }
@@ -106,7 +109,7 @@ void Document::traiterReponse(int idMoteurRecherche)
         // Détermine si le texte est plagier
         bool b=m_moteurRecherche->traiterDOM();
         // Stock le résulta
-        m_textCible[indiceCible].setResult(b,m_moteurRecherche->getUrl(),idMoteurRecherche);
+        m_textCible[m_indiceCible].setResult(b,m_moteurRecherche->getUrl(),idMoteurRecherche);
         // Passe a la requete suivante
         traiterEnvoie();
 }
@@ -121,13 +124,15 @@ void Document::traiterReponse(int idMoteurRecherche)
 void Document::initialisation()
 {
     m_textCible.clear();
-    indiceCible=-1;
+    m_text="";
+    m_indiceCible=-1;
     int focus=m_ihm->focusTab();
     if(focus == 1){//Par texte
         m_text=m_ihm->getText();
         m_textCible << TextCible(m_text);
     }
     else{
+        emit progress(0,"Selection des texts cible...");
         if(focus == 2) // Par document
             m_text=m_ihm->getDocument();
         else  // Par fichier
@@ -154,6 +159,9 @@ void Document::extractTextFile()
 
 void Document::determinTextCible()
 {
+    QStringList list = m_text.split(".");
+    for(int i=0;i < list.size();i++)
+        m_textCible << TextCible(list[i]);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -177,4 +185,20 @@ QString Document::getUrlTextPlagier()
 {
     return m_textCible[0].getUrl();
 }
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Document::getTextEnrichi()
+// Purpose:    Implementation of Document::getTextEnrichi()
+// Return:     QString
+////////////////////////////////////////////////////////////////////////
+
+QString Document::getDocumentEnrichi(){
+    QString doc=m_text;
+    emit progress(95,"Traitement des résultats... ");
+    for(int i=0;i<m_textCible.size();i++)
+        if(m_textCible[i].isPlagier())
+            doc.replace(m_textCible[i].getText(),"<a style=\"text-decoration:none;background:yellow;color:black;\" href=\""+m_textCible[i].getUrl()+"\" >"+m_textCible[i].getText()+"</a>");
+    return doc;
+}
+
 
