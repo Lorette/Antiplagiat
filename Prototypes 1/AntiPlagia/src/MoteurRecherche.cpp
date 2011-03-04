@@ -149,8 +149,10 @@ bool MoteurRecherche::rechercheText()
 void MoteurRecherche::HttpRequest(QString urlrequete)
 {
     const QUrl url = QUrl(urlrequete); //On récupère l'URL entrée par l'utilisateur.
-    const QNetworkRequest requete(url); //On crée notre requête
+    QNetworkRequest requete(url); //On crée notre requête
     QNetworkAccessManager *m = new QNetworkAccessManager;
+    requete.setRawHeader("Charset","utf-8;");
+    requete.setRawHeader("Accept-Charset","iso-8859-1,utf-8;q=0.7,*;q=0.7");
     QNetworkReply *r = m->get(requete);
     connect(r, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
     connect(r, SIGNAL(finished()), this, SLOT(downloadFinish()));

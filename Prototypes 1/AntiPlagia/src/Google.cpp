@@ -41,7 +41,7 @@ Google::~Google()
 bool Google::rechercheText()
 {
     m_DOM=m_DOM.QString::replace("&#39;","'");
-    bool b = m_DOM.contains("<em>"+m_text+"</em>",Qt::CaseInsensitive);
+    bool b = m_DOM.contains("<em>"+m_text.toUtf8()+"</em>",Qt::CaseInsensitive);
     return b;
 }
 
@@ -66,7 +66,7 @@ void Google::sendRequest()
 
 void Google::recupUrl()
 {
-    int pos=m_DOM.indexOf("<em>"+m_text+"</em>",0,Qt::CaseInsensitive);
+    int pos=m_DOM.indexOf("<em>"+m_text.toUtf8()+"</em>",0,Qt::CaseInsensitive);
     QString s(m_DOM);
     s.resize(pos);
     pos=0;
