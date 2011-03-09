@@ -129,7 +129,7 @@ void Document::initialisation()
     int focus=m_ihm->focusTab();
     if(focus == 1){//Par texte
         m_text=m_ihm->getText();
-        m_textCible << TextCible(m_text);
+        m_textCible << TextCible(m_text.trimmed());
     }
     else{
         emit progress(0,"Selection des texts cible...");
@@ -158,10 +158,36 @@ void Document::extractTextFile()
 ////////////////////////////////////////////////////////////////////////
 
 void Document::determinTextCible()
-{
+{/*
     QStringList list = m_text.split(".");
     for(int i=0;i < list.size();i++)
-        m_textCible << TextCible(list[i]);
+        m_textCible << TextCible(list[i]);*/
+
+        QStringList list = m_text.split(".");
+        QStringList listFinal;
+        QStringList list2;
+        int n;
+        QString s;
+
+        for(int i=0;i<list.size();i++){
+            list2=(list[i]).split(" ");
+            n=list2.size()/10;
+            for(int j=0;j < n ;j++){
+                s="";
+                for(int h=0;h<10;h++)
+                    s+=list2[j*10+h]+" ";
+                listFinal << s;
+            }/*
+            s="";
+            for(int h=(10*n);h<list2.size();h++)
+                s+=list2[h]+" ";
+            listFinal << s;*/
+            list2.clear();
+        }
+
+        for(int i=0;i < listFinal.size();i++){
+            m_textCible << TextCible((listFinal[i]).trimmed());
+        }
 }
 
 ////////////////////////////////////////////////////////////////////////
