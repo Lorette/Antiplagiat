@@ -190,7 +190,10 @@ int Ihm::focusTab(){
 
 void Ihm::selectFile()
 {
-    ui->lineEdit_4->setText(QFileDialog::getOpenFileName(this, "Ouvrir un fichier", QString(), "Fichier (*.pdf *.doc)"));
+    QString file = QFileDialog::getOpenFileName(this, "Ouvrir un fichier", QString(), "Fichier (*.pdf *.doc)");
+    if(file != "")
+        m_file = new QFile(file);
+    ui->lineEdit_4->setText(file);
 }
 
 ////////////////////////////////////////////////////////////////////////

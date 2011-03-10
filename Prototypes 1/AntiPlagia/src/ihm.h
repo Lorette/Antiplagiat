@@ -13,6 +13,7 @@
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QString>
+#include <QFile>
 #include <QFileDialog>
 #include "Document.h"
 #include "IhmPopup.h"
@@ -30,6 +31,7 @@ class Ihm : public QMainWindow
 public:
     explicit Ihm(QWidget *parent = 0);
     ~Ihm();
+    QFile *m_file;
     QString getText();
     QString getNameFile();
     QString getDocument();
