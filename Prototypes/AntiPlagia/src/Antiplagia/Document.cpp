@@ -177,11 +177,11 @@ void Document::determinTextCible()
                 for(int h=0;h<10;h++)
                     s+=list2[j*10+h]+" ";
                 listFinal << s;
-            }/*
+            }
             s="";
             for(int h=(10*n);h<list2.size();h++)
                 s+=list2[h]+" ";
-            listFinal << s;*/
+            listFinal << s;
             list2.clear();
         }
 
