@@ -190,10 +190,14 @@ int Ihm::focusTab(){
 
 void Ihm::selectFile()
 {
-    QString file = QFileDialog::getOpenFileName(this, "Ouvrir un fichier", QString(), "Fichier (*.pdf *.doc)");
+    QString file = QFileDialog::getOpenFileName(this, "Ouvrir un fichier", QString(), "Fichier (*.pdf *.docx)");
     if(file != "")
-        m_file = new QFile(file);
-    ui->lineEdit_4->setText(file);
+    {
+        if(m_TextDocx != NULL) delete m_TextDocx;
+        m_TextDocx = new TextDocx(file);
+        m_TextDocx->decompress();
+        ui->lineEdit_4->setText(file);
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////
