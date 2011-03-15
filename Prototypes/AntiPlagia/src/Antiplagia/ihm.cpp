@@ -20,7 +20,7 @@ Ihm::Ihm(QWidget *parent) : QMainWindow(parent), ui(new Ui::Ihm)
     ui->setupUi(this);
     m_document = new Document(this);
     m_popup = new IhmPopup();
-
+    m_TextDocx = NULL;
     QObject::connect(m_document,SIGNAL(progress(int,QString)),m_popup,SLOT(progressDL(int,QString)));
     QObject::connect(ui->buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked()), this, SLOT(traitement()));
     QObject::connect(ui->actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
@@ -42,6 +42,7 @@ Ihm::~Ihm()
     delete ui;
     delete m_document;
     delete m_popup;
+    if(m_TextDocx != NULL) delete m_TextDocx;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -191,6 +192,7 @@ int Ihm::focusTab(){
 void Ihm::selectFile()
 {
     QString file = QFileDialog::getOpenFileName(this, "Ouvrir un fichier", QString(), "Fichier (*.pdf *.docx)");
+
     if(file != "")
     {
         if(m_TextDocx != NULL) delete m_TextDocx;

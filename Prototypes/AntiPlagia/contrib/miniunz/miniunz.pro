@@ -12,4 +12,5 @@ DESTDIR = ../../workdir/bin
 # Input
 HEADERS += ioapi.h iowin32.h unzip.h
 SOURCES += ioapi.c iowin32.c miniunz.c unzip.c
-win32:LIBS += $$(PWD)/../../../Antiplagia/contrib/miniunz/zlib.a
+LIBS += ../../../Antiplagia/contrib/miniunz/zlib.a
+

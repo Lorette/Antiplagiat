@@ -17,6 +17,9 @@ public:
     bool decompress();
 
 private:
+    void removeDir(QString dir);
+
+private:
     QString m_file;
     QDomDocument *m_document;
 };
