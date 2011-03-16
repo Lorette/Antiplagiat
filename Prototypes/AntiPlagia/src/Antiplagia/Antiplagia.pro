@@ -20,7 +20,8 @@ HEADERS += Document.h \
            ListTextCicble.h \
            MoteurRecherche.h \
            TextCible.h \
-           textdocx.h
+           textdocx.h \
+    xstring.h
 FORMS += ihm.ui
 SOURCES += Document.cpp \
            Google.cpp \
@@ -30,4 +31,5 @@ SOURCES += Document.cpp \
            main.cpp \
            MoteurRecherche.cpp \
            TextCible.cpp \
-           textdocx.cpp
+           textdocx.cpp \
+    xstring.cpp

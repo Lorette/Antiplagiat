@@ -10,7 +10,7 @@
 
 #include <QString>
 #include "MoteurRecherche.h"
-#include "Ihm.h"
+#include "ihm.h"
 #include "Google.h"
 #include "ListTextCicble.h"
 #include "TextCible.h"

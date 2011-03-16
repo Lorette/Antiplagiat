@@ -6,8 +6,9 @@
 #include <QDir>
 #include <QtXml/QDomDocument>
 #include <QFile>
-#include <QTextStream>
+#include <QList>
 #include <QMessageBox>
+#include "xstring.h"
 
 class TextDocx
 {
@@ -15,6 +16,7 @@ public:
     TextDocx(QString file);
     ~TextDocx();
     bool decompress();
+    void extract_Text();
 
 private:
     void removeDir(QString dir);
@@ -22,6 +24,7 @@ private:
 private:
     QString m_file;
     QDomDocument *m_document;
+    QList <XString> m_textCibles;
 };
 
 #endif // TEXTDOCX_H

@@ -37,7 +37,6 @@ bool TextDocx::decompress()
     m_document->setContent(&file);
     file.close();
     removeDir("tmp");
-
     return true;
 }
 
@@ -64,4 +63,9 @@ void TextDocx::removeDir(QString dir)
 
         QDir().rmdir(dossier.absolutePath());
     }
+}
+
+void TextDocx::extract_Text()
+{
+
 }
