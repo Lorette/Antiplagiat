@@ -24,7 +24,7 @@ private:
 private:
     QString m_file;
     QDomDocument *m_document;
-    QList <XString> m_textCibles;
+    QList <XString *> m_textCibles;
 };
 
 #endif // TEXTDOCX_H

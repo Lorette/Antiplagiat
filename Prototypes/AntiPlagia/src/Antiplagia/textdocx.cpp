@@ -3,6 +3,9 @@
 TextDocx::TextDocx(QString file) : m_file(file)
 {
     m_document = NULL;
+    if(decompress())
+        extract_Text();
+
 }
 
 TextDocx::~TextDocx()
@@ -37,6 +40,7 @@ bool TextDocx::decompress()
     m_document->setContent(&file);
     file.close();
     removeDir("tmp");
+
     return true;
 }
 
@@ -67,5 +71,33 @@ void TextDocx::removeDir(QString dir)
 
 void TextDocx::extract_Text()
 {
+    QString text = "";
+    XString *x_string = NULL;
+    QDomNodeList node = m_document->elementsByTagName("w:r");
 
+    for(unsigned int i = 0; i< node.length();i++)
+    {
+        if(node.item(i).firstChildElement("w:t").text() != "")
+        {
+            if(x_string != NULL)
+            {
+                text = x_string->toString() + " ";
+                delete x_string;
+            }
+
+            x_string = new XString(text +(node.item(i).firstChildElement("w:t").text()),node.item(i).firstChildElement("w:rPr").firstChildElement("w:rFonts").attribute("w:hAnsi"),node.item(i).firstChildElement("w:rPr").firstChildElement("w:sz").attribute("w:val"));
+        }
+
+        if(x_string != NULL && x_string->toString().size() > 10)
+        {
+            m_textCibles << x_string;
+            x_string = NULL;
+            text = "";
+        }
+
+    }
+
+    // Pour tester
+    for(int i = 0;i<m_textCibles.count();i++)
+        QMessageBox::information(0,"hhh",m_textCibles.at(i)->toString());
 }

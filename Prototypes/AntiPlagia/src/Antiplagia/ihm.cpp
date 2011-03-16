@@ -197,7 +197,6 @@ void Ihm::selectFile()
     {
         if(m_TextDocx != NULL) delete m_TextDocx;
         m_TextDocx = new TextDocx(file);
-        m_TextDocx->decompress();
         ui->lineEdit_4->setText(file);
     }
 }

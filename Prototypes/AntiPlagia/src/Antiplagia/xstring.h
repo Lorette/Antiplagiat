@@ -3,16 +3,20 @@
 
 #include <QString>
 
-class XString : public QString
+class XString
 {
 
 public:
-    XString(QString string, QString police, int size);
-
+    XString();
+    ~XString();
+    XString(QString string, QString police, QString size);
+    QString get_m_police();
+    QString get_m_size();
+    QString toString();
 private:
     QString text;
     QString m_police;
-    int m_size;
+    QString m_size;
 };
 
 #endif // XSTRING_H
