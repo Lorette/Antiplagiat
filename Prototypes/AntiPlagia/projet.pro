@@ -4,6 +4,6 @@
 
 TEMPLATE = subdirs
 
-SUBDIRS = src/Antiplagia
-        #contrib/miniunz \
+SUBDIRS = src/Antiplagia \
+        contrib/miniunz 
 
