@@ -100,7 +100,7 @@ void TextDocx::tri()
     {
         if(text.count() != 0 && aux.get_m_police() == m_textCibles.at(i)->get_m_police() && aux.get_m_size() == m_textCibles.at(i)->get_m_size())
         {
-            m_textCibles.at(i)->setText(text +"" +m_textCibles.at(i)->toString());
+            m_textCibles.at(i)->setText(text +m_textCibles.at(i)->toString());
             text = "";
         }
         else if(text.count() != 0)
@@ -114,7 +114,7 @@ void TextDocx::tri()
         while(list.count() > 0)
         {
 
-            text = text +" "+ list.takeFirst();
+            text = text + list.takeFirst()+" ";
             if(text.split(" ").count() > 10)
             {
                 textCibles << new XString(text,m_textCibles.at(i)->get_m_police(),m_textCibles.at(i)->get_m_size());
@@ -124,8 +124,5 @@ void TextDocx::tri()
     }
     textCibles << new XString(text,aux.get_m_police(),aux.get_m_size());
 
-    for(int i = 0;i<textCibles.count();i++)
-        QMessageBox::information(0,"hhh",textCibles.at(i)->toString());
-
-    // Pas terminé : 1 problème persiste
+    m_textCibles = textCibles;
 }
