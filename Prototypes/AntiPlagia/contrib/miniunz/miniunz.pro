@@ -10,7 +10,14 @@ INCLUDEPATH += . ../includes/zlib/
 DESTDIR = ../../workdir/bin
 
 # Input
-HEADERS += ioapi.h iowin32.h unzip.h
-SOURCES += ioapi.c iowin32.c miniunz.c unzip.c
+win32 {
+    HEADERS += ioapi.h iowin32.h unzip.h
+    SOURCES += ioapi.c iowin32.c miniunz.c unzip.c
+ }
+else {
+    HEADERS += ioapi.h unzip.h
+    SOURCES += ioapi.c miniunz.c unzip.c
+ }
+
 LIBS += ../../../Antiplagia/contrib/miniunz/zlib.a
 

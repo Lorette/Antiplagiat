@@ -17,6 +17,7 @@ public:
     ~TextDocx();
     bool decompress();
     void extract_Text();
+    void tri();
 
 private:
     void removeDir(QString dir);

@@ -2,6 +2,7 @@
 #define XSTRING_H
 
 #include <QString>
+#include <QStringList>
 
 class XString
 {
@@ -13,8 +14,11 @@ public:
     QString get_m_police();
     QString get_m_size();
     QString toString();
+    void setText(QString text);
+    int count_words();
+
 private:
-    QString text;
+    QString m_text;
     QString m_police;
     QString m_size;
 };

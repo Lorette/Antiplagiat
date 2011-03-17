@@ -71,7 +71,6 @@ void TextDocx::removeDir(QString dir)
 
 void TextDocx::extract_Text()
 {
-    QString text = "";
     XString *x_string = NULL;
     QDomNodeList node = m_document->elementsByTagName("w:r");
 
@@ -79,25 +78,54 @@ void TextDocx::extract_Text()
     {
         if(node.item(i).firstChildElement("w:t").text() != "")
         {
-            if(x_string != NULL)
-            {
-                text = x_string->toString() + " ";
-                delete x_string;
-            }
-
-            x_string = new XString(text +(node.item(i).firstChildElement("w:t").text()),node.item(i).firstChildElement("w:rPr").firstChildElement("w:rFonts").attribute("w:hAnsi"),node.item(i).firstChildElement("w:rPr").firstChildElement("w:sz").attribute("w:val"));
-        }
-
-        if(x_string != NULL && x_string->toString().size() > 10)
-        {
+            x_string = new XString(node.item(i).firstChildElement("w:t").text(),node.item(i).firstChildElement("w:rPr").firstChildElement("w:rFonts").attribute("w:hAnsi"),node.item(i).firstChildElement("w:rPr").firstChildElement("w:sz").attribute("w:val"));
             m_textCibles << x_string;
-            x_string = NULL;
-            text = "";
         }
-
     }
 
     // Pour tester
-    for(int i = 0;i<m_textCibles.count();i++)
-        QMessageBox::information(0,"hhh",m_textCibles.at(i)->toString());
+    //for(int i = 0;i<m_textCibles.count();i++)
+        //QMessageBox::information(0,"hhh",m_textCibles.at(i)->toString());
+    tri();
+}
+
+void TextDocx::tri()
+{
+    QList <XString *> textCibles;
+    XString aux;
+    QString text = "";
+    QStringList list;
+
+    for(int i = 0;i < m_textCibles.count();i++)
+    {
+        if(text.count() != 0 && aux.get_m_police() == m_textCibles.at(i)->get_m_police() && aux.get_m_size() == m_textCibles.at(i)->get_m_size())
+        {
+            m_textCibles.at(i)->setText(text +"" +m_textCibles.at(i)->toString());
+            text = "";
+        }
+        else if(text.count() != 0)
+        {
+            textCibles << new XString(text,aux.get_m_police(),aux.get_m_size());
+            text = "";
+        }
+        aux = *m_textCibles.at(i);
+        list = aux.toString().split(" ");
+
+        while(list.count() > 0)
+        {
+
+            text = text +" "+ list.takeFirst();
+            if(text.split(" ").count() > 10)
+            {
+                textCibles << new XString(text,m_textCibles.at(i)->get_m_police(),m_textCibles.at(i)->get_m_size());
+                text = "";
+            }
+        }
+    }
+    textCibles << new XString(text,aux.get_m_police(),aux.get_m_size());
+
+    for(int i = 0;i<textCibles.count();i++)
+        QMessageBox::information(0,"hhh",textCibles.at(i)->toString());
+
+    // Pas terminé : 1 problème persiste
 }
