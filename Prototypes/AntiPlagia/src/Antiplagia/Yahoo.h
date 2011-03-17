@@ -1,12 +1,12 @@
 /***********************************************************************
- * Module:  Google.h
+ * Module:  Yahoo.h
  * Author:  fabien
  * Modified: vendredi 11 février 2011 16:46:28
- * Purpose: Declaration of the class Google
+ * Purpose: Declaration of the class Yahoo
  ***********************************************************************/
 
-#ifndef GOOGLE_H
-#define	GOOGLE_H
+#ifndef YAHOO_H
+#define YAHOO_H
 
 #include "MoteurRecherche.h"
 #include <QString>
@@ -14,17 +14,16 @@
 
 class MoteurRecherche;
 
-class Google : public MoteurRecherche
+class Yahoo : public MoteurRecherche
 {
-    
+
 public:
-   Google();
-   ~Google();
-   bool rechercheText();
-   void sendRequest();
-   void recupUrl();
+    Yahoo();
+    ~Yahoo();
+    bool rechercheText();
+    void sendRequest();
+    void recupUrl();
 
 };
 
-#endif	/* GOOGLE_H */
-
+#endif /* YAHOO_H */

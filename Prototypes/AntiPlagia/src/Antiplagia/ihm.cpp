@@ -19,9 +19,9 @@ Ihm::Ihm(QWidget *parent) : QMainWindow(parent), ui(new Ui::Ihm)
 {
     ui->setupUi(this);
     m_document = new Document(this);
-    m_popup = new IhmPopup();
+    m_popup = NULL;
+    m_file = NULL;
 
-    QObject::connect(m_document,SIGNAL(progress(int,QString)),m_popup,SLOT(progressDL(int,QString)));
     QObject::connect(ui->buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked()), this, SLOT(traitement()));
     QObject::connect(ui->actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
     QObject::connect(ui->buttonBox->button(QDialogButtonBox::Close), SIGNAL(clicked()), qApp, SLOT(quit()));
@@ -41,7 +41,10 @@ Ihm::~Ihm()
 {
     delete ui;
     delete m_document;
-    delete m_popup;
+    if (m_popup != NULL )
+        delete m_popup;
+    if (m_file != NULL )
+        delete m_file;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -54,10 +57,15 @@ void Ihm::traitement()
 {
     enabelDisabel(false);
     ui->label->setText("");
-    m_popup->close();
+    if (m_popup != NULL )
+        delete m_popup;
+
     if(!erreurChamp()){ // Si les champ son bien entrer
-        if(focusTab() != 1)
+        if(focusTab() != 1){
+            m_popup = new IhmPopup();
+            QObject::connect(m_document,SIGNAL(progress(int,QString)),m_popup,SLOT(progressDL(int,QString)));
             m_popup->startDL();
+        }
         m_document->traiterDocument();
     }
 }
@@ -110,10 +118,18 @@ void Ihm::result(bool error, QString errorString)
             else
                 ui->label->setText("<br/><h3>Ce text n'a pas été plagier</h3>");
         }
-        else if (n == 2)// Par document
-            m_popup->result(m_document->getDocumentEnrichi());
-        else // Par fichier
-            QMessageBox::critical(this, "Erreur", "Indisponible ");
+        else{// Par document
+            QObject::disconnect(m_document,SIGNAL(progress(int,QString)),m_popup,SLOT(progressDL(int,QString)));
+            delete m_popup;
+            if(n == 3){ // Par fichier
+                QMessageBox::critical(this, "Erreur", "Indisponible ");
+                m_popup = NULL;
+            }
+            else{
+                m_popup = new IhmPopup();
+                m_popup->result(m_document->getDocumentEnrichi());
+            }
+        }
     }
     enabelDisabel(true);
 }
@@ -190,7 +206,7 @@ int Ihm::focusTab(){
 
 void Ihm::selectFile()
 {
-    QString file = QFileDialog::getOpenFileName(this, "Ouvrir un fichier", QString(), "Fichier (*.pdf *.doc)");
+    QString file = QFileDialog::getOpenFileName(this, "Ouvrir un fichier", QString(), "Fichier (*.pdf *.doc *.docx)");
     if(file != "")
         m_file = new QFile(file);
     ui->lineEdit_4->setText(file);
@@ -234,6 +250,33 @@ bool Ihm::erreurChamp()
     else if ( !ui->checkBox_4->isChecked() && !ui->checkBox_5->isChecked() && !ui->checkBox_6->isChecked()){
         result(true,"Aucun moteur de recheche sélectioné");
         b=true;
+    }
+    return b;
+}
+
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Ihm::isSelect(int idMoteurRecherche)
+// Purpose:    Implementation of Ihm::isSelect()
+// Return:     bool
+////////////////////////////////////////////////////////////////////////
+
+bool Ihm::isSelect(int idMoteurRecherche)
+{
+    bool b;
+    switch(idMoteurRecherche){
+    case 0:
+        b=ui->checkBox_6->isChecked();
+        break;
+    case 1:
+        b=ui->checkBox_5->isChecked();
+        break;
+    case 2:
+        b=ui->checkBox_4->isChecked();
+        break;
+    default:
+        b=false;
+        break;
     }
     return b;
 }

@@ -1,72 +1,72 @@
 /***********************************************************************
- * Module:  Google.cpp
+ * Module:  Bing.cpp
  * Author:  fabien
  * Modified: vendredi 11 février 2011 16:46:28
- * Purpose: Implementation of the class Google
+ * Purpose: Implementation of the class Bing
  ***********************************************************************/
 
-#include "Google.h"
+#include "Bing.h"
 
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       Google::Google()
-// Purpose:    Implementation of Google::Google()
+// Name:       Bing::Bing()
+// Purpose:    Implementation of Bing::Bing()
 // Return:
 ////////////////////////////////////////////////////////////////////////
 
-Google::Google() : MoteurRecherche()
+Bing::Bing() : MoteurRecherche()
 {
-    m_id=0;
+    m_id=2;
 }
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       Google::~Google()
-// Purpose:    Implementation of Google::~Google()
+// Name:       Bing::~Bing()
+// Purpose:    Implementation of Bing::~Bing()
 // Return:
 ////////////////////////////////////////////////////////////////////////
 
-Google::~Google()
+Bing::~Bing()
 {
 }
 
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       Google::rechercheText()
-// Purpose:    Implementation of Google::rechercheText()
+// Name:       Bing::rechercheText()
+// Purpose:    Implementation of Bing::rechercheText()
 // Return:     boolean
 ////////////////////////////////////////////////////////////////////////
 
 
 
-bool Google::rechercheText()
+bool Bing::rechercheText()
 {
-    m_DOM=m_DOM.QString::replace("&#39;","'");
-    bool b = m_DOM.contains("<em>"+m_text.toUtf8()+"</em>",Qt::CaseInsensitive);
+    //m_DOM=m_DOM.QString::replace("&#39;","'");
+    bool b = m_DOM.contains("<strong>"+m_text.toUtf8()+"</strong>",Qt::CaseInsensitive);
     return b;
 }
 
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       Google::sendRequest()
-// Purpose:    Implementation of Google::sendRequest()
+// Name:       Bing::sendRequest()
+// Purpose:    Implementation of Bing::sendRequest()
 // Return:     void
 ////////////////////////////////////////////////////////////////////////
 
-void Google::sendRequest()
+void Bing::sendRequest()
 {
-    // Recupère la page web de la requette google et la met dans m_DOM
-    HttpRequest("http://www.google.fr/search?hl=fr&q=\""+m_text+"\"");
+    // Recupère la page web de la requette Bing et la met dans m_DOM
+    HttpRequest("http://www.bing.com/search?q=\""+m_text+"\"");
 }
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       Google::recupUrl()
-// Purpose:    Implementation of Google::recupUrl()
+// Name:       Bing::recupUrl()
+// Purpose:    Implementation of Bing::recupUrl()
 // Return:     void
 ////////////////////////////////////////////////////////////////////////
 
-void Google::recupUrl()
+void Bing::recupUrl()
 {
-    int pos=m_DOM.indexOf("<em>"+m_text.toUtf8()+"</em>",0,Qt::CaseInsensitive);
+    int pos=m_DOM.indexOf("<strong>"+m_text.toUtf8()+"</strong>",0,Qt::CaseInsensitive);
     QString s(m_DOM);
     s.resize(pos);
     pos=0;

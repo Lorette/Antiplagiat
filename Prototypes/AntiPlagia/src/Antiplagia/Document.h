@@ -12,6 +12,8 @@
 #include "MoteurRecherche.h"
 #include "Ihm.h"
 #include "Google.h"
+#include "Yahoo.h"
+#include "Bing.h"
 #include "ListTextCicble.h"
 #include "TextCible.h"
 #include <QWidget>
@@ -21,6 +23,7 @@
 class MoteurRecherche;
 class Ihm;
 class Google;
+class Yahoo;
 class ListTextCicble;
 class TextCible;
 
@@ -35,7 +38,7 @@ public:
    QString getText();
    void setText(QString text);
    void traiterDocument();
-   void traiterEnvoie();
+   void traiterEnvoie(int idMoteurRecherche);
    void initialisation();
    void extractTextFile();
    void determinTextCible();
@@ -45,9 +48,11 @@ public:
 
 private:
    QString m_text;
-   int m_indiceCible;
+   int m_indiceCible[3];
+   int m_nbRequet;
+   int m_requet;
    ListTextCicble m_textCible;
-   MoteurRecherche *m_moteurRecherche;
+   QList<MoteurRecherche*> m_moteurRecherche;
    Ihm *m_ihm;
 
 public slots:

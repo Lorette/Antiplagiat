@@ -17,15 +17,21 @@
 
 Document::Document(Ihm* interface) : QObject()
 {
-    m_moteurRecherche = new Google();
+    m_moteurRecherche << new Google();
+    m_moteurRecherche << new Yahoo();
+    m_moteurRecherche << new Bing();
     m_ihm = interface;
 
     // Quand la requete est terminer, execute traiterReponse
-    QObject::connect(m_moteurRecherche, SIGNAL(requetFini(int)), this, SLOT(traiterReponse(int)));
+    QObject::connect(m_moteurRecherche[0], SIGNAL(requetFini(int)), this, SLOT(traiterReponse(int)));
+    QObject::connect(m_moteurRecherche[1], SIGNAL(requetFini(int)), this, SLOT(traiterReponse(int)));
+    QObject::connect(m_moteurRecherche[2], SIGNAL(requetFini(int)), this, SLOT(traiterReponse(int)));
     // Quand le traitement est fini
     QObject::connect(this, SIGNAL(traitementFini()), m_ihm, SLOT(result()));
     // Si il y a une erreur lors de la requete
-    QObject::connect(m_moteurRecherche, SIGNAL(erreurRequet(bool,QString)), m_ihm, SLOT(result(bool,QString)));
+    QObject::connect(m_moteurRecherche[0], SIGNAL(erreurRequet(bool,QString)), m_ihm, SLOT(result(bool,QString)));
+    QObject::connect(m_moteurRecherche[1], SIGNAL(erreurRequet(bool,QString)), m_ihm, SLOT(result(bool,QString)));
+    QObject::connect(m_moteurRecherche[2], SIGNAL(erreurRequet(bool,QString)), m_ihm, SLOT(result(bool,QString)));
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -36,7 +42,9 @@ Document::Document(Ihm* interface) : QObject()
 
 Document::~Document()
 {
-       delete m_moteurRecherche;
+       delete m_moteurRecherche[0];
+       delete m_moteurRecherche[1];
+       delete m_moteurRecherche[2];
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -73,8 +81,12 @@ void Document::traiterDocument()
     // Récupere les donné de l'ihm
     initialisation();
     // traite l'envoi la 1er requete
-    traiterEnvoie();
-
+    if(m_ihm->isSelect(0))
+        traiterEnvoie(0);
+    if(m_ihm->isSelect(1))
+        traiterEnvoie(1);
+    if(m_ihm->isSelect(2))
+        traiterEnvoie(2);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -83,18 +95,20 @@ void Document::traiterDocument()
 // Return:     void
 ////////////////////////////////////////////////////////////////////////
 
-void Document::traiterEnvoie()
+void Document::traiterEnvoie(int idMoteurRecherche)
 {
-    m_indiceCible++;
-    if(m_indiceCible == m_textCible.size()) // Toute les requete on été traiter
+    m_requet++;
+    m_indiceCible[idMoteurRecherche]++;
+    if(m_requet == m_nbRequet) // Toute les requete on été traiter
         emit traitementFini();//signal de fin
+    else if(m_indiceCible[idMoteurRecherche] == m_textCible.size())
+        ;// tout les requettes de ce moteur de recherche on été effectuer
     else{
-        //QMessageBox::critical(0, "Erreur", QString::number(5+m_indiceCible/m_textCible.size()*90));
         if(m_ihm->focusTab() != 1)
-            emit progress(5+(int)((float)m_indiceCible/(float)m_textCible.size()*90),"Envoi des requetes... "+QString::number(m_indiceCible)+"/"+QString::number(m_textCible.size()));
-        m_moteurRecherche->setText(m_textCible[m_indiceCible].getText());
+            emit progress(5+(int)((float)m_requet/(float)m_nbRequet*90),"Envoi des requetes... "+QString::number(m_requet)+"/"+QString::number(m_nbRequet));
+        m_moteurRecherche[idMoteurRecherche]->setText(m_textCible[m_indiceCible[idMoteurRecherche]].getText());
         // Envoi la requette
-        m_moteurRecherche->sendRequest();
+        m_moteurRecherche[idMoteurRecherche]->sendRequest();
     }
 }
 
@@ -107,11 +121,11 @@ void Document::traiterEnvoie()
 void Document::traiterReponse(int idMoteurRecherche)
 {
         // Détermine si le texte est plagier
-        bool b=m_moteurRecherche->traiterDOM();
+        bool b=m_moteurRecherche[idMoteurRecherche]->traiterDOM();
         // Stock le résulta
-        m_textCible[m_indiceCible].setResult(b,m_moteurRecherche->getUrl(),idMoteurRecherche);
+        m_textCible[m_indiceCible[idMoteurRecherche]].setResult(b,m_moteurRecherche[idMoteurRecherche]->getUrl(),idMoteurRecherche);
         // Passe a la requete suivante
-        traiterEnvoie();
+        traiterEnvoie(idMoteurRecherche);
 }
 
 
@@ -125,7 +139,10 @@ void Document::initialisation()
 {
     m_textCible.clear();
     m_text="";
-    m_indiceCible=-1;
+    m_requet=0;
+    m_indiceCible[0]=-1;
+    m_indiceCible[1]=-1;
+    m_indiceCible[2]=-1;
     int focus=m_ihm->focusTab();
     if(focus == 1){//Par texte
         m_text=m_ihm->getText();
@@ -139,6 +156,13 @@ void Document::initialisation()
             extractTextFile();
         determinTextCible();
     }
+
+    m_nbRequet=0;
+    m_nbRequet+=(m_ihm->isSelect(0))? 1 : 0;
+    m_nbRequet+=(m_ihm->isSelect(1))? 1 : 0;
+    m_nbRequet+=(m_ihm->isSelect(2))? 1 : 0;
+    m_requet-=m_nbRequet;
+    m_nbRequet*=m_textCible.size();
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -149,6 +173,7 @@ void Document::initialisation()
 
 void Document::extractTextFile()
 {
+    //QProcess::execute("miniunz.exe -o \""+m_file +"\" -d tmp");
 }
 
 ////////////////////////////////////////////////////////////////////////

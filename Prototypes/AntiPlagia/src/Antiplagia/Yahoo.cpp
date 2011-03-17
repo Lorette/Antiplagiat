@@ -1,72 +1,71 @@
 /***********************************************************************
- * Module:  Google.cpp
+ * Module:  Yahoo.cpp
  * Author:  fabien
  * Modified: vendredi 11 février 2011 16:46:28
- * Purpose: Implementation of the class Google
+ * Purpose: Implementation of the class Yahoo
  ***********************************************************************/
 
-#include "Google.h"
+#include "Yahoo.h"
 
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       Google::Google()
-// Purpose:    Implementation of Google::Google()
+// Name:       Yahoo::Yahoo()
+// Purpose:    Implementation of Yahoo::Yahoo()
 // Return:
 ////////////////////////////////////////////////////////////////////////
 
-Google::Google() : MoteurRecherche()
+Yahoo::Yahoo() : MoteurRecherche()
 {
-    m_id=0;
+    m_id=1;
 }
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       Google::~Google()
-// Purpose:    Implementation of Google::~Google()
+// Name:       Yahoo::~Yahoo()
+// Purpose:    Implementation of Yahoo::~Yahoo()
 // Return:
 ////////////////////////////////////////////////////////////////////////
 
-Google::~Google()
+Yahoo::~Yahoo()
 {
 }
 
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       Google::rechercheText()
-// Purpose:    Implementation of Google::rechercheText()
+// Name:       Yahoo::rechercheText()
+// Purpose:    Implementation of Yahoo::rechercheText()
 // Return:     boolean
 ////////////////////////////////////////////////////////////////////////
 
 
 
-bool Google::rechercheText()
+bool Yahoo::rechercheText()
 {
-    m_DOM=m_DOM.QString::replace("&#39;","'");
-    bool b = m_DOM.contains("<em>"+m_text.toUtf8()+"</em>",Qt::CaseInsensitive);
+    bool b = m_DOM.contains("<b>"+m_text.toUtf8()+"</b>",Qt::CaseInsensitive);
     return b;
 }
 
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       Google::sendRequest()
-// Purpose:    Implementation of Google::sendRequest()
+// Name:       Yahoo::sendRequest()
+// Purpose:    Implementation of Yahoo::sendRequest()
 // Return:     void
 ////////////////////////////////////////////////////////////////////////
 
-void Google::sendRequest()
+void Yahoo::sendRequest()
 {
-    // Recupère la page web de la requette google et la met dans m_DOM
-    HttpRequest("http://www.google.fr/search?hl=fr&q=\""+m_text+"\"");
+    // Recupère la page web de la requette Yahoo et la met dans m_DOM
+    HttpRequest("http://fr.search.yahoo.com/search?p=\""+m_text+"\"");
 }
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       Google::recupUrl()
-// Purpose:    Implementation of Google::recupUrl()
+// Name:       Yahoo::recupUrl()
+// Purpose:    Implementation of Yahoo::recupUrl()
 // Return:     void
 ////////////////////////////////////////////////////////////////////////
 
-void Google::recupUrl()
+void Yahoo::recupUrl()
 {
-    int pos=m_DOM.indexOf("<em>"+m_text.toUtf8()+"</em>",0,Qt::CaseInsensitive);
+    int pos=m_DOM.indexOf("<b>"+m_text.toUtf8()+"</b>",0,Qt::CaseInsensitive);
     QString s(m_DOM);
     s.resize(pos);
     pos=0;
@@ -74,11 +73,17 @@ void Google::recupUrl()
         pos=s.indexOf("<a",0,Qt::CaseInsensitive);
         s=s.right(s.size()-pos-2);
     }
-    s=s.right(s.size()-6);
+    pos=s.indexOf("href",0,Qt::CaseInsensitive);
+    s=s.right(s.size()-pos-6);
     pos=0;
     while(pos != -1){
         pos=s.indexOf("\"",0,Qt::CaseInsensitive);
         if (pos != -1 )s.resize(pos);
     }
-    m_url=s;
+    pos=0;
+    while(pos != -1){
+        pos=s.indexOf("http",0,Qt::CaseInsensitive);
+        if (pos != -1 )s=s.right(s.size()-pos-7);
+    }
+    m_url="http:"+s;
 }

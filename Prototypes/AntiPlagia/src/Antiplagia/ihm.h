@@ -38,6 +38,7 @@ public:
     int focusTab();
     void enabelDisabel(bool b);
     bool erreurChamp();
+    bool isSelect(int idMoteurRecherche);
 
 public slots:
     void traitement();
