@@ -18,7 +18,7 @@ bool TextDocx::decompress()
 {
     m_document = new QDomDocument();
 
-    if(!QFile().exists("miniunz.exe"))
+    if(!QFile().exists(EXE_UNZIP))
     {
         QMessageBox::warning(0,"Fichier manquant","Le programme nécessaire pour lire ce type de ficier est absent.\n\nVeuillez réinstaller l'application pour corriger le problème");
         return false;
@@ -27,7 +27,7 @@ bool TextDocx::decompress()
     if(!QDir().exists("tmp"))
         QDir().mkdir("tmp");
 
-    QProcess::execute("miniunz.exe -o \""+m_file +"\" -d tmp");
+    QProcess::execute(QString(L_EXE_UNZIP) +" -o \""+m_file +"\" -d tmp");
 
     QFile file("tmp/word/document.xml");
 

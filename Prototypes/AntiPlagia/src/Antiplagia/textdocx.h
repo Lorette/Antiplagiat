@@ -10,6 +10,15 @@
 #include <QMessageBox>
 #include "xstring.h"
 
+#ifdef _WIN32
+#define EXE_UNZIP ("miniunz.exe")
+#define L_EXE_UNZIP ("miniunz.exe")
+#else
+#define EXE_UNZIP ("miniunz")
+#define L_EXE_UNZIP ("./miniunz")
+#endif
+
+
 class TextDocx
 {
 public:
