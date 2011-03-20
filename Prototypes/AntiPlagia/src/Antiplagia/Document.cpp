@@ -287,6 +287,8 @@ bool Document::setFile(QString file)
         m_file = new TextDocx(file);
     if(file.endsWith(".pdf",Qt::CaseInsensitive))
         m_file = new TextPdf(file);
+    if(file.endsWith(".odt",Qt::CaseInsensitive))
+        m_file = new TextOdt(file);
 
     if(!m_file->fileIsValid())
     {

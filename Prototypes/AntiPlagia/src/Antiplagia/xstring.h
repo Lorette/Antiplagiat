@@ -17,7 +17,7 @@ class XString
 public:
     XString();
     ~XString();
-    XString(QString string, QString police, QString size);
+    XString(QString string, QString police = "None", QString size = "None");
     QString get_m_police();
     QString get_m_size();
     QString toString();

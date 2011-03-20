@@ -18,6 +18,7 @@
 #include "TextCible.h"
 #include "textdocx.h"
 #include "TextPdf.h"
+#include "textodt.h"
 #include <QWidget>
 #include <QObject>
 #include <QStringList>
@@ -31,6 +32,7 @@ class TextCible;
 class Extension;
 class TextDocx;
 class TextPdf;
+class TextOdt;
 
 class Document : public QObject
 {

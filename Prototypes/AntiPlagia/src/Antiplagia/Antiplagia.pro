@@ -23,7 +23,8 @@ HEADERS += Document.h \
            Yahoo.h \
            Bing.h \
            Extension.h \
-           TextPdf.h
+           TextPdf.h \
+		   textodt.h
 
 FORMS +=   ihm.ui \
            resultat.ui \
@@ -42,4 +43,5 @@ SOURCES += Document.cpp \
            Yahoo.cpp \
            Bing.cpp \
            Extension.cpp \
-           TextPdf.cpp
+           TextPdf.cpp \
+		   textodt.cpp

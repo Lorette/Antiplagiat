@@ -35,7 +35,7 @@ XString::~XString()
 // Return:
 ////////////////////////////////////////////////////////////////////////
 
-XString::XString(QString string, QString police = "None", QString size = "") : m_text(string), m_police(police),m_size(size)
+XString::XString(QString string, QString police, QString size) : m_text(string), m_police(police),m_size(size)
 {
 }
 

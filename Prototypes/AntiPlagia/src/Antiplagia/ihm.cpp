@@ -212,7 +212,7 @@ int Ihm::focusTab(){
 
 void Ihm::selectFile()
 {
-    QString file = QFileDialog::getOpenFileName(this, "Ouvrir un fichier", QString(), "Fichier (*.pdf *.docx)");
+    QString file = QFileDialog::getOpenFileName(this, "Ouvrir un fichier", QString(), "Fichier (*.pdf *.docx *.odt)");
 
     if(file != "")
     {
