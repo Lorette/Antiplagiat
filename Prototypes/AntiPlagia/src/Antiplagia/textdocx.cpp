@@ -3,9 +3,6 @@
 TextDocx::TextDocx(QString file) : m_file(file)
 {
     m_document = NULL;
-    if(decompress())
-        extract_Text();
-
 }
 
 TextDocx::~TextDocx()
@@ -86,11 +83,15 @@ void TextDocx::extract_Text()
     // Pour tester
     //for(int i = 0;i<m_textCibles.count();i++)
         //QMessageBox::information(0,"hhh",m_textCibles.at(i)->toString());
-    tri();
 }
 
-void TextDocx::tri()
+void TextDocx::tri(int max_word, bool tri_police, bool tri_size)
 {
+    int tri_ = 0;
+    (tri_police == true) ? tri_++ : tri_;
+    (tri_size == true) ? tri_++ : tri_;
+
+    int tri;
     QList <XString *> textCibles;
     XString aux;
     QString text = "";
@@ -98,16 +99,28 @@ void TextDocx::tri()
 
     for(int i = 0;i < m_textCibles.count();i++)
     {
-        if(text.count() != 0 && aux.get_m_police() == m_textCibles.at(i)->get_m_police() && aux.get_m_size() == m_textCibles.at(i)->get_m_size())
+        if(text.count() != 0)
         {
-            m_textCibles.at(i)->setText(text +m_textCibles.at(i)->toString());
-            text = "";
+            tri = 0;
+            if(tri_police && aux.get_m_police() == m_textCibles.at(i)->get_m_police())
+                tri++;
+            if(tri_size && aux.get_m_size() == m_textCibles.at(i)->get_m_size())
+                tri++;
+
+            if(tri == tri_)
+            {
+                m_textCibles.at(i)->setText(text +m_textCibles.at(i)->toString());
+                text = "";
+            }
+
         }
-        else if(text.count() != 0)
+
+        if(text.count() != 0)
         {
             textCibles << new XString(text,aux.get_m_police(),aux.get_m_size());
             text = "";
         }
+
         aux = *m_textCibles.at(i);
         list = aux.toString().split(" ");
 
@@ -115,7 +128,7 @@ void TextDocx::tri()
         {
 
             text = text + list.takeFirst()+" ";
-            if(text.split(" ").count() > 10)
+            if(text.split(" ").count() > max_word)
             {
                 textCibles << new XString(text,m_textCibles.at(i)->get_m_police(),m_textCibles.at(i)->get_m_size());
                 text = "";
@@ -125,4 +138,25 @@ void TextDocx::tri()
     textCibles << new XString(text,aux.get_m_police(),aux.get_m_size());
 
     m_textCibles = textCibles;
+
+    // Pour tester
+    //for(int i = 0;i<m_textCibles.count();i++)
+        //QMessageBox::information(0,"hhh",m_textCibles.at(i)->toString());
+
+}
+
+QList <XString *> TextDocx::getList()
+{
+    return this->m_textCibles;
+}
+
+QString TextDocx::getText()
+{
+    QString s = "";
+    int count = m_textCibles.count();
+    for(int i = 0; i < count;i++)
+        s = s+ m_textCibles.at(i)->toString();
+    QMessageBox::information(0,"jhj",s);
+    return s;
+
 }

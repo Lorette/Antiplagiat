@@ -21,6 +21,7 @@ Document::Document(Ihm* interface) : QObject()
     m_moteurRecherche << new Yahoo();
     m_moteurRecherche << new Bing();
     m_ihm = interface;
+    m_docx = NULL;
 
     // Quand la requete est terminer, execute traiterReponse
     QObject::connect(m_moteurRecherche[0], SIGNAL(requetFini(int)), this, SLOT(traiterReponse(int)));
@@ -45,6 +46,7 @@ Document::~Document()
        delete m_moteurRecherche[0];
        delete m_moteurRecherche[1];
        delete m_moteurRecherche[2];
+       if(m_docx != NULL) delete m_docx;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -150,11 +152,17 @@ void Document::initialisation()
     }
     else{
         emit progress(0,"Selection des texts cible...");
-        if(focus == 2) // Par document
+        if(focus == 2) {// Par document
             m_text=m_ihm->getDocument();
+            determinTextCible();
+        }
         else  // Par fichier
+        {
             extractTextFile();
-        determinTextCible();
+            triTextFile();
+            m_text=m_docx->getText();
+            determinDocxCible();
+        }
     }
 
     m_nbRequet=0;
@@ -173,7 +181,7 @@ void Document::initialisation()
 
 void Document::extractTextFile()
 {
-    //QProcess::execute("miniunz.exe -o \""+m_file +"\" -d tmp");
+        m_docx->extract_Text();
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -200,8 +208,9 @@ void Document::determinTextCible()
             for(int j=0;j < n ;j++){
                 s="";
                 for(int h=0;h<10;h++)
-                    s+=list2[j*10+h]+" ";
+                s +=list2[j*10+h]+" ";
                 listFinal << s;
+
             }
             s="";
             for(int h=(10*n);h<list2.size();h++)
@@ -210,9 +219,9 @@ void Document::determinTextCible()
             list2.clear();
         }
 
-        for(int i=0;i < listFinal.size();i++){
+        for(int i=0;i < listFinal.size();i++)
             m_textCible << TextCible((listFinal[i]).trimmed());
-        }
+
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -252,4 +261,29 @@ QString Document::getDocumentEnrichi(){
     return doc;
 }
 
+bool Document::setFile(QString file)
+{
+    m_docx = new TextDocx(file);
+    if(!m_docx->decompress())
+    {
+        delete m_docx;
+        m_docx = NULL;
+        return false;
+    }
 
+    return true;
+}
+
+void Document::triTextFile()
+{
+    m_docx->tri(10,true,true);
+}
+
+void Document::determinDocxCible()
+{
+    int c = m_docx->getList().count();
+    for(int i = 0;i < c;i++)
+    {
+        m_textCible << TextCible(m_docx->getList().at(i)->toString().trimmed());
+    }
+}

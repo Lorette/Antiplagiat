@@ -26,7 +26,9 @@ public:
     ~TextDocx();
     bool decompress();
     void extract_Text();
-    void tri();
+    void tri(int max_word = 10, bool tri_police = true, bool tri_size = true);
+    QList <XString *> getList();
+    QString getText();
 
 private:
     void removeDir(QString dir);

@@ -23,7 +23,6 @@ Ihm::Ihm(QWidget *parent) : QMainWindow(parent), ui(new Ui::Ihm)
     m_popup = NULL;
     m_file = NULL;
 
-    m_TextDocx = NULL;
     QObject::connect(ui->buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked()), this, SLOT(traitement()));
     QObject::connect(ui->actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
     QObject::connect(ui->buttonBox->button(QDialogButtonBox::Close), SIGNAL(clicked()), qApp, SLOT(quit()));
@@ -48,7 +47,6 @@ Ihm::~Ihm()
         delete m_popup;
     if (m_file != NULL )
         delete m_file;
-    if(m_TextDocx != NULL) delete m_TextDocx;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -125,14 +123,14 @@ void Ihm::result(bool error, QString errorString)
         else{// Par document
             QObject::disconnect(m_document,SIGNAL(progress(int,QString)),m_popup,SLOT(progressDL(int,QString)));
             delete m_popup;
-            if(n == 3){ // Par fichier
-                QMessageBox::critical(this, "Erreur", "Indisponible ");
-                m_popup = NULL;
-            }
-            else{
+            //if(n == 3){ // Par fichier
+              //  QMessageBox::critical(this, "Erreur", "Indisponible ");
+                //m_popup = NULL;
+            //}
+            //else{
                 m_popup = new IhmPopup();
                 m_popup->result(m_document->getDocumentEnrichi());
-            }
+            //}
         }
     }
     enabelDisabel(true);
@@ -214,9 +212,8 @@ void Ihm::selectFile()
 
     if(file != "")
     {
-        if(m_TextDocx != NULL) delete m_TextDocx;
-        m_TextDocx = new TextDocx(file);
-        ui->lineEdit_4->setText(file);
+        if(m_document->setFile(file));
+            ui->lineEdit_4->setText(file);
     }
 }
 

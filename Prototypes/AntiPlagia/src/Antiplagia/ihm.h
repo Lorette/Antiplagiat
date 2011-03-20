@@ -17,7 +17,7 @@
 #include <QFileDialog>
 #include "Document.h"
 #include "IhmPopup.h"
-#include "textdocx.h"
+
 namespace Ui {
     class Ihm;
 }
@@ -35,7 +35,6 @@ public:
     QString getText();
     QString getNameFile();
     QString getDocument();
-    TextDocx *m_TextDocx;
     int focusTab();
     void enabelDisabel(bool b);
     bool erreurChamp();
