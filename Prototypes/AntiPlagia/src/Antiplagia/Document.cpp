@@ -21,7 +21,7 @@ Document::Document(Ihm* interface) : QObject()
     m_moteurRecherche << new Yahoo();
     m_moteurRecherche << new Bing();
     m_ihm = interface;
-    m_docx = NULL;
+    m_file = NULL;
 
     // Quand la requete est terminer, execute traiterReponse
     QObject::connect(m_moteurRecherche[0], SIGNAL(requetFini(int)), this, SLOT(traiterReponse(int)));
@@ -46,7 +46,7 @@ Document::~Document()
        delete m_moteurRecherche[0];
        delete m_moteurRecherche[1];
        delete m_moteurRecherche[2];
-       if(m_docx != NULL) delete m_docx;
+       if(m_file != NULL) delete m_file;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -145,7 +145,9 @@ void Document::initialisation()
     m_indiceCible[0]=-1;
     m_indiceCible[1]=-1;
     m_indiceCible[2]=-1;
+
     int focus=m_ihm->focusTab();
+
     if(focus == 1){//Par texte
         m_text=m_ihm->getText();
         m_textCible << TextCible(m_text.trimmed());
@@ -157,11 +159,14 @@ void Document::initialisation()
             determinTextCible();
         }
         else  // Par fichier
-        {
+        {   /*
             extractTextFile();
             triTextFile();
             m_text=m_docx->getText();
             determinDocxCible();
+            */
+            m_text=m_file->getText();
+            determinTextCibleFile();
         }
     }
 
@@ -174,14 +179,16 @@ void Document::initialisation()
 }
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       Document::extractTextFile()
-// Purpose:    Implementation of Document::extractTextFile()
+// Name:       Document::determinTextCibleFile()
+// Purpose:    Implementation of Document::determinTextCibleFile()
 // Return:     void
 ////////////////////////////////////////////////////////////////////////
 
-void Document::extractTextFile()
+void Document::determinTextCibleFile()
 {
-        m_docx->extract_Text();
+    QStringList cible = m_file->getCible();
+    for(int i=0;i < cible.size();i++)
+        m_textCible << TextCible((cible[i]).trimmed());
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -191,11 +198,7 @@ void Document::extractTextFile()
 ////////////////////////////////////////////////////////////////////////
 
 void Document::determinTextCible()
-{/*
-    QStringList list = m_text.split(".");
-    for(int i=0;i < list.size();i++)
-        m_textCible << TextCible(list[i]);*/
-
+{
         QStringList list = m_text.split(".");
         QStringList listFinal;
         QStringList list2;
@@ -208,7 +211,7 @@ void Document::determinTextCible()
             for(int j=0;j < n ;j++){
                 s="";
                 for(int h=0;h<10;h++)
-                s +=list2[j*10+h]+" ";
+                    s += list2[j*10+h]+" ";
                 listFinal << s;
 
             }
@@ -261,29 +264,33 @@ QString Document::getDocumentEnrichi(){
     return doc;
 }
 
+////////////////////////////////////////////////////////////////////////
+// Name:       Document::setFile(QString file)
+// Purpose:    Implementation of Document::setFile()
+// Return:     bool
+////////////////////////////////////////////////////////////////////////
+
 bool Document::setFile(QString file)
 {
-    m_docx = new TextDocx(file);
-    if(!m_docx->decompress())
+    if(m_file != NULL) delete m_file;
+
+    QString extention(file);
+    int pos=0;
+
+    while(pos != -1){
+        pos=extention.indexOf(".",0,Qt::CaseInsensitive);
+        if(pos != -1 ) extention=extention.right(extention.size()-pos-1);
+    }
+
+    if(extention == "docx")
+        m_file = new TextDocx(file);
+
+    if(!m_file->fileIsValid())
     {
-        delete m_docx;
-        m_docx = NULL;
+        delete m_file;
+        m_file = NULL;
         return false;
     }
 
     return true;
-}
-
-void Document::triTextFile()
-{
-    m_docx->tri(10,true,true);
-}
-
-void Document::determinDocxCible()
-{
-    int c = m_docx->getList().count();
-    for(int i = 0;i < c;i++)
-    {
-        m_textCible << TextCible(m_docx->getList().at(i)->toString().trimmed());
-    }
 }

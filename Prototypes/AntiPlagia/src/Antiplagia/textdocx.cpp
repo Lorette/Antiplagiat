@@ -1,15 +1,97 @@
+/***********************************************************************
+ * Module:  textdocx.cpp
+ * Author:  fabien
+ * Modified: vendredi 11 février 2011 16:44:15
+ * Purpose: Implementation of the class TextDocx
+ ***********************************************************************/
+
 #include "textdocx.h"
+
+////////////////////////////////////////////////////////////////////////
+// Name:       TextDocx::TextDocx()
+// Purpose:    Implementation of TextDocx::TextDocx()
+// Return:
+////////////////////////////////////////////////////////////////////////
 
 TextDocx::TextDocx(QString file) : m_file(file)
 {
     m_document = NULL;
 }
 
+////////////////////////////////////////////////////////////////////////
+// Name:       TextDocx::~TextDocx()
+// Purpose:    Implementation of TextDocx::~TextDocx()
+// Return:
+////////////////////////////////////////////////////////////////////////
+
 TextDocx::~TextDocx()
 {
     if(m_document != NULL) delete m_document;
     removeDir("tmp");
+    for(int i=0; i < m_textCibles.size();i++)
+        delete m_textCibles[i];
 }
+
+////////////////////////////////////////////////////////////////////////
+// Name:       TextDocx::fileIsValid()
+// Purpose:    Implementation of TextDocx::fileIsValid()
+// Return:     boolean
+////////////////////////////////////////////////////////////////////////
+
+bool TextDocx::fileIsValid()
+{
+    return decompress();
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       TextDocx::getText()
+// Purpose:    Implementation of TextDocx::getText()
+// Return:     QString
+////////////////////////////////////////////////////////////////////////
+
+QString TextDocx::getText()
+{
+    QString s="";
+    QDomNodeList node = m_document->elementsByTagName("w:p");
+    QDomNodeList node2;
+
+    for(int i=0;i<node.size();i++){
+        node2 = node.item(i).childNodes();//toDocument().elementsByTagName("w:r");
+        for(int j = 0; j< node2.size();j++)
+            s+=node2.item(j).firstChildElement("w:t").text();
+        s+="<br/>";
+    }
+
+    return s;
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       TextDocx::getCible()
+// Purpose:    Implementation of TextDocx::getCible()
+// Return:     QStringList
+////////////////////////////////////////////////////////////////////////
+
+QStringList TextDocx::getCible()
+{
+    for(int i=0; i < m_textCibles.size();i++)
+        delete m_textCibles[i];
+    m_textCibles.clear();
+    extract_Text();
+    tri(10,true,true);
+
+    QStringList cible;
+
+    for(int i=0; i < m_textCibles.size();i++)
+        cible << m_textCibles[i]->toString();
+
+    return cible;
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       TextDocx::decompress()
+// Purpose:    Implementation of TextDocx::decompress()
+// Return:     boolean
+////////////////////////////////////////////////////////////////////////
 
 bool TextDocx::decompress()
 {
@@ -41,6 +123,12 @@ bool TextDocx::decompress()
     return true;
 }
 
+////////////////////////////////////////////////////////////////////////
+// Name:       TextDocx::removeDir(QString dir)
+// Purpose:    Implementation of TextDocx::removeDir()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
 void TextDocx::removeDir(QString dir)
 {
     {
@@ -66,6 +154,12 @@ void TextDocx::removeDir(QString dir)
     }
 }
 
+////////////////////////////////////////////////////////////////////////
+// Name:       TextDocx::extract_Text()
+// Purpose:    Implementation of TextDocx::extract_Text()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
 void TextDocx::extract_Text()
 {
     XString *x_string = NULL;
@@ -84,6 +178,12 @@ void TextDocx::extract_Text()
     //for(int i = 0;i<m_textCibles.count();i++)
         //QMessageBox::information(0,"hhh",m_textCibles.at(i)->toString());
 }
+
+////////////////////////////////////////////////////////////////////////
+// Name:       TextDocx::tri(int max_word, bool tri_police, bool tri_size)
+// Purpose:    Implementation of TextDocx::tri()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
 
 void TextDocx::tri(int max_word, bool tri_police, bool tri_size)
 {
@@ -145,18 +245,4 @@ void TextDocx::tri(int max_word, bool tri_police, bool tri_size)
 
 }
 
-QList <XString *> TextDocx::getList()
-{
-    return this->m_textCibles;
-}
 
-QString TextDocx::getText()
-{
-    QString s = "";
-    int count = m_textCibles.count();
-    for(int i = 0; i < count;i++)
-        s = s+ m_textCibles.at(i)->toString();
-    QMessageBox::information(0,"jhj",s);
-    return s;
-
-}

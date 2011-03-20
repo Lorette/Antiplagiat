@@ -27,6 +27,7 @@ class Google;
 class Yahoo;
 class ListTextCicble;
 class TextCible;
+class Extension;
 class TextDocx;
 
 class Document : public QObject
@@ -42,18 +43,16 @@ public:
    void traiterDocument();
    void traiterEnvoie(int idMoteurRecherche);
    void initialisation();
-   void extractTextFile();
    void determinTextCible();
    bool textIsPlagier();
    bool setFile(QString file);
    QString getDocumentEnrichi();
    QString getUrlTextPlagier();
-   void triTextFile();
-   void determinDocxCible();
+   void determinTextCibleFile();
 
 private:
    QString m_text;
-   TextDocx *m_docx;
+   Extension *m_file;
    int m_indiceCible[3];
    int m_nbRequet;
    int m_requet;

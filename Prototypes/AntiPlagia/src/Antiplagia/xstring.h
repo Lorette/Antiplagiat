@@ -1,3 +1,10 @@
+/***********************************************************************
+ * Module:  xstring.h
+ * Author:  fabien
+ * Modified: vendredi 11 février 2011 16:46:28
+ * Purpose: Declaration of the class XString
+ ***********************************************************************/
+
 #ifndef XSTRING_H
 #define XSTRING_H
 

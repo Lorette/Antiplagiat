@@ -19,9 +19,10 @@ HEADERS += Document.h \
            MoteurRecherche.h \
            TextCible.h \
            textdocx.h \
-		   xstring.h \
-		   Yahoo.h \
-           Bing.h
+           xstring.h \
+           Yahoo.h \
+           Bing.h \
+           Extension.h
 
 FORMS +=   ihm.ui \
            resultat.ui \
@@ -36,6 +37,7 @@ SOURCES += Document.cpp \
            MoteurRecherche.cpp \
            TextCible.cpp \
            textdocx.cpp \
-		   xstring.cpp \
-	       Yahoo.cpp \
-           Bing.cpp
+           xstring.cpp \
+           Yahoo.cpp \
+           Bing.cpp \
+           Extension.cpp
