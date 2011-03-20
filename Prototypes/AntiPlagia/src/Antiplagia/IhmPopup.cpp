@@ -43,6 +43,7 @@ void IhmPopup::startDL()
 {
     ui = new Ui::Progress();
     ui->setupUi(this);
+    QObject::connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(clickAnnuler()));
     show();
 }
 
@@ -72,3 +73,13 @@ void IhmPopup::result(QString text)
     show();
 }
 
+////////////////////////////////////////////////////////////////////////
+// Name:       IhmPopup::clickAnnuler()
+// Purpose:    Implementation of IhmPopup::clickAnnuler()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void IhmPopup::clickAnnuler()
+{
+    emit annuler();
+}

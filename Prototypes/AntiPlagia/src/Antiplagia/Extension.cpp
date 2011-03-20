@@ -47,7 +47,7 @@ bool Extension::fileIsValid()
 
 QString Extension::getText()
 {
-    return NULL;
+    return QString();
 
 }
 
@@ -59,5 +59,5 @@ QString Extension::getText()
 
 QStringList Extension::getCible()
 {
-
+    return QStringList();
 }

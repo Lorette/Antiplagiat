@@ -30,8 +30,12 @@ public:
     void startDL();
     void result(QString text);
 
-private slots:
+public slots:
     void progressDL(int valeur,QString text);
+    void clickAnnuler();
+
+signals:
+    void annuler();
 
 private:
     Ui::Progress *ui;

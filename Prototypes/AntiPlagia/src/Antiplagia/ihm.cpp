@@ -66,6 +66,8 @@ void Ihm::traitement()
         if(focusTab() != 1){
             m_popup = new IhmPopup();
             QObject::connect(m_document,SIGNAL(progress(int,QString)),m_popup,SLOT(progressDL(int,QString)));
+            QObject::connect(m_popup,SIGNAL(annuler()),m_document,SLOT(annulerTraitement()));
+            QObject::connect(m_popup,SIGNAL(annuler()),this,SLOT(annulerTraitement()));
             m_popup->startDL();
         }
         m_document->traiterDocument();
@@ -122,6 +124,8 @@ void Ihm::result(bool error, QString errorString)
         }
         else{// Par document
             QObject::disconnect(m_document,SIGNAL(progress(int,QString)),m_popup,SLOT(progressDL(int,QString)));
+            QObject::disconnect(m_popup,SIGNAL(annuler()),m_document,SLOT(annulerTraitement()));
+            QObject::disconnect(m_popup,SIGNAL(annuler()),this,SLOT(annulerTraitement()));
             delete m_popup;
             //if(n == 3){ // Par fichier
               //  QMessageBox::critical(this, "Erreur", "Indisponible ");
@@ -284,4 +288,22 @@ bool Ihm::isSelect(int idMoteurRecherche)
         break;
     }
     return b;
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Ihm::annulerTraitement()
+// Purpose:    Implementation of Ihm::annulerTraitement()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void Ihm::annulerTraitement()
+{
+    if(m_popup != NULL ){
+        QObject::disconnect(m_document,SIGNAL(progress(int,QString)),m_popup,SLOT(progressDL(int,QString)));
+        QObject::disconnect(m_popup,SIGNAL(annuler()),m_document,SLOT(annulerTraitement()));
+        QObject::disconnect(m_popup,SIGNAL(annuler()),this,SLOT(annulerTraitement()));
+        delete m_popup;
+        m_popup = NULL;
+    }
+    enabelDisabel(true);
 }

@@ -33,6 +33,12 @@ Document::Document(Ihm* interface) : QObject()
     QObject::connect(m_moteurRecherche[0], SIGNAL(erreurRequet(bool,QString)), m_ihm, SLOT(result(bool,QString)));
     QObject::connect(m_moteurRecherche[1], SIGNAL(erreurRequet(bool,QString)), m_ihm, SLOT(result(bool,QString)));
     QObject::connect(m_moteurRecherche[2], SIGNAL(erreurRequet(bool,QString)), m_ihm, SLOT(result(bool,QString)));
+    QObject::connect(m_moteurRecherche[0], SIGNAL(erreurRequet(bool,QString)), m_ihm, SLOT(annulerTraitement()));
+    QObject::connect(m_moteurRecherche[1], SIGNAL(erreurRequet(bool,QString)), m_ihm, SLOT(annulerTraitement()));
+    QObject::connect(m_moteurRecherche[2], SIGNAL(erreurRequet(bool,QString)), m_ihm, SLOT(annulerTraitement()));
+    QObject::connect(m_moteurRecherche[0], SIGNAL(erreurRequet(bool,QString)), this, SLOT(annulerTraitement()));
+    QObject::connect(m_moteurRecherche[1], SIGNAL(erreurRequet(bool,QString)), this, SLOT(annulerTraitement()));
+    QObject::connect(m_moteurRecherche[2], SIGNAL(erreurRequet(bool,QString)), this, SLOT(annulerTraitement()));
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -99,18 +105,20 @@ void Document::traiterDocument()
 
 void Document::traiterEnvoie(int idMoteurRecherche)
 {
-    m_requet++;
-    m_indiceCible[idMoteurRecherche]++;
-    if(m_requet == m_nbRequet) // Toute les requete on été traiter
-        emit traitementFini();//signal de fin
-    else if(m_indiceCible[idMoteurRecherche] == m_textCible.size())
-        ;// tout les requettes de ce moteur de recherche on été effectuer
-    else{
-        if(m_ihm->focusTab() != 1)
-            emit progress(5+(int)((float)m_requet/(float)m_nbRequet*90),"Envoi des requetes... "+QString::number(m_requet)+"/"+QString::number(m_nbRequet));
-        m_moteurRecherche[idMoteurRecherche]->setText(m_textCible[m_indiceCible[idMoteurRecherche]].getText());
-        // Envoi la requette
-        m_moteurRecherche[idMoteurRecherche]->sendRequest();
+    if(!m_annuler){
+        m_requet++;
+        m_indiceCible[idMoteurRecherche]++;
+        if(m_requet == m_nbRequet) // Toute les requete on été traiter
+            emit traitementFini();//signal de fin
+        else if(m_indiceCible[idMoteurRecherche] == m_textCible.size())
+            ;// tout les requettes de ce moteur de recherche on été effectuer
+        else{
+            if(m_ihm->focusTab() != 1)
+                emit progress(5+(int)((float)m_requet/(float)m_nbRequet*90),"Envoi des requetes... "+QString::number(m_requet)+"/"+QString::number(m_nbRequet));
+            m_moteurRecherche[idMoteurRecherche]->setText(m_textCible[m_indiceCible[idMoteurRecherche]].getText());
+            // Envoi la requette
+            m_moteurRecherche[idMoteurRecherche]->sendRequest();
+        }
     }
 }
 
@@ -145,6 +153,7 @@ void Document::initialisation()
     m_indiceCible[0]=-1;
     m_indiceCible[1]=-1;
     m_indiceCible[2]=-1;
+    m_annuler=false;
 
     int focus=m_ihm->focusTab();
 
@@ -293,4 +302,15 @@ bool Document::setFile(QString file)
     }
 
     return true;
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Document::annulerTraitement()
+// Purpose:    Implementation of Document::annulerTraitement()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void Document::annulerTraitement()
+{
+    m_annuler=true;
 }

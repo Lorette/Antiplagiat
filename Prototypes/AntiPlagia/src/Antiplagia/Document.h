@@ -56,6 +56,7 @@ private:
    int m_indiceCible[3];
    int m_nbRequet;
    int m_requet;
+   bool m_annuler;
    ListTextCicble m_textCible;
    QList<MoteurRecherche*> m_moteurRecherche;
    Ihm *m_ihm;
@@ -63,6 +64,7 @@ private:
 
 public slots:
    void traiterReponse(int idMoteurRecherche);
+   void annulerTraitement();
 
 signals:
     void traitementFini();

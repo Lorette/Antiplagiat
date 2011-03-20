@@ -47,6 +47,7 @@ public slots:
     void documentation();
     void selectFile();
     void result(bool error = false , QString errorString = QString());
+    void annulerTraitement();
 
 private:
     Ui::Ihm *ui;
