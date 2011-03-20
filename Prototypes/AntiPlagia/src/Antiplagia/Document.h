@@ -17,6 +17,7 @@
 #include "ListTextCicble.h"
 #include "TextCible.h"
 #include "textdocx.h"
+#include "TextPdf.h"
 #include <QWidget>
 #include <QObject>
 #include <QStringList>
@@ -29,6 +30,7 @@ class ListTextCicble;
 class TextCible;
 class Extension;
 class TextDocx;
+class TextPdf;
 
 class Document : public QObject
 {

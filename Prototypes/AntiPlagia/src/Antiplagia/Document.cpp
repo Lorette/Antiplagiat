@@ -283,16 +283,10 @@ bool Document::setFile(QString file)
 {
     if(m_file != NULL) delete m_file;
 
-    QString extention(file);
-    int pos=0;
-
-    while(pos != -1){
-        pos=extention.indexOf(".",0,Qt::CaseInsensitive);
-        if(pos != -1 ) extention=extention.right(extention.size()-pos-1);
-    }
-
-    if(extention == "docx")
+    if(file.endsWith(".docx",Qt::CaseInsensitive))
         m_file = new TextDocx(file);
+    if(file.endsWith(".pdf",Qt::CaseInsensitive))
+        m_file = new TextPdf(file);
 
     if(!m_file->fileIsValid())
     {

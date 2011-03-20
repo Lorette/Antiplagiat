@@ -216,8 +216,10 @@ void Ihm::selectFile()
 
     if(file != "")
     {
-        if(m_document->setFile(file));
+        if(m_document->setFile(file))
             ui->lineEdit_4->setText(file);
+        else
+            ui->lineEdit_4->setText("");
     }
 }
 

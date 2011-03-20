@@ -22,7 +22,8 @@ HEADERS += Document.h \
            xstring.h \
            Yahoo.h \
            Bing.h \
-           Extension.h
+           Extension.h \
+           TextPdf.h
 
 FORMS +=   ihm.ui \
            resultat.ui \
@@ -40,4 +41,5 @@ SOURCES += Document.cpp \
            xstring.cpp \
            Yahoo.cpp \
            Bing.cpp \
-           Extension.cpp
+           Extension.cpp \
+           TextPdf.cpp
