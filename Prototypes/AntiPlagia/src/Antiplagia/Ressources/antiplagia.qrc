@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>Images/p2.jpg</file>
         <file>AP.ico</file>
+        <file>Images/AP.png</file>
     </qresource>
 </RCC>

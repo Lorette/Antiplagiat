@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="../Ressources/antiplagia.qrc">
-    <normaloff>:/AP.ico</normaloff>:/AP.ico</iconset>
+    <normaloff>:/Images/AP.png</normaloff>:/Images/AP.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="1" column="0" colspan="6">
