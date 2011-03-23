@@ -24,6 +24,8 @@ Ihm::Ihm(QWidget *parent) : QMainWindow(parent), ui(new Ui::Ihm)
     m_file = NULL;
 
     QObject::connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(traitement()));
+    QObject::connect(ui->pushButton_2, SIGNAL(clicked()), this, SLOT(traitement()));
+    QObject::connect(ui->pushButton_3, SIGNAL(clicked()), this, SLOT(traitement()));
     QObject::connect(ui->actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
     QObject::connect(ui->action_propos, SIGNAL(triggered()), this, SLOT(aPropos()));
     QObject::connect(ui->actionDocumentation,SIGNAL(triggered()),this,SLOT(documentation()));
@@ -230,9 +232,7 @@ void Ihm::selectFile()
 
 void Ihm::enabelDisabel(bool b)
 {
-    ui->pushButton->setEnabled(b);
     ui->tabWidget->setEnabled(b);
-    ui->groupBox->setEnabled(b);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -257,10 +257,23 @@ bool Ihm::erreurChamp()
         result(true,"Vous devez selectioné un fichier");
         b=true;
     }
-    else if ( !ui->checkBox_4->isChecked() && !ui->checkBox_5->isChecked() && !ui->checkBox_6->isChecked()){
+
+    else if(n == 1 && !ui->checkBox_4->isChecked() && !ui->checkBox_5->isChecked() && !ui->checkBox_6->isChecked()){
         result(true,"Aucun moteur de recheche sélectioné");
         b=true;
     }
+
+    else if(n == 2 && !ui->checkBox_7->isChecked() && !ui->checkBox_8->isChecked() && !ui->checkBox_9->isChecked()){
+        result(true,"Aucun moteur de recheche sélectioné");
+        b=true;
+    }
+
+    else if(n == 3 && !ui->checkBox_10->isChecked() && !ui->checkBox_11->isChecked() && !ui->checkBox_12->isChecked()){
+        result(true,"Aucun moteur de recheche sélectioné");
+        b=true;
+    }
+
+
     return b;
 }
 
