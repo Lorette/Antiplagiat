@@ -16,6 +16,10 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../Ressources/antiplagia.qrc">
+    <normaloff>:/AP.ico</normaloff>:/AP.ico</iconset>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="1" column="1">
     <widget class="QPushButton" name="pushButton">
@@ -49,6 +53,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../Ressources/antiplagia.qrc"/>
+ </resources>
  <connections/>
 </ui>

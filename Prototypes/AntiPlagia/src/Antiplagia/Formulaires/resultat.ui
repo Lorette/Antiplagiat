@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Resultat</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../Ressources/antiplagia.qrc">
+    <normaloff>:/AP.ico</normaloff>:/AP.ico</iconset>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="1" column="0" colspan="6">
     <widget class="QTextBrowser" name="textBrowser">
@@ -84,6 +88,8 @@ p, li { white-space: pre-wrap; }
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../Ressources/antiplagia.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>Images/p2.jpg</file>
+        <file>AP.ico</file>
     </qresource>
 </RCC>

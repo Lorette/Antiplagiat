@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Ihm</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../Ressources/antiplagia.qrc">
+    <normaloff>:/AP.ico</normaloff>:/AP.ico</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(255, 255, 255);</string>
   </property>
