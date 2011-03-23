@@ -23,9 +23,8 @@ Ihm::Ihm(QWidget *parent) : QMainWindow(parent), ui(new Ui::Ihm)
     m_popup = NULL;
     m_file = NULL;
 
-    QObject::connect(ui->buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked()), this, SLOT(traitement()));
+    QObject::connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(traitement()));
     QObject::connect(ui->actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
-    QObject::connect(ui->buttonBox->button(QDialogButtonBox::Close), SIGNAL(clicked()), qApp, SLOT(quit()));
     QObject::connect(ui->action_propos, SIGNAL(triggered()), this, SLOT(aPropos()));
     QObject::connect(ui->actionDocumentation,SIGNAL(triggered()),this,SLOT(documentation()));
     QObject::connect(ui->actionPr_f_rences,SIGNAL(triggered()),this,SLOT(preference()));
@@ -231,7 +230,7 @@ void Ihm::selectFile()
 
 void Ihm::enabelDisabel(bool b)
 {
-    ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(b);
+    ui->pushButton->setEnabled(b);
     ui->tabWidget->setEnabled(b);
     ui->groupBox->setEnabled(b);
 }

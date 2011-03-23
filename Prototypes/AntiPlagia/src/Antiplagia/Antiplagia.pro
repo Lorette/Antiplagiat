@@ -24,7 +24,7 @@ HEADERS += Document.h \
            Bing.h \
            Extension.h \
            TextPdf.h \
-		   textodt.h
+           textodt.h
 
 FORMS +=   ihm.ui \
            resultat.ui \
@@ -44,4 +44,7 @@ SOURCES += Document.cpp \
            Bing.cpp \
            Extension.cpp \
            TextPdf.cpp \
-		   textodt.cpp
+           textodt.cpp
+
+RESOURCES += \
+    antiplagia.qrc
