@@ -36,11 +36,12 @@ color: rgb(0, 0, 127);</string>
        <widget class="QTabWidget" name="tabWidget">
         <property name="styleSheet">
          <string notr="true">background-color: rgb(255, 255, 255);
+font: 75 10pt &quot;Lucida Calligraphy&quot;;
 border:none;
-font: 10pt &quot;Harrington&quot;;</string>
+</string>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="tab_3">
          <attribute name="title">
@@ -81,6 +82,9 @@ border-radius:5px;</string>
              <string/>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <property name="topMargin">
+              <number>4</number>
+             </property>
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout">
                <property name="spacing">
@@ -109,7 +113,7 @@ border-radius:5px;</string>
                  </property>
                  <property name="styleSheet">
                   <string notr="true">color: rgb(0, 0, 255);
-font: italic 12pt &quot;Monotype Corsiva&quot;;</string>
+font: italic 14pt &quot;Monotype Corsiva&quot;;</string>
                  </property>
                  <property name="text">
                   <string>Google</string>
@@ -139,7 +143,7 @@ font: italic 12pt &quot;Monotype Corsiva&quot;;</string>
                  </property>
                  <property name="styleSheet">
                   <string notr="true">color: rgb(0, 0, 255);
-font: italic 12pt &quot;Monotype Corsiva&quot;;</string>
+font: italic 14pt &quot;Monotype Corsiva&quot;;</string>
                  </property>
                  <property name="text">
                   <string>Bing</string>
@@ -166,7 +170,7 @@ font: italic 12pt &quot;Monotype Corsiva&quot;;</string>
                  </property>
                  <property name="styleSheet">
                   <string notr="true">color: rgb(0, 0, 255);
-font: italic 12pt &quot;Monotype Corsiva&quot;;</string>
+font: italic 14pt &quot;Monotype Corsiva&quot;;</string>
                  </property>
                  <property name="text">
                   <string>Yahoo</string>
@@ -194,10 +198,13 @@ font: italic 12pt &quot;Monotype Corsiva&quot;;</string>
           <item>
            <widget class="QWidget" name="widget" native="true">
             <layout class="QGridLayout" name="gridLayout_3">
+             <property name="topMargin">
+              <number>3</number>
+             </property>
              <item row="0" column="1">
               <widget class="QPushButton" name="pushButton">
                <property name="styleSheet">
-                <string notr="true">font: italic 14pt &quot;Monotype Corsiva&quot;;
+                <string notr="true">font: italic 16pt &quot;Monotype Corsiva&quot;;
 color: rgb(0, 0, 127);</string>
                </property>
                <property name="text">
@@ -296,6 +303,9 @@ color: rgb(0, 0, 255);</string>
              <string/>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_5">
+             <property name="topMargin">
+              <number>8</number>
+             </property>
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_2">
                <property name="spacing">
@@ -324,7 +334,7 @@ color: rgb(0, 0, 255);</string>
                  </property>
                  <property name="styleSheet">
                   <string notr="true">color: rgb(0, 0, 255);
-font: italic 12pt &quot;Monotype Corsiva&quot;;</string>
+font: italic 14pt &quot;Monotype Corsiva&quot;;</string>
                  </property>
                  <property name="text">
                   <string>Google</string>
@@ -354,7 +364,7 @@ font: italic 12pt &quot;Monotype Corsiva&quot;;</string>
                  </property>
                  <property name="styleSheet">
                   <string notr="true">color: rgb(0, 0, 255);
-font: italic 12pt &quot;Monotype Corsiva&quot;;</string>
+font: italic 14pt &quot;Monotype Corsiva&quot;;</string>
                  </property>
                  <property name="text">
                   <string>Bing</string>
@@ -381,7 +391,7 @@ font: italic 12pt &quot;Monotype Corsiva&quot;;</string>
                  </property>
                  <property name="styleSheet">
                   <string notr="true">color: rgb(0, 0, 255);
-font: italic 12pt &quot;Monotype Corsiva&quot;;</string>
+font: italic 14pt &quot;Monotype Corsiva&quot;;</string>
                  </property>
                  <property name="text">
                   <string>Yahoo</string>
@@ -412,7 +422,7 @@ font: italic 12pt &quot;Monotype Corsiva&quot;;</string>
              <item row="0" column="1">
               <widget class="QPushButton" name="pushButton_2">
                <property name="styleSheet">
-                <string notr="true">font: italic 14pt &quot;Monotype Corsiva&quot;;
+                <string notr="true">font: italic 16pt &quot;Monotype Corsiva&quot;;
 color: rgb(0, 0, 127);</string>
                </property>
                <property name="text">
@@ -495,6 +505,142 @@ border-radius:5px;</string>
             </property>
            </widget>
           </item>
+          <item row="5" column="0" colspan="2">
+           <widget class="QGroupBox" name="groupBox_3">
+            <property name="styleSheet">
+             <string notr="true">border:none;
+font: italic 12pt &quot;Monotype Corsiva&quot;;
+color: rgb(0, 0, 255);</string>
+            </property>
+            <property name="title">
+             <string/>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_9">
+             <property name="topMargin">
+              <number>3</number>
+             </property>
+             <property name="bottomMargin">
+              <number>22</number>
+             </property>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_5">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <spacer name="horizontalSpacer_19">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="checkBox_10">
+                 <property name="enabled">
+                  <bool>true</bool>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">color: rgb(0, 0, 255);
+font: italic 14pt &quot;Monotype Corsiva&quot;;</string>
+                 </property>
+                 <property name="text">
+                  <string>Google</string>
+                 </property>
+                 <property name="checked">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_20">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="checkBox_11">
+                 <property name="enabled">
+                  <bool>true</bool>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <family>Monotype Corsiva</family>
+                   <pointsize>14</pointsize>
+                   <weight>50</weight>
+                   <italic>true</italic>
+                   <bold>false</bold>
+                  </font>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">color: rgb(0, 0, 255);
+font: italic 14pt &quot;Monotype Corsiva&quot;;</string>
+                 </property>
+                 <property name="text">
+                  <string>Bing</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_21">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="checkBox_12">
+                 <property name="enabled">
+                  <bool>true</bool>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">font: italic 14pt &quot;Monotype Corsiva&quot;;
+color: rgb(0, 0, 255);</string>
+                 </property>
+                 <property name="text">
+                  <string>Yahoo</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_22">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
           <item row="6" column="0" colspan="2">
            <widget class="QWidget" name="widget_4" native="true">
             <property name="styleSheet">
@@ -502,17 +648,26 @@ border-radius:5px;</string>
 font: italic 14pt &quot;Monotype Corsiva&quot;;</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_6">
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>19</number>
+             </property>
              <item row="0" column="1">
               <widget class="QPushButton" name="pushButton_3">
                <property name="font">
                 <font>
                  <family>Monotype Corsiva</family>
-                 <pointsize>14</pointsize>
+                 <pointsize>16</pointsize>
+                 <weight>50</weight>
                  <italic>true</italic>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="styleSheet">
-                <string notr="true">color: rgb(0, 0, 127);</string>
+                <string notr="true">font: italic 16pt &quot;Monotype Corsiva&quot;;
+color: rgb(0, 0, 127);</string>
                </property>
                <property name="text">
                 <string>Rechercher</string>
@@ -548,134 +703,6 @@ font: italic 14pt &quot;Monotype Corsiva&quot;;</string>
             </layout>
            </widget>
           </item>
-          <item row="5" column="0" colspan="2">
-           <widget class="QGroupBox" name="groupBox_3">
-            <property name="styleSheet">
-             <string notr="true">border:none;
-font: italic 12pt &quot;Monotype Corsiva&quot;;
-color: rgb(0, 0, 255);</string>
-            </property>
-            <property name="title">
-             <string/>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_9">
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_5">
-               <property name="spacing">
-                <number>0</number>
-               </property>
-               <property name="leftMargin">
-                <number>0</number>
-               </property>
-               <item>
-                <spacer name="horizontalSpacer_19">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="checkBox_10">
-                 <property name="enabled">
-                  <bool>true</bool>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">color: rgb(0, 0, 255);
-font: italic 12pt &quot;Monotype Corsiva&quot;;</string>
-                 </property>
-                 <property name="text">
-                  <string>Google</string>
-                 </property>
-                 <property name="checked">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_20">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="checkBox_11">
-                 <property name="enabled">
-                  <bool>true</bool>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <family>Monotype Corsiva</family>
-                   <pointsize>12</pointsize>
-                   <italic>true</italic>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">color: rgb(0, 0, 255);
-font: italic 12pt &quot;Monotype Corsiva&quot;;</string>
-                 </property>
-                 <property name="text">
-                  <string>Bing</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_21">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="checkBox_12">
-                 <property name="enabled">
-                  <bool>true</bool>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">font: italic 12pt &quot;Monotype Corsiva&quot;;
-color: rgb(0, 0, 255);</string>
-                 </property>
-                 <property name="text">
-                  <string>Yahoo</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_22">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </widget>
-          </item>
          </layout>
         </widget>
        </widget>
@@ -690,7 +717,7 @@ color: rgb(0, 0, 255);</string>
      <x>0</x>
      <y>0</y>
      <width>545</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFichier">
