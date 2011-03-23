@@ -28,7 +28,8 @@ HEADERS += Document.h \
 
 FORMS +=   ihm.ui \
            resultat.ui \
-           progress.ui
+           progress.ui \
+		   setting.ui
 
 SOURCES += Document.cpp \
            Google.cpp \
