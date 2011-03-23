@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>Ihm</class>
  <widget class="QMainWindow" name="Ihm">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -12,6 +15,10 @@
   </property>
   <property name="windowTitle">
    <string>Ihm</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../Ressources/antiplagia.qrc">
+    <normaloff>:/Images/AP.png</normaloff>:/Images/AP.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(255, 255, 255);</string>
