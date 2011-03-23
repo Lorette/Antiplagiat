@@ -8,44 +8,17 @@ QT += xml
 TEMPLATE = app
 TARGET = 
 DEPENDPATH += .
-INCLUDEPATH += .
+INCLUDEPATH += . Headers/
 DESTDIR = ../../workdir/bin/
 # Input
-HEADERS += Document.h \
-           Google.h \
-           ihm.h \
-           IhmPopup.h \
-           ListTextCicble.h \
-           MoteurRecherche.h \
-           TextCible.h \
-           textdocx.h \
-           xstring.h \
-           Yahoo.h \
-           Bing.h \
-           Extension.h \
-           TextPdf.h \
-           textodt.h
+HEADERS += Headers/*
 
-FORMS +=   ihm.ui \
-           resultat.ui \
-           progress.ui \
-		   setting.ui
+FORMS +=   Formulaires/*
 
-SOURCES += Document.cpp \
-           Google.cpp \
-           ihm.cpp \
-           IhmPopup.cpp \
-           ListTextCicble.cpp \
-           main.cpp \
-           MoteurRecherche.cpp \
-           TextCible.cpp \
-           textdocx.cpp \
-           xstring.cpp \
-           Yahoo.cpp \
-           Bing.cpp \
-           Extension.cpp \
-           TextPdf.cpp \
-           textodt.cpp
+SOURCES += main.cpp \
+	   Documents/* \	   
+	   Fichiers/* \
+	   Interfaces/* \
+	   MoteurRecherches/* 
 
-RESOURCES += \
-    antiplagia.qrc
+RESOURCES += Ressources/*.qrc
