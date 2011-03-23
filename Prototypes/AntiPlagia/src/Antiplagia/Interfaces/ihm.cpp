@@ -119,23 +119,17 @@ void Ihm::result(bool error, QString errorString)
         int n=focusTab();
         if(n == 1){ // Par text
             if(m_document->textIsPlagier()) // text plagier
-                ui->label->setText("<br/><h3>Ce text a été plagier</h3>\nSource: <a href=\""+m_document->getUrlTextPlagier()+"\"> "+m_document->getUrlTextPlagier()+" </a>");
+                ui->label->setText("<h3>Ce text a été plagier</h3>\nSource: <a href=\""+m_document->getUrlTextPlagier()+"\"> "+m_document->getUrlTextPlagier()+" </a>");
             else
-                ui->label->setText("<br/><h3>Ce text n'a pas été plagier</h3>");
+                ui->label->setText("<h3>Ce text n'a pas été plagier</h3>");
         }
         else{// Par document
             QObject::disconnect(m_document,SIGNAL(progress(int,QString)),m_popup,SLOT(progressDL(int,QString)));
             QObject::disconnect(m_popup,SIGNAL(annuler()),m_document,SLOT(annulerTraitement()));
             QObject::disconnect(m_popup,SIGNAL(annuler()),this,SLOT(annulerTraitement()));
             delete m_popup;
-            //if(n == 3){ // Par fichier
-              //  QMessageBox::critical(this, "Erreur", "Indisponible ");
-                //m_popup = NULL;
-            //}
-            //else{
-                m_popup = new IhmPopup();
-                m_popup->result(m_document->getDocumentEnrichi());
-            //}
+            m_popup = new IhmPopup();
+            m_popup->result(m_document->getDocumentEnrichi());
         }
     }
     enabelDisabel(true);
@@ -286,19 +280,55 @@ bool Ihm::erreurChamp()
 
 bool Ihm::isSelect(int idMoteurRecherche)
 {
-    bool b;
-    switch(idMoteurRecherche){
-    case 0:
-        b=ui->checkBox_6->isChecked();
-        break;
+    bool b=false;
+    switch(focusTab()){
     case 1:
-        b=ui->checkBox_5->isChecked();
+        switch(idMoteurRecherche){
+        case 0:
+            b=ui->checkBox_6->isChecked();
+            break;
+        case 1:
+            b=ui->checkBox_5->isChecked();
+            break;
+        case 2:
+            b=ui->checkBox_4->isChecked();
+            break;
+        default:
+            b=false;
+            break;
+        }
         break;
     case 2:
-        b=ui->checkBox_4->isChecked();
+        switch(idMoteurRecherche){
+        case 0:
+            b=ui->checkBox_7->isChecked();
+            break;
+        case 1:
+            b=ui->checkBox_9->isChecked();
+            break;
+        case 2:
+            b=ui->checkBox_8->isChecked();
+            break;
+        default:
+            b=false;
+            break;
+        }
         break;
-    default:
-        b=false;
+    case 3:
+        switch(idMoteurRecherche){
+        case 0:
+            b=ui->checkBox_10->isChecked();
+            break;
+        case 1:
+            b=ui->checkBox_12->isChecked();
+            break;
+        case 2:
+            b=ui->checkBox_11->isChecked();
+            break;
+        default:
+            b=false;
+            break;
+        }
         break;
     }
     return b;
