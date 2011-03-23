@@ -57,3 +57,5 @@ SOURCES += main.cpp \
            MoteurRecherches/Yahoo.cpp
 
 RESOURCES += Ressources/antiplagia.qrc
+
+win32:RC_FILE += Ressources/ico.rc
