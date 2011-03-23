@@ -60,16 +60,18 @@ void IhmPopup::progressDL(int valeur,QString text)
 }
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       IhmPopup::result(QString text)
+// Name:       IhmPopup::result(QString text1,QString text2,int nbSource,int prCenPlagier)
 // Purpose:    Implementation of IhmPopup::result()
 // Return:     void
 ////////////////////////////////////////////////////////////////////////
 
-void IhmPopup::result(QString text1,QString text2)
+void IhmPopup::result(QString text1,QString text2,int nbSource,int prCenPlagier)
 {
     ui2 = new Ui::Resultat();
     ui2->setupUi(this);
     ui2->textBrowser->setText(text1);
+    ui2->label_2->setText("<strong>Nombres de sources: "+QString::number(nbSource)+"</strong>");
+    ui2->label->setText("<strong>Text plagier à "+QString::number(prCenPlagier)+"% </strong>");
     m_text1=text1;
     m_text2=text2;
     m_idText = 1;

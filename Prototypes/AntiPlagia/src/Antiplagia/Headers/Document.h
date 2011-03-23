@@ -62,6 +62,8 @@ public:
    QString getUrlTextPlagier();
    void determinTextCibleFile();
    QList<MemeSource> getMemeSource(QString source);
+   int getNbSource();
+   int getPrCentPlagier();
 
 private:
    QString m_text;

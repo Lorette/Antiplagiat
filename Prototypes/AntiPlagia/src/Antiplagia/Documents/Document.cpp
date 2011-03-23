@@ -271,7 +271,7 @@ QString Document::getDocumentEnrichi(int mode){
         QList<MemeSource> list;
         QList<int> indiceTraiter;
         int indiceColor=0;
-        QString color[20]= {"yellow","YellowGreen","Wheat","Turquoise","SpringGreen","Tan","Silver","MistyRose","MediumPurple","Khaki","GoldenRod","DeepPink","DarkSalmon","Coral","BlueViolet","Aqua","Plum","MediumBlue","DarkOrchid","Aquamarine"};
+        QString color[20]= {"yellow","YellowGreen","Wheat","Turquoise","SpringGreen","DeepPink","Silver","MistyRose","MediumPurple","Khaki","GoldenRod","Tan","DarkSalmon","Coral","BlueViolet","Aqua","Plum","MediumBlue","DarkOrchid","Aquamarine"};
         for(int i=0; i < m_textCible.size() ; i++ ){
             if( !indiceTraiter.contains(i) && m_textCible[i].isPlagier()){
                 list = getMemeSource(m_textCible[i].getUrl());
@@ -327,7 +327,7 @@ void Document::annulerTraitement()
 
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       Document::getMemeSource(QString source)()
+// Name:       Document::getMemeSource(QString source)
 // Purpose:    Implementation of Document::getMemeSource()
 // Return:     QList<MemeSource>
 ////////////////////////////////////////////////////////////////////////
@@ -345,4 +345,38 @@ QList<MemeSource> Document::getMemeSource(QString source)
     }
 
     return list;
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Document::getNbSource()
+// Purpose:    Implementation of Document::getNbSource()
+// Return:     int
+////////////////////////////////////////////////////////////////////////
+
+int Document::getNbSource()
+{
+    int nb = 0;
+    QList<QString> list;
+    for(int i=0;i<m_textCible.size();i++)
+        if( !list.contains(m_textCible[i].getUrl()) && m_textCible[i].isPlagier() ){
+            nb++;
+            list << m_textCible[i].getUrl();
+        }
+    return nb;
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Document::getPrCentPlagier()
+// Purpose:    Implementation of Document::getPrCentPlagier()
+// Return:     int
+////////////////////////////////////////////////////////////////////////
+
+int Document::getPrCentPlagier()
+{
+    int nbPlagier=0;
+    for(int i=0;i<m_textCible.size();i++)
+        if(m_textCible[i].isPlagier())
+            nbPlagier++;
+
+    return (int)((float)nbPlagier/(float)m_textCible.size()*100);
 }

@@ -28,7 +28,7 @@ public:
     explicit IhmPopup(QWidget *parent = 0);
     ~IhmPopup();
     void startDL();
-    void result(QString text1,QString text2);
+    void result(QString text1,QString text2,int nbSource,int prCenPlagier);
 
 public slots:
     void progressDL(int valeur,QString text);
