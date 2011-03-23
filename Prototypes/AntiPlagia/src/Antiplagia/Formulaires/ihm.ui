@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>545</width>
-    <height>403</height>
+    <width>634</width>
+    <height>421</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -203,6 +203,9 @@ font: italic 14pt &quot;Monotype Corsiva&quot;;</string>
              </property>
              <item row="0" column="1">
               <widget class="QPushButton" name="pushButton">
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
                <property name="styleSheet">
                 <string notr="true">font: italic 16pt &quot;Monotype Corsiva&quot;;
 color: rgb(0, 0, 127);</string>
@@ -282,7 +285,7 @@ color: rgb(0, 0, 127);</string>
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>37</height>
+              <height>60</height>
              </size>
             </property>
             <property name="styleSheet">
@@ -421,6 +424,9 @@ font: italic 14pt &quot;Monotype Corsiva&quot;;</string>
             <layout class="QGridLayout" name="gridLayout_4">
              <item row="0" column="1">
               <widget class="QPushButton" name="pushButton_2">
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
                <property name="styleSheet">
                 <string notr="true">font: italic 16pt &quot;Monotype Corsiva&quot;;
 color: rgb(0, 0, 127);</string>
@@ -665,6 +671,9 @@ font: italic 14pt &quot;Monotype Corsiva&quot;;</string>
                  <bold>false</bold>
                 </font>
                </property>
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
                <property name="styleSheet">
                 <string notr="true">font: italic 16pt &quot;Monotype Corsiva&quot;;
 color: rgb(0, 0, 127);</string>
@@ -716,8 +725,8 @@ color: rgb(0, 0, 127);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>545</width>
-     <height>20</height>
+     <width>634</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFichier">

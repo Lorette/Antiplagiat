@@ -34,6 +34,14 @@ class TextDocx;
 class TextPdf;
 class TextOdt;
 
+typedef struct MemeSource MemeSource;
+struct MemeSource
+{
+    int position;
+    QString text;
+};
+
+
 class Document : public QObject
 {
 
@@ -50,9 +58,10 @@ public:
    void determinTextCible();
    bool textIsPlagier();
    bool setFile(QString file);
-   QString getDocumentEnrichi();
+   QString getDocumentEnrichi(int mode);
    QString getUrlTextPlagier();
    void determinTextCibleFile();
+   QList<MemeSource> getMemeSource(QString source);
 
 private:
    QString m_text;

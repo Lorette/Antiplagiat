@@ -168,12 +168,7 @@ void Document::initialisation()
             determinTextCible();
         }
         else  // Par fichier
-        {   /*
-            extractTextFile();
-            triTextFile();
-            m_text=m_docx->getText();
-            determinDocxCible();
-            */
+        {
             m_text=m_file->getText();
             determinTextCibleFile();
         }
@@ -259,17 +254,36 @@ QString Document::getUrlTextPlagier()
 }
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       Document::getTextEnrichi()
+// Name:       Document::getTextEnrichi(int mode)
 // Purpose:    Implementation of Document::getTextEnrichi()
 // Return:     QString
 ////////////////////////////////////////////////////////////////////////
 
-QString Document::getDocumentEnrichi(){
+QString Document::getDocumentEnrichi(int mode){
     QString doc=m_text;
-    emit progress(95,"Traitement des résultats... ");
-    for(int i=0;i<m_textCible.size();i++)
-        if(m_textCible[i].isPlagier())
-            doc.replace(m_textCible[i].getText(),"<a style=\"text-decoration:none;background:yellow;color:black;\" href=\""+m_textCible[i].getUrl()+"\" >"+m_textCible[i].getText()+"</a>");
+    if(mode == 1){
+        emit progress(95,"Traitement des résultats... ");
+        for(int i=0;i<m_textCible.size();i++)
+            if(m_textCible[i].isPlagier())
+                doc.replace(m_textCible[i].getText(),"<a style=\"text-decoration:none;background:yellow;color:black;\" href=\""+m_textCible[i].getUrl()+"\" >"+m_textCible[i].getText()+"</a>");
+    }
+    else if (mode == 2){
+        QList<MemeSource> list;
+        QList<int> indiceTraiter;
+        int indiceColor=0;
+        QString color[20]= {"yellow","YellowGreen","Wheat","Turquoise","SpringGreen","Tan","Silver","MistyRose","MediumPurple","Khaki","GoldenRod","DeepPink","DarkSalmon","Coral","BlueViolet","Aqua","Plum","MediumBlue","DarkOrchid","Aquamarine"};
+        for(int i=0; i < m_textCible.size() ; i++ ){
+            if( !indiceTraiter.contains(i) && m_textCible[i].isPlagier()){
+                list = getMemeSource(m_textCible[i].getUrl());
+                for(int j=0;j<list.size();j++){
+                    indiceTraiter << list[j].position;
+                    doc.replace(list[j].text,"<a style=\"text-decoration:none;background:"+color[indiceColor%20]+";color:black;\" href=\""+m_textCible[i].getUrl()+"\" >"+list[j].text+"</a>");
+                }
+                indiceColor++;
+            }
+            list.clear();
+        }
+    }
     return doc;
 }
 
@@ -309,4 +323,26 @@ bool Document::setFile(QString file)
 void Document::annulerTraitement()
 {
     m_annuler=true;
+}
+
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Document::getMemeSource(QString source)()
+// Purpose:    Implementation of Document::getMemeSource()
+// Return:     QList<MemeSource>
+////////////////////////////////////////////////////////////////////////
+
+QList<MemeSource> Document::getMemeSource(QString source)
+{
+    QList<MemeSource> list;
+    for(int i=0;i<m_textCible.size();i++){
+        if( ( source == m_textCible[i].getUrl() ) && m_textCible[i].isPlagier() ){
+            MemeSource s;
+            s.position=i;
+            s.text=m_textCible[i].getText();
+            list << s;
+        }
+    }
+
+    return list;
 }

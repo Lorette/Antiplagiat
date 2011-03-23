@@ -65,11 +65,15 @@ void IhmPopup::progressDL(int valeur,QString text)
 // Return:     void
 ////////////////////////////////////////////////////////////////////////
 
-void IhmPopup::result(QString text)
+void IhmPopup::result(QString text1,QString text2)
 {
     ui2 = new Ui::Resultat();
     ui2->setupUi(this);
-    ui2->textBrowser->setText(text);
+    ui2->textBrowser->setText(text1);
+    m_text1=text1;
+    m_text2=text2;
+    m_idText = 1;
+    QObject::connect(ui2->pushButton_2,SIGNAL(clicked()),this,SLOT(changeMode()));
     show();
 }
 
@@ -82,4 +86,17 @@ void IhmPopup::result(QString text)
 void IhmPopup::clickAnnuler()
 {
     emit annuler();
+}
+
+
+void IhmPopup::changeMode()
+{
+    if(m_idText == 1){
+        ui2->textBrowser->setText(m_text2);
+        m_idText=2;
+    }
+    else{
+        ui2->textBrowser->setText(m_text1);
+        m_idText=1;
+    }
 }

@@ -28,11 +28,12 @@ public:
     explicit IhmPopup(QWidget *parent = 0);
     ~IhmPopup();
     void startDL();
-    void result(QString text);
+    void result(QString text1,QString text2);
 
 public slots:
     void progressDL(int valeur,QString text);
     void clickAnnuler();
+    void changeMode();
 
 signals:
     void annuler();
@@ -40,6 +41,9 @@ signals:
 private:
     Ui::Progress *ui;
     Ui::Resultat *ui2;
+    QString m_text1;
+    QString m_text2;
+    int m_idText;
 
 };
 

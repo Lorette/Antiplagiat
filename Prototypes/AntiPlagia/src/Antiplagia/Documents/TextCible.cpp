@@ -57,7 +57,7 @@ QString TextCible::getText()
 // Purpose:    Implementation of TextCible::isPlagia()
 // Return:     bool
 ////////////////////////////////////////////////////////////////////////
-#include <QMessageBox>
+
 bool TextCible::isPlagier()
 {
     bool b=false;

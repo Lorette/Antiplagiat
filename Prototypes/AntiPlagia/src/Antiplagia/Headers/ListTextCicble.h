@@ -10,6 +10,8 @@
 
 #include <QList>
 #include "TextCible.h"
+#include <QString>
+
 
 class TextCible;
 

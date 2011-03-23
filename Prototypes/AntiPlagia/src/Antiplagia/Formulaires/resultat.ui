@@ -16,6 +16,10 @@
   <layout class="QGridLayout" name="gridLayout">
    <item row="1" column="0" colspan="6">
     <widget class="QTextBrowser" name="textBrowser">
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);
+font: 10pt &quot;MS Shell Dlg 2&quot;;</string>
+     </property>
      <property name="openExternalLinks">
       <bool>true</bool>
      </property>
