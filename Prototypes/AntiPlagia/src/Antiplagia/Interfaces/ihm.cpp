@@ -165,8 +165,9 @@ void Ihm::aPropos()
 
 void Ihm::preference()
 {
-    QMessageBox::critical(this, "Indisponible", "Disponible prochainement !");
-
+    //QMessageBox::critical(this, "Indisponible", "Disponible prochainement !");
+    Settings* s=new Settings(this);
+    s->show();
 }
 
 

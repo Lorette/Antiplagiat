@@ -17,12 +17,14 @@
 #include <QFileDialog>
 #include "Document.h"
 #include "IhmPopup.h"
+#include "Settings.h"
 
 namespace Ui {
     class Ihm;
 }
 class Document;
 class IhmPopup;
+class Settings;
 
 class Ihm : public QMainWindow
 {
