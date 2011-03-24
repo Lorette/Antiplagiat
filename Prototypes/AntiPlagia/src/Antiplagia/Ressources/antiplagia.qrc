@@ -3,5 +3,6 @@
         <file>Images/p2.jpg</file>
         <file>AP.ico</file>
         <file>Images/AP.png</file>
+        <file>Images/go-next.png</file>
     </qresource>
 </RCC>

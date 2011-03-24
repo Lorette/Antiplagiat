@@ -21,7 +21,10 @@
     <normaloff>:/Images/AP.png</normaloff>:/Images/AP.png</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(255, 255, 255);</string>
+   <string notr="true">QTabWidget { 
+	background-color: rgb(255, 255, 255); 
+	font: 75 10pt &quot;Lucida Calligraphy&quot;;
+}</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -42,13 +45,10 @@ color: rgb(0, 0, 127);</string>
       <item row="1" column="1">
        <widget class="QTabWidget" name="tabWidget">
         <property name="styleSheet">
-         <string notr="true">background-color: rgb(255, 255, 255);
-font: 75 10pt &quot;Lucida Calligraphy&quot;;
-border:none;
-</string>
+         <string notr="true"/>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="tab_3">
          <attribute name="title">
@@ -71,9 +71,7 @@ border:none;
           <item>
            <widget class="QLineEdit" name="lineEdit_3">
             <property name="styleSheet">
-             <string notr="true">border-style:solid;
-border-width:1px;
-border-radius:5px;</string>
+             <string notr="true"/>
             </property>
             <property name="frame">
              <bool>true</bool>
@@ -220,6 +218,10 @@ color: rgb(0, 0, 127);</string>
                <property name="text">
                 <string>Rechercher</string>
                </property>
+               <property name="icon">
+                <iconset resource="../Ressources/antiplagia.qrc">
+                 <normaloff>:/Images/go-next.png</normaloff>:/Images/go-next.png</iconset>
+               </property>
               </widget>
              </item>
              <item row="0" column="0">
@@ -296,9 +298,7 @@ color: rgb(0, 0, 127);</string>
              </size>
             </property>
             <property name="styleSheet">
-             <string notr="true">border-style:solid;
-border-width:1px;
-border-radius:5px;</string>
+             <string notr="true"/>
             </property>
            </widget>
           </item>
@@ -441,6 +441,10 @@ color: rgb(0, 0, 127);</string>
                <property name="text">
                 <string>Rechercher</string>
                </property>
+               <property name="icon">
+                <iconset resource="../Ressources/antiplagia.qrc">
+                 <normaloff>:/Images/go-next.png</normaloff>:/Images/go-next.png</iconset>
+               </property>
               </widget>
              </item>
              <item row="0" column="0">
@@ -495,11 +499,7 @@ color: rgb(0, 0, 127);</string>
           <item row="4" column="1">
            <widget class="QToolButton" name="toolButton_2">
             <property name="styleSheet">
-             <string notr="true">border-style:solid;
-border-width:1px;
-background-color: qlineargradient(spread:pad, x1:0.467, y1:1, x2:0.492462, y2:0, stop:0 rgba(150, 150, 150, 255), stop:1 rgba(255, 255, 255, 255));
-border-radius:5px;
-</string>
+             <string notr="true"/>
             </property>
             <property name="text">
              <string>...</string>
@@ -509,9 +509,7 @@ border-radius:5px;
           <item row="4" column="0">
            <widget class="QLineEdit" name="lineEdit_4">
             <property name="styleSheet">
-             <string notr="true">border-style:solid;
-border-width:1px;
-border-radius:5px;</string>
+             <string notr="true"/>
             </property>
             <property name="readOnly">
              <bool>true</bool>
@@ -688,6 +686,10 @@ color: rgb(0, 0, 127);</string>
                <property name="text">
                 <string>Rechercher</string>
                </property>
+               <property name="icon">
+                <iconset resource="../Ressources/antiplagia.qrc">
+                 <normaloff>:/Images/go-next.png</normaloff>:/Images/go-next.png</iconset>
+               </property>
               </widget>
              </item>
              <item row="0" column="0">
@@ -736,7 +738,13 @@ color: rgb(0, 0, 127);</string>
      <height>21</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
    <widget class="QMenu" name="menuFichier">
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
     <property name="title">
      <string>Fichier</string>
     </property>

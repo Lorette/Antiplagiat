@@ -7,6 +7,7 @@
 
 #include <QtGui/QApplication>
 #include "ihm.h"
+#include <QPlastiqueStyle>
 
 ////////////////////////////////////////////////////////////////////////
 // Name:       int main(int argc, char *argv[])
@@ -18,6 +19,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     Ihm w;
+    a.setStyle(new QPlastiqueStyle);
     w.show();
 
     return a.exec();
