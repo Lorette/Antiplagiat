@@ -277,7 +277,7 @@ QString Document::getDocumentEnrichi(int mode){
                 list = getMemeSource(m_textCible[i].getUrl());
                 for(int j=0;j<list.size();j++){
                     indiceTraiter << list[j].position;
-                    doc.replace(list[j].text,"<a style=\"text-decoration:none;background:"+color[indiceColor%20]+";color:black;\" href=\""+m_textCible[i].getUrl()+"\" >"+list[j].text+"</a>");
+                    doc.replace(list[j].text,"<a style=\"text-decoration:none;background:"+color[indiceColor%color->size()]+";color:black;\" href=\""+m_textCible[i].getUrl()+"\" >"+list[j].text+"</a>");
                 }
                 indiceColor++;
             }
@@ -397,7 +397,7 @@ QString Document::getListSource()
             list << m_textCible[i].getUrl();
         }
     for(int i=0;i<list.size();i++)
-        listSource+="<a href=\">"+list[i]+"\" >"+list[i]+"</a><br/>";
+        listSource+="<a href=\""+list[i]+"\" >"+list[i]+"</a><br/>";
 
     return listSource;
 }
@@ -410,14 +410,40 @@ QString Document::getListSource()
 
 void Document::exportHtml(QString file)
 {
+    QString doc=m_text;
+    QList<MemeSource> list;
+    QList<int> indiceTraiter;
+    int indice=0;
+    QString color[20]= {"yellow","YellowGreen","Wheat","Turquoise","SpringGreen","DeepPink","Silver","MistyRose","MediumPurple","DarkKhaki","GoldenRod","Tan","DarkSalmon","Coral","BlueViolet","Aqua","Plum","MediumBlue","DarkOrchid","Aquamarine"};
+    for(int i=0; i < m_textCible.size() ; i++ ){
+        if( !indiceTraiter.contains(i) && m_textCible[i].isPlagier()){
+            list = getMemeSource(m_textCible[i].getUrl());
+            for(int j=0;j<list.size();j++){
+                indiceTraiter << list[j].position;
+                doc.replace(list[j].text,"<a class=\"class"+QString::number(indice)+"\" href=\""+m_textCible[i].getUrl()+"\" >"+list[j].text+"</a>");
+            }
+            indice++;
+        }
+        list.clear();
+    }
+
+    QString css="<style type=\"text/css\"> div#text a {text-decoration:none;color:black;}";
+
+    for(int i=0;i< indice;i++)
+        css+=" a.class"+QString::number(i)+" { background:"+color[i%color->size()]+"; }";
+    css+="</style>";
+
+
     QString html="<html><head><style type=\"text/css\"> div#contenu { margin-left:15%;margin-right:15%;border-style:solid;border-width:2px;height:100%;padding:10px;}";
     html+=" div#info { border-bottom-style:solid;border-bottom-width:1px;} div#text {border-bottom-style:solid;border-bottom-width:1px;padding:10px;}";
     html+=" div#source {padding:10px;} table { width:100%;text-align:center;} .boutton { background-color:#E5E5E5;border:1px solid;border-color: black;padding: 2px;color:black;margin:5px;}";
-    html+=" .boutton:hover { background-color:#C4C4C4;}</style></head>";
+    html+=" .boutton:hover { background-color:#C4C4C4;}</style>";
+    html+="<style type=\"text/css\">div#text a {text-decoration:none;background:yellow;color:black;}</style>";
+    html+=css;
+    html+="<script language=\"Javascript\"> window.onload = function() { document.styleSheets[2].disabled=false; } </script><script language=\"Javascript\"> function changeMode(){ if ( document.styleSheets[1].disabled == false ) { document.styleSheets[1].disabled=true; document.styleSheets[2].disabled=false; } else{ document.styleSheets[1].disabled=false; document.styleSheets[2].disabled=true; } } </script>";
 
-    html+="<body><div id=\"contenu\" ><div id=\"info\" ><table><tr><td><strong>Text plagier à "+QString::number(getPrCentPlagier())+"%</strong></td><td><p class=\"boutton\">Changer Mode Couleur</p></td><td><strong>Nombres de sources: "+QString::number(getNbSource())+"</strong></td></tr></table></div><div id=\"text\">";
-
-    html+=getDocumentEnrichi(1);
+    html+="</head><body><div id=\"contenu\" ><div id=\"info\" ><table><tr><td><strong>Text plagier à "+QString::number(getPrCentPlagier())+"%</strong></td><td><p class=\"boutton\" onClick=\"changeMode()\">Changer Mode Couleur</p></td><td><strong>Nombres de sources: "+QString::number(getNbSource())+"</strong></td></tr></table></div><div id=\"text\">";
+    html+=doc;
     html+="</div><div id=\"source\">";
     html+=getListSource();
     html+="</div></div></body></html>";
