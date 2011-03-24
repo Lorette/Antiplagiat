@@ -64,6 +64,7 @@ public:
    QList<MemeSource> getMemeSource(QString source);
    int getNbSource();
    int getPrCentPlagier();
+   QString getListSource();
 
 private:
    QString m_text;

@@ -10,11 +10,11 @@
     <x>0</x>
     <y>0</y>
     <width>634</width>
-    <height>421</height>
+    <height>431</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Ihm</string>
+   <string>Anti Plagiat</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../Ressources/antiplagia.qrc">

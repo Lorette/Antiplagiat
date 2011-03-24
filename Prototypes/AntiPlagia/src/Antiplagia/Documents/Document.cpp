@@ -271,7 +271,7 @@ QString Document::getDocumentEnrichi(int mode){
         QList<MemeSource> list;
         QList<int> indiceTraiter;
         int indiceColor=0;
-        QString color[20]= {"yellow","YellowGreen","Wheat","Turquoise","SpringGreen","DeepPink","Silver","MistyRose","MediumPurple","Khaki","GoldenRod","Tan","DarkSalmon","Coral","BlueViolet","Aqua","Plum","MediumBlue","DarkOrchid","Aquamarine"};
+        QString color[20]= {"yellow","YellowGreen","Wheat","Turquoise","SpringGreen","DeepPink","Silver","MistyRose","MediumPurple","DarkKhaki","GoldenRod","Tan","DarkSalmon","Coral","BlueViolet","Aqua","Plum","MediumBlue","DarkOrchid","Aquamarine"};
         for(int i=0; i < m_textCible.size() ; i++ ){
             if( !indiceTraiter.contains(i) && m_textCible[i].isPlagier()){
                 list = getMemeSource(m_textCible[i].getUrl());
@@ -356,7 +356,7 @@ QList<MemeSource> Document::getMemeSource(QString source)
 int Document::getNbSource()
 {
     int nb = 0;
-    QList<QString> list;
+    QStringList list;
     for(int i=0;i<m_textCible.size();i++)
         if( !list.contains(m_textCible[i].getUrl()) && m_textCible[i].isPlagier() ){
             nb++;
@@ -379,4 +379,25 @@ int Document::getPrCentPlagier()
             nbPlagier++;
 
     return (int)((float)nbPlagier/(float)m_textCible.size()*100);
+}
+
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Document::getListSource()
+// Purpose:    Implementation of Document::getListSource()
+// Return:     QString
+////////////////////////////////////////////////////////////////////////
+
+QString Document::getListSource()
+{
+    QStringList list;
+    QString listSource;
+    for(int i=0;i<m_textCible.size();i++)
+        if( !list.contains(m_textCible[i].getUrl()) && m_textCible[i].isPlagier() ){
+            list << m_textCible[i].getUrl();
+        }
+    for(int i=0;i<list.size();i++)
+        listSource+="<a href=\">"+list[i]+"\" >"+list[i]+"</a><br/>";
+
+    return listSource;
 }

@@ -129,7 +129,7 @@ void Ihm::result(bool error, QString errorString)
             QObject::disconnect(m_popup,SIGNAL(annuler()),this,SLOT(annulerTraitement()));
             delete m_popup;
             m_popup = new IhmPopup();
-            m_popup->result(m_document->getDocumentEnrichi(1),m_document->getDocumentEnrichi(2),m_document->getNbSource(),m_document->getPrCentPlagier());
+            m_popup->result(m_document->getDocumentEnrichi(1),m_document->getDocumentEnrichi(2),m_document->getListSource(),m_document->getNbSource(),m_document->getPrCentPlagier());
         }
     }
     enabelDisabel(true);

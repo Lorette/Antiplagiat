@@ -10,12 +10,7 @@
 #define IHMPOPUP_H
 
 #include <QWidget>
-#include <QLabel>
-#include <QProgressBar>
-#include <QTextBrowser>
-#include <QGridLayout>
-#include <QApplication>
-#include <QDesktopWidget>
+#include <QFileDialog>
 #include "ui_progress.h"
 #include "ui_resultat.h"
 
@@ -28,12 +23,13 @@ public:
     explicit IhmPopup(QWidget *parent = 0);
     ~IhmPopup();
     void startDL();
-    void result(QString text1,QString text2,int nbSource,int prCenPlagier);
+    void result(QString text1,QString text2,QString listSource,int nbSource,int prCenPlagier);
 
 public slots:
     void progressDL(int valeur,QString text);
     void clickAnnuler();
     void changeMode();
+    void exportHtml();
 
 signals:
     void annuler();

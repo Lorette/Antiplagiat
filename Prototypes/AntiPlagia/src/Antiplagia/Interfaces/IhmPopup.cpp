@@ -60,22 +60,24 @@ void IhmPopup::progressDL(int valeur,QString text)
 }
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       IhmPopup::result(QString text1,QString text2,int nbSource,int prCenPlagier)
+// Name:       IhmPopup::result(QString text1,QString text2,QString listSource,int nbSource,int prCenPlagier)
 // Purpose:    Implementation of IhmPopup::result()
 // Return:     void
 ////////////////////////////////////////////////////////////////////////
 
-void IhmPopup::result(QString text1,QString text2,int nbSource,int prCenPlagier)
+void IhmPopup::result(QString text1,QString text2,QString listSource,int nbSource,int prCenPlagier)
 {
     ui2 = new Ui::Resultat();
     ui2->setupUi(this);
     ui2->textBrowser->setText(text1);
     ui2->label_2->setText("<strong>Nombres de sources: "+QString::number(nbSource)+"</strong>");
     ui2->label->setText("<strong>Text plagier à "+QString::number(prCenPlagier)+"% </strong>");
+    ui2->textBrowser_2->setText(listSource);
     m_text1=text1;
     m_text2=text2;
     m_idText = 1;
     QObject::connect(ui2->pushButton_2,SIGNAL(clicked()),this,SLOT(changeMode()));
+    QObject::connect(ui2->pushButton,SIGNAL(clicked()),this,SLOT(exportHtml()));
     show();
 }
 
@@ -90,6 +92,11 @@ void IhmPopup::clickAnnuler()
     emit annuler();
 }
 
+////////////////////////////////////////////////////////////////////////
+// Name:       IhmPopup::changeMode()
+// Purpose:    Implementation of IhmPopup::changeMode()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
 
 void IhmPopup::changeMode()
 {
@@ -101,4 +108,16 @@ void IhmPopup::changeMode()
         ui2->textBrowser->setText(m_text1);
         m_idText=1;
     }
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       IhmPopup::exportHtml()
+// Purpose:    Implementation of IhmPopup::exportHtml()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void IhmPopup::exportHtml()
+{
+    QString file = QFileDialog::getSaveFileName(this, "Enregistrer un fichier", QString(), "Images (*.html)");
+
 }
