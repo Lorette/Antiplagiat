@@ -19,6 +19,7 @@ Ihm::Ihm(QWidget *parent) : QMainWindow(parent), ui(new Ui::Ihm)
 {
     ui->setupUi(this);
     m_document = new Document(this);
+    m_settings = new Settings(this);
 
     m_popup = NULL;
     m_file = NULL;
@@ -43,6 +44,7 @@ Ihm::~Ihm()
 {
     delete ui;
     delete m_document;
+    delete m_settings;
 
     if (m_popup != NULL)
         delete m_popup;
@@ -148,7 +150,7 @@ void Ihm::aPropos()
 {
     QDialog* action_propos = new QDialog (this);
     QVBoxLayout *layout = new QVBoxLayout;
-    QString propos = "<strong>Projet Antiplagia</strong>:<br/><br/><u><i>Réalisé par</i></u>:<ul><li>Fabien RONGIARD</li><li>Brice DUREUIL</li><li>Elkader FATNI</li><li>Soufi&egrave;ne NAJAR</li><li>Thomas CRESSON</li></ul><br/><u><i>Langage de programmation utilisé</u></i>:<ul><li>Langage C++</li></ul><br/><u><i>Framework utilisée</u></i>:<ul><li>Qt 4.7</li></ul><br/><br/>Pour de plus amples informations visitez notre <a href=\"http://94.23.244.98/antiplagia/\">site web</a>.";
+    QString propos = "<strong>Projet Anti-Plagiat</strong>:<br/><br/><u><i>Réalisé par</i></u>:<ul><li>Fabien RONGIARD</li><li>Brice DUREUIL</li><li>Elkader FATNI</li><li>Soufi&egrave;ne NAJAR</li><li>Thomas CRESSON</li></ul><br/><u><i>Langage de programmation utilisé</u></i>:<ul><li>Langage C++</li></ul><br/><u><i>Framework utilisée</u></i>:<ul><li>Qt 4.7</li></ul><br/><br/>Pour de plus amples informations visitez notre <a href=\"http://94.23.244.98/antiplagia/\">site web</a>.";
     QLabel *text = new QLabel(propos);
     layout->addWidget(text);
     action_propos->setLayout(layout);
@@ -165,9 +167,7 @@ void Ihm::aPropos()
 
 void Ihm::preference()
 {
-    //QMessageBox::critical(this, "Indisponible", "Disponible prochainement !");
-    Settings* s=new Settings(this);
-    s->show();
+    m_settings->show();
 }
 
 
@@ -353,4 +353,29 @@ void Ihm::annulerTraitement()
         m_popup = NULL;
     }
     enabelDisabel(true);
+}
+
+int Ihm::getNbMots()
+{
+    return m_settings->getNbMots();
+}
+
+bool Ihm::getParTaille()
+{
+    return m_settings->getParTaille();
+}
+
+bool Ihm::getParPolice()
+{
+    return m_settings->getParPolice();
+}
+
+int Ihm::getPrCentATester()
+{
+    return m_settings->getPrCentATester();
+}
+
+int Ihm::nbMaxRequete()
+{
+    return m_settings->nbMaxRequete();
 }

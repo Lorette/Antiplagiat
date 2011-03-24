@@ -52,12 +52,12 @@ QString Extension::getText()
 }
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       Extension::getCible()
+// Name:       Extension::getCible(int max_word, bool tri_police, bool tri_size)
 // Purpose:    Implementation of Extension::getCible()
 // Return:     QStringList
 ////////////////////////////////////////////////////////////////////////
 
-QStringList Extension::getCible()
+QStringList Extension::getCible(int max_word, bool tri_police, bool tri_size)
 {
     return QStringList();
 }

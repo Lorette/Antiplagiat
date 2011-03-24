@@ -75,12 +75,12 @@ QString TextPdf::getText()
 }
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       TextPdf::getCible()
+// Name:       TextPdf::getCible(int max_word, bool tri_police, bool tri_size)
 // Purpose:    Implementation of TextPdf::getCible()
 // Return:     QStringList
 ////////////////////////////////////////////////////////////////////////
 
-QStringList TextPdf::getCible()
+QStringList TextPdf::getCible(int max_word, bool tri_police, bool tri_size)
 {
     QStringList list = m_text.split(".");
     QStringList listFinal;
@@ -90,18 +90,14 @@ QStringList TextPdf::getCible()
 
     for(int i=0;i<list.size();i++){
         list2=(list[i]).split(" ");
-        n=list2.size()/10;
+        n=list2.size()/max_word;
         for(int j=0;j < n ;j++){
             s="";
-            for(int h=0;h<10;h++)
-                s += list2[j*10+h]+" ";
+            for(int h=0;h<max_word;h++)
+                s += list2[j*max_word+h]+" ";
             listFinal << s;
 
         }
-        s="";
-        for(int h=(10*n);h<list2.size();h++)
-            s+=list2[h]+" ";
-        listFinal << s;
         list2.clear();
     }
 

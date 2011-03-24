@@ -26,7 +26,7 @@ public:
     ~TextPdf();
     bool fileIsValid();
     QString getText();
-    QStringList getCible();
+    QStringList getCible(int max_word, bool tri_police, bool tri_size);
 
 private:
     QString m_file;

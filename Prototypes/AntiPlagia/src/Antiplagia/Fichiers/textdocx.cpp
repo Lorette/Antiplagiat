@@ -66,18 +66,18 @@ QString TextDocx::getText()
 }
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       TextDocx::getCible()
+// Name:       TextDocx::getCible(int max_word, bool tri_police, bool tri_size)
 // Purpose:    Implementation of TextDocx::getCible()
 // Return:     QStringList
 ////////////////////////////////////////////////////////////////////////
 
-QStringList TextDocx::getCible()
+QStringList TextDocx::getCible(int max_word, bool tri_police, bool tri_size)
 {
     for(int i=0; i < m_textCibles.size();i++)
         delete m_textCibles[i];
     m_textCibles.clear();
     extract_Text();
-    tri(10,true,true);
+    tri(max_word,tri_police,tri_size);
 
     QStringList cible;
 

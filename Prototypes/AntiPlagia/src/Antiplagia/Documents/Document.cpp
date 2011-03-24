@@ -165,14 +165,16 @@ void Document::initialisation()
         emit progress(0,"Selection des texts cible...");
         if(focus == 2) {// Par document
             m_text=m_ihm->getDocument();
-            determinTextCible();
+            determinTextCible(m_ihm->getNbMots());
         }
         else  // Par fichier
         {
             m_text=m_file->getText();
-            determinTextCibleFile();
+            determinTextCibleFile(m_ihm->getNbMots(),m_ihm->getParPolice(),m_ihm->getParTaille());
         }
     }
+
+
 
     m_nbRequet=0;
     m_nbRequet+=(m_ihm->isSelect(0))? 1 : 0;
@@ -188,9 +190,9 @@ void Document::initialisation()
 // Return:     void
 ////////////////////////////////////////////////////////////////////////
 
-void Document::determinTextCibleFile()
+void Document::determinTextCibleFile(int nbMots, bool tri_police, bool tri_size)
 {
-    QStringList cible = m_file->getCible();
+    QStringList cible = m_file->getCible(nbMots,tri_police,tri_size);
     for(int i=0;i < cible.size();i++)
         m_textCible << TextCible((cible[i]).trimmed());
 }
@@ -201,7 +203,7 @@ void Document::determinTextCibleFile()
 // Return:     void
 ////////////////////////////////////////////////////////////////////////
 
-void Document::determinTextCible()
+void Document::determinTextCible(int nbMots)
 {
         QStringList list = m_text.split(".");
         QStringList listFinal;
@@ -211,18 +213,18 @@ void Document::determinTextCible()
 
         for(int i=0;i<list.size();i++){
             list2=(list[i]).split(" ");
-            n=list2.size()/10;
+            n=list2.size()/nbMots;
             for(int j=0;j < n ;j++){
                 s="";
-                for(int h=0;h<10;h++)
-                    s += list2[j*10+h]+" ";
+                for(int h=0;h<nbMots;h++)
+                    s += list2[j*nbMots+h]+" ";
                 listFinal << s;
 
             }
-            s="";
+           /* s="";
             for(int h=(10*n);h<list2.size();h++)
                 s+=list2[h]+" ";
-            listFinal << s;
+            listFinal << s;*/
             list2.clear();
         }
 
@@ -378,7 +380,7 @@ int Document::getPrCentPlagier()
         if(m_textCible[i].isPlagier())
             nbPlagier++;
 
-    return (int)((float)nbPlagier/(float)m_textCible.size()*100);
+    return ((int)((float)nbPlagier/(float)m_textCible.size()*100) < 0)? 0 : (int)((float)nbPlagier/(float)m_textCible.size()*100) ;
 }
 
 
@@ -434,7 +436,7 @@ void Document::exportHtml(QString file)
     css+="</style>";
 
 
-    QString html="<html><head><style type=\"text/css\"> div#contenu { margin-left:15%;margin-right:15%;border-style:solid;border-width:2px;height:100%;padding:10px;}";
+    QString html="<html><head><style type=\"text/css\"> div#contenu { margin-left:15%;margin-right:15%;border-style:solid;border-width:2px;padding:10px;}";
     html+=" div#info { border-bottom-style:solid;border-bottom-width:1px;} div#text {border-bottom-style:solid;border-bottom-width:1px;padding:10px;}";
     html+=" div#source {padding:10px;} table { width:100%;text-align:center;} .boutton { background-color:#E5E5E5;border:1px solid;border-color: black;padding: 2px;color:black;margin:5px;}";
     html+=" .boutton:hover { background-color:#C4C4C4;}</style>";
@@ -442,7 +444,7 @@ void Document::exportHtml(QString file)
     html+=css;
     html+="<script language=\"Javascript\"> window.onload = function() { document.styleSheets[2].disabled=false; } </script><script language=\"Javascript\"> function changeMode(){ if ( document.styleSheets[1].disabled == false ) { document.styleSheets[1].disabled=true; document.styleSheets[2].disabled=false; } else{ document.styleSheets[1].disabled=false; document.styleSheets[2].disabled=true; } } </script>";
 
-    html+="</head><body><div id=\"contenu\" ><div id=\"info\" ><table><tr><td><strong>Text plagier à "+QString::number(getPrCentPlagier())+"%</strong></td><td><p class=\"boutton\" onClick=\"changeMode()\">Changer Mode Couleur</p></td><td><strong>Nombres de sources: "+QString::number(getNbSource())+"</strong></td></tr></table></div><div id=\"text\">";
+    html+="</head><body><div id=\"contenu\" ><div id=\"info\" ><table><tr><td><strong>Texte plagié à "+QString::number(getPrCentPlagier())+"%</strong></td><td><p class=\"boutton\" onClick=\"changeMode()\">Changer Mode Couleur</p></td><td><strong>Nombres de sources: "+QString::number(getNbSource())+"</strong></td></tr></table></div><div id=\"text\">";
     html+=doc;
     html+="</div><div id=\"source\">";
     html+=getListSource();
@@ -455,5 +457,14 @@ void Document::exportHtml(QString file)
         QTextStream out(&f);
         out << html;
     }
+
+}
+
+void Document::adaptNbCible(int prCent,int maxReq)
+{
+    int nbMot=(m_text.split(" ")).size();
+
+    int nbReq = (int)(((float)m_textCible.size() / (float)nbMot) *100);
+    nbReq=(nbReq > maxReq)? maxReq : nbReq;
 
 }

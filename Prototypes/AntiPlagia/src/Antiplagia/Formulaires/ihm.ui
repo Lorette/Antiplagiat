@@ -14,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Anti Plagiat</string>
+   <string>Anti-Plagiat</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../Ressources/antiplagia.qrc">

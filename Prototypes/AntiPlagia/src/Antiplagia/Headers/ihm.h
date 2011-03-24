@@ -41,6 +41,11 @@ public:
     void enabelDisabel(bool b);
     bool erreurChamp();
     bool isSelect(int idMoteurRecherche);
+    int getNbMots();
+    bool getParTaille();
+    bool getParPolice();
+    int getPrCentATester();
+    int nbMaxRequete();
 
 public slots:
     void traitement();
@@ -55,6 +60,7 @@ private:
     Ui::Ihm *ui;
     Document *m_document;
     IhmPopup *m_popup;
+    Settings *m_settings;
 
 };
 

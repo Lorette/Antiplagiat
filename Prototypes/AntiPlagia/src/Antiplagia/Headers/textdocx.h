@@ -40,7 +40,7 @@ public:
     void tri(int max_word = 10, bool tri_police = true, bool tri_size = true);
     bool fileIsValid();
     QString getText();
-    QStringList getCible();
+    QStringList getCible(int max_word, bool tri_police, bool tri_size);
 
 private:
     void removeDir(QString dir);

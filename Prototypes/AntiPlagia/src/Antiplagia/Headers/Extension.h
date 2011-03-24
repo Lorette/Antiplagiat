@@ -19,7 +19,7 @@ public:
     ~Extension();
     virtual bool fileIsValid();
     virtual QString getText();
-    virtual QStringList getCible();
+    virtual QStringList getCible(int max_word, bool tri_police, bool tri_size);
 
 };
 

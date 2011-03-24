@@ -55,16 +55,17 @@ public:
    void traiterDocument();
    void traiterEnvoie(int idMoteurRecherche);
    void initialisation();
-   void determinTextCible();
+   void determinTextCible(int nbMots);
    bool textIsPlagier();
    bool setFile(QString file);
    QString getDocumentEnrichi(int mode);
    QString getUrlTextPlagier();
-   void determinTextCibleFile();
+   void determinTextCibleFile(int nbMots, bool tri_police, bool tri_size);
    QList<MemeSource> getMemeSource(QString source);
    int getNbSource();
    int getPrCentPlagier();
    QString getListSource();
+   void adaptNbCible(int prCent,int maxReq);
 
 private:
    QString m_text;
