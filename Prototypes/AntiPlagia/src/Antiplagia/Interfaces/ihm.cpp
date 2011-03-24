@@ -60,9 +60,10 @@ void Ihm::traitement()
 {
     enabelDisabel(false);
     ui->label->setText("");
-    if (m_popup != NULL )
+    if (m_popup != NULL ){
+        QObject::disconnect(m_popup,SIGNAL(exportHtml(QString)),m_document,SLOT(exportHtml(QString)));
         delete m_popup;
-
+    }
     if(!erreurChamp()){ // Si les champ son bien entrer
         if(focusTab() != 1){
             m_popup = new IhmPopup();
@@ -129,6 +130,7 @@ void Ihm::result(bool error, QString errorString)
             QObject::disconnect(m_popup,SIGNAL(annuler()),this,SLOT(annulerTraitement()));
             delete m_popup;
             m_popup = new IhmPopup();
+            QObject::connect(m_popup,SIGNAL(exportHtml(QString)),m_document,SLOT(exportHtml(QString)));
             m_popup->result(m_document->getDocumentEnrichi(1),m_document->getDocumentEnrichi(2),m_document->getListSource(),m_document->getNbSource(),m_document->getPrCentPlagier());
         }
     }

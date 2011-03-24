@@ -401,3 +401,33 @@ QString Document::getListSource()
 
     return listSource;
 }
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Document::exportHtml(QString file)
+// Purpose:    Implementation of Document::exportHtml()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void Document::exportHtml(QString file)
+{
+    QString html="<html><head><style type=\"text/css\"> div#contenu { margin-left:15%;margin-right:15%;border-style:solid;border-width:2px;height:100%;padding:10px;}";
+    html+=" div#info { border-bottom-style:solid;border-bottom-width:1px;} div#text {border-bottom-style:solid;border-bottom-width:1px;padding:10px;}";
+    html+=" div#source {padding:10px;} table { width:100%;text-align:center;} .boutton { background-color:#E5E5E5;border:1px solid;border-color: black;padding: 2px;color:black;margin:5px;}";
+    html+=" .boutton:hover { background-color:#C4C4C4;}</style></head>";
+
+    html+="<body><div id=\"contenu\" ><div id=\"info\" ><table><tr><td><strong>Text plagier à "+QString::number(getPrCentPlagier())+"%</strong></td><td><p class=\"boutton\">Changer Mode Couleur</p></td><td><strong>Nombres de sources: "+QString::number(getNbSource())+"</strong></td></tr></table></div><div id=\"text\">";
+
+    html+=getDocumentEnrichi(1);
+    html+="</div><div id=\"source\">";
+    html+=getListSource();
+    html+="</div></div></body></html>";
+
+    html.replace("\n","<br/>");
+
+    QFile f(file);
+    if (f.open(QFile::WriteOnly)) {
+        QTextStream out(&f);
+        out << html;
+    }
+
+}

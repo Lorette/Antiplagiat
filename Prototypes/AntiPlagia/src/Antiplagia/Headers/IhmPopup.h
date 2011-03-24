@@ -29,10 +29,11 @@ public slots:
     void progressDL(int valeur,QString text);
     void clickAnnuler();
     void changeMode();
-    void exportHtml();
+    void clickExportHtml();
 
 signals:
     void annuler();
+    void exportHtml(QString file);
 
 private:
     Ui::Progress *ui;

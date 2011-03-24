@@ -77,7 +77,7 @@ void IhmPopup::result(QString text1,QString text2,QString listSource,int nbSourc
     m_text2=text2;
     m_idText = 1;
     QObject::connect(ui2->pushButton_2,SIGNAL(clicked()),this,SLOT(changeMode()));
-    QObject::connect(ui2->pushButton,SIGNAL(clicked()),this,SLOT(exportHtml()));
+    QObject::connect(ui2->pushButton,SIGNAL(clicked()),this,SLOT(clickExportHtml()));
     show();
 }
 
@@ -111,13 +111,14 @@ void IhmPopup::changeMode()
 }
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       IhmPopup::exportHtml()
-// Purpose:    Implementation of IhmPopup::exportHtml()
+// Name:       IhmPopup::clickExportHtml()
+// Purpose:    Implementation of IhmPopup::clickExportHtml()
 // Return:     void
 ////////////////////////////////////////////////////////////////////////
 
-void IhmPopup::exportHtml()
+void IhmPopup::clickExportHtml()
 {
     QString file = QFileDialog::getSaveFileName(this, "Enregistrer un fichier", QString(), "Images (*.html)");
-
+    if (file != "")
+        emit exportHtml(file);
 }

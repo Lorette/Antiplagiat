@@ -81,6 +81,7 @@ private:
 public slots:
    void traiterReponse(int idMoteurRecherche);
    void annulerTraitement();
+   void exportHtml(QString file);
 
 signals:
     void traitementFini();
