@@ -172,9 +172,8 @@ void Document::initialisation()
             m_text=m_file->getText();
             determinTextCibleFile(m_ihm->getNbMots(),m_ihm->getParPolice(),m_ihm->getParTaille());
         }
+        adaptNbCible(m_ihm->getPrCentATester(),m_ihm->nbMaxRequete(),m_ihm->getNbMots());
     }
-
-    adaptNbCible(m_ihm->getPrCentATester(),m_ihm->nbMaxRequete(),m_ihm->getNbMots());
 
     m_nbRequet=0;
     m_nbRequet+=(m_ihm->isSelect(0))? 1 : 0;
@@ -470,6 +469,8 @@ void Document::adaptNbCible(int prCent, int maxReq,int nbMotsParTest)
         nbReq=(nbReq > maxReq)? maxReq : nbReq;
     QMessageBox::information(0,"",QString::number(nbReq));
 
-
-
+    int n=m_textCible.size()-nbReq;
+    if(n > 0)
+        for(int i=0;i<n;i++)
+            m_textCible.removeAt(qrand()%m_textCible.size());
 }

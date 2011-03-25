@@ -123,9 +123,9 @@ void Ihm::result(bool error, QString errorString)
         int n=focusTab();
         if(n == 1){ // Par text
             if(m_document->textIsPlagier()) // text plagier
-                ui->label->setText("<h3>Ce text a été plagier</h3>\nSource: <a href=\""+m_document->getUrlTextPlagier()+"\"> "+m_document->getUrlTextPlagier()+" </a>");
+                ui->label->setText("<h3>Ce texte a été plagié</h3>\nSource: <a href=\""+m_document->getUrlTextPlagier()+"\"> "+m_document->getUrlTextPlagier()+" </a>");
             else
-                ui->label->setText("<h3>Ce text n'a pas été plagier</h3>");
+                ui->label->setText("<h3>Ce texte n'a pas été plagié</h3>");
         }
         else{// Par document
             QObject::disconnect(m_document,SIGNAL(progress(int,QString)),m_popup,SLOT(progressDL(int,QString)));
@@ -151,8 +151,9 @@ void Ihm::aPropos()
 {
     QDialog* action_propos = new QDialog (this);
     QVBoxLayout *layout = new QVBoxLayout;
-    QString propos = "<strong>Projet Anti-Plagiat</strong>:<br/><br/><u><i>Réalisé par</i></u>:<ul><li>Fabien RONGIARD</li><li>Brice DUREUIL</li><li>Elkader FATNI</li><li>Soufi&egrave;ne NAJAR</li><li>Thomas CRESSON</li></ul><br/><u><i>Langage de programmation utilisé</u></i>:<ul><li>Langage C++</li></ul><br/><u><i>Framework utilisée</u></i>:<ul><li>Qt 4.7</li></ul><br/><br/>Pour de plus amples informations visitez notre <a href=\"http://94.23.244.98/antiplagia/\">site web</a>.";
+    QString propos = "<strong>Projet Anti-Plagiat</strong>:<br/><br/><u><i>Réalisé par</i></u>:<ul><li>Fabien RONGIARD</li><li>Brice DUREUIL</li><li>Elkader FATNI</li><li>Soufi&egrave;ne NAJAR</li><li>Thomas CRESSON</li></ul><br/><u><i>Langage de programmation utilisé</u></i>:<ul><li>Langage C++</li></ul><br/><u><i>Framework utilisée</u></i>:<ul><li>Qt 4.7</li></ul><br/><br/>Pour de plus amples informations visitez notre <a href=\"http://lorette.fr.nf\">site web</a>.";
     QLabel *text = new QLabel(propos);
+    text->setOpenExternalLinks(true);
     layout->addWidget(text);
     action_propos->setLayout(layout);
     action_propos->setFixedSize(300,350);
