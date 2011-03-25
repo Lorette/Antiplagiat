@@ -206,12 +206,15 @@ void Document::determinTextCible(int nbMots)
 {
         QStringList list = m_text.split(".");
         QStringList listFinal;
-        QStringList list2;
+        QStringList list2,list3;
         int n;
         QString s;
 
         for(int i=0;i<list.size();i++){
-            list2=(list[i]).split(" ");
+            list3=(list[i]).split(" ");
+
+            //for(int j)
+
             n=list2.size()/nbMots;
             for(int j=0;j < n ;j++){
                 s="";
@@ -220,10 +223,6 @@ void Document::determinTextCible(int nbMots)
                 listFinal << s;
 
             }
-           /* s="";
-            for(int h=(10*n);h<list2.size();h++)
-                s+=list2[h]+" ";
-            listFinal << s;*/
             list2.clear();
         }
 
