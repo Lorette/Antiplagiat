@@ -22,6 +22,7 @@
 #include <QWidget>
 #include <QObject>
 #include <QStringList>
+#include <QtGlobal>
 
 class MoteurRecherche;
 class Ihm;
@@ -65,7 +66,7 @@ public:
    int getNbSource();
    int getPrCentPlagier();
    QString getListSource();
-   void adaptNbCible(int prCent,int maxReq);
+   void adaptNbCible(int prCent,int maxReq,int nbMotsParTest);
 
 private:
    QString m_text;

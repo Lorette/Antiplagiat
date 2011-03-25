@@ -174,7 +174,7 @@ void Document::initialisation()
         }
     }
 
-
+    adaptNbCible(m_ihm->getPrCentATester(),m_ihm->nbMaxRequete(),m_ihm->getNbMots());
 
     m_nbRequet=0;
     m_nbRequet+=(m_ihm->isSelect(0))? 1 : 0;
@@ -460,11 +460,16 @@ void Document::exportHtml(QString file)
 
 }
 
-void Document::adaptNbCible(int prCent,int maxReq)
+void Document::adaptNbCible(int prCent, int maxReq,int nbMotsParTest)
 {
     int nbMot=(m_text.split(" ")).size();
 
-    int nbReq = (int)(((float)m_textCible.size() / (float)nbMot) *100);
-    nbReq=(nbReq > maxReq)? maxReq : nbReq;
+    int nbReq = (int)( ( (float)nbMot * (float)prCent / nbMotsParTest) / 100 );
+
+    if(maxReq != 0)
+        nbReq=(nbReq > maxReq)? maxReq : nbReq;
+    QMessageBox::information(0,"",QString::number(nbReq));
+
+
 
 }
