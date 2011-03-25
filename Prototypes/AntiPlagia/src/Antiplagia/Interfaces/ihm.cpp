@@ -65,6 +65,7 @@ void Ihm::traitement()
     if (m_popup != NULL ){
         QObject::disconnect(m_popup,SIGNAL(exportHtml(QString)),m_document,SLOT(exportHtml(QString)));
         delete m_popup;
+        m_popup = NULL;
     }
     if(!erreurChamp()){ // Si les champ son bien entrer
         if(focusTab() != 1){
