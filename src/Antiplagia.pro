@@ -6,7 +6,7 @@ QT += core gui network xml
 
 TEMPLATE = app
 TARGET = Antiplagia
-DESTDIR = ../../workdir/bin
+DESTDIR = ../workdir/bin
 
 DEPENDPATH += . \
               Documents \
