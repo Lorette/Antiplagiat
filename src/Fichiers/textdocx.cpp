@@ -173,10 +173,6 @@ void TextDocx::extract_Text()
             m_textCibles << x_string;
         }
     }
-
-    // Pour tester
-    //for(int i = 0;i<m_textCibles.count();i++)
-        //QMessageBox::information(0,"hhh",m_textCibles.at(i)->toString());
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -239,9 +235,6 @@ void TextDocx::tri(int max_word, bool tri_police, bool tri_size)
 
     m_textCibles = textCibles;
 
-    // Pour tester
-    //for(int i = 0;i<m_textCibles.count();i++)
-        //QMessageBox::information(0,"hhh",m_textCibles.at(i)->toString());
 
 }
 

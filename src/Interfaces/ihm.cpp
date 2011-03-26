@@ -201,7 +201,10 @@ void Ihm::preference()
 
 void Ihm::documentation()
 {
-    QMessageBox::critical(this, "Indisponible", "Disponible prochainement !");
+    QWebView *pageWeb = new QWebView();
+    pageWeb->load(QUrl("file://localhost/"+QDir().absolutePath()+"/doc/Anti-Plagiat.html"));
+    pageWeb->show();
+
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -415,25 +418,55 @@ void Ihm::annulerTraitement()
     enabelDisabel(true);
 }
 
+////////////////////////////////////////////////////////////////////////
+// Name:       Ihm::getNbMots()
+// Purpose:    Implementation of Ihm::getNbMots()
+// Return:     int
+////////////////////////////////////////////////////////////////////////
+
 int Ihm::getNbMots()
 {
     return m_settings->getNbMots();
 }
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Ihm::getParTaille()
+// Purpose:    Implementation of Ihm::getParTaille()
+// Return:     bool
+////////////////////////////////////////////////////////////////////////
 
 bool Ihm::getParTaille()
 {
     return m_settings->getParTaille();
 }
 
+////////////////////////////////////////////////////////////////////////
+// Name:       Ihm::getParPolice()
+// Purpose:    Implementation of Ihm::getParPolice()
+// Return:     bool
+////////////////////////////////////////////////////////////////////////
+
 bool Ihm::getParPolice()
 {
     return m_settings->getParPolice();
 }
 
+////////////////////////////////////////////////////////////////////////
+// Name:       Ihm::getPrCentATester()
+// Purpose:    Implementation of Ihm::getPrCentATester()
+// Return:     int
+////////////////////////////////////////////////////////////////////////
+
 int Ihm::getPrCentATester()
 {
     return m_settings->getPrCentATester();
 }
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Ihm::nbMaxRequete()
+// Purpose:    Implementation of Ihm::nbMaxRequete()
+// Return:     int
+////////////////////////////////////////////////////////////////////////
 
 int Ihm::nbMaxRequete()
 {

@@ -8,6 +8,7 @@
 #ifndef IHM_H
 #define IHM_H
 
+#include <QWebView>
 #include <QMainWindow>
 #include <QPushButton>
 #include <QLineEdit>

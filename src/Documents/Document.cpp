@@ -526,6 +526,12 @@ void Document::exportHtml(QString file)
 
 }
 
+////////////////////////////////////////////////////////////////////////
+// Name:       Document::adaptNbCible(int prCent, int maxReq,int nbMotsParTest)
+// Purpose:    Implementation of Document::adaptNbCible()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
 void Document::adaptNbCible(int prCent, int maxReq,int nbMotsParTest)
 {
     int nbMot=(m_text.split(" ")).size();

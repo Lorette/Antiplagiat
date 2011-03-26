@@ -40,7 +40,6 @@ Bing::~Bing()
 
 bool Bing::rechercheText()
 {
-    //m_DOM=m_DOM.QString::replace("&#39;","'");
     bool b = m_DOM.contains("<strong>"+m_text.toUtf8()+"</strong>",Qt::CaseInsensitive);
     return b;
 }
