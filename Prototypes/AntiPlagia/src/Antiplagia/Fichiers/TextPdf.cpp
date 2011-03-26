@@ -39,7 +39,7 @@ bool TextPdf::fileIsValid()
 {
     if(!QFile().exists("pdftotext.exe"))
     {
-        QMessageBox::warning(0,"Fichier manquant","Le programme nécessaire pour lire ce type de ficier est absent.\n\nVeuillez réinstaller l'application pour corriger le problème");
+        emit error(true,"Le programme nécessaire pour lire ce type de ficier est absent.\n\nVeuillez réinstaller l'application pour corriger le problème");
         return false;
     }
 
@@ -47,8 +47,10 @@ bool TextPdf::fileIsValid()
 
     QFile file("tmp.txt");
 
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)){
+        emit error(true,"Le fichier est endommagé ou d'un format inconnu. Impossible de continuer");
         return false;
+    }
 
     QTextStream in(&file);
     while (!in.atEnd()) {
@@ -59,8 +61,10 @@ bool TextPdf::fileIsValid()
 
     if(m_text != "")
         return true;
-    else
+    else{
+        emit error(true,"Le fichier est endommagé ou d'un format inconnu. Impossible de continuer");
         return false;
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////

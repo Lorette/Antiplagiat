@@ -10,9 +10,12 @@
 
 #include <QString>
 #include <QStringList>
+#include <QObject>
 
-class Extension
+class Extension : public QObject
 {
+
+Q_OBJECT
 
 public:
     Extension();
@@ -20,6 +23,9 @@ public:
     virtual bool fileIsValid();
     virtual QString getText();
     virtual QStringList getCible(int max_word, bool tri_police, bool tri_size);
+
+signals:
+    void error(bool,QString error);
 
 };
 

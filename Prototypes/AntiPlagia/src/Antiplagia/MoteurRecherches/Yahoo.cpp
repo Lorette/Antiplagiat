@@ -75,11 +75,10 @@ void Yahoo::recupUrl()
     }
     pos=s.indexOf("href",0,Qt::CaseInsensitive);
     s=s.right(s.size()-pos-6);
-    pos=0;
-    while(pos != -1){
-        pos=s.indexOf("\"",0,Qt::CaseInsensitive);
-        if (pos != -1 )s.resize(pos);
-    }
+
+    pos=s.indexOf("\"",0,Qt::CaseInsensitive);
+    s.resize(pos);
+
     pos=0;
     while(pos != -1){
         pos=s.indexOf("http",0,Qt::CaseInsensitive);

@@ -27,11 +27,13 @@ Ihm::Ihm(QWidget *parent) : QMainWindow(parent), ui(new Ui::Ihm)
     QObject::connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(traitement()));
     QObject::connect(ui->pushButton_2, SIGNAL(clicked()), this, SLOT(traitement()));
     QObject::connect(ui->pushButton_3, SIGNAL(clicked()), this, SLOT(traitement()));
+    QObject::connect(ui->pushButton_4, SIGNAL(clicked()), this, SLOT(traitement()));
     QObject::connect(ui->actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
     QObject::connect(ui->action_propos, SIGNAL(triggered()), this, SLOT(aPropos()));
     QObject::connect(ui->actionDocumentation,SIGNAL(triggered()),this,SLOT(documentation()));
     QObject::connect(ui->actionPr_f_rences,SIGNAL(triggered()),this,SLOT(preference()));
     QObject::connect(ui->toolButton_2,SIGNAL(clicked()),this,SLOT(selectFile()));
+    QObject::connect(ui->toolButton_3,SIGNAL(clicked()),this,SLOT(selectDir()));
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -63,19 +65,22 @@ void Ihm::traitement()
     enabelDisabel(false);
     ui->label->setText("");
     if (m_popup != NULL ){
-        QObject::disconnect(m_popup,SIGNAL(exportHtml(QString)),m_document,SLOT(exportHtml(QString)));
+         QObject::disconnect(m_popup,SIGNAL(exportHtml(QString)),m_document,SLOT(exportHtml(QString)));
         delete m_popup;
         m_popup = NULL;
     }
     if(!erreurChamp()){ // Si les champ son bien entrer
-        if(focusTab() != 1){
+        if(focusTab() != 1 ){
             m_popup = new IhmPopup();
             QObject::connect(m_document,SIGNAL(progress(int,QString)),m_popup,SLOT(progressDL(int,QString)));
             QObject::connect(m_popup,SIGNAL(annuler()),m_document,SLOT(annulerTraitement()));
             QObject::connect(m_popup,SIGNAL(annuler()),this,SLOT(annulerTraitement()));
             m_popup->startDL();
         }
-        m_document->traiterDocument();
+        if(focusTab() != 4)
+            m_document->traiterDocument();
+        else
+            m_document->traiterDossier();
     }
 }
 
@@ -110,6 +115,16 @@ QString Ihm::getNameFile(){
 }
 
 ////////////////////////////////////////////////////////////////////////
+// Name:       Ihm::getDir()
+// Purpose:    Implementation of Ihm::getDir()
+// Return:     QString
+////////////////////////////////////////////////////////////////////////
+
+QString Ihm::getDir(){
+    return ui->lineEdit_5->text();
+}
+
+////////////////////////////////////////////////////////////////////////
 // Name:       Ihm::result(bool plagier, QString url)
 // Purpose:    Implementation of Ihm::result()
 // Return:     void
@@ -132,9 +147,14 @@ void Ihm::result(bool error, QString errorString)
             QObject::disconnect(m_popup,SIGNAL(annuler()),m_document,SLOT(annulerTraitement()));
             QObject::disconnect(m_popup,SIGNAL(annuler()),this,SLOT(annulerTraitement()));
             delete m_popup;
-            m_popup = new IhmPopup();
-            QObject::connect(m_popup,SIGNAL(exportHtml(QString)),m_document,SLOT(exportHtml(QString)));
-            m_popup->result(m_document->getDocumentEnrichi(1),m_document->getDocumentEnrichi(2),m_document->getListSource(),m_document->getNbSource(),m_document->getPrCentPlagier());
+            m_popup = NULL;
+            if(n == 4)
+                QMessageBox::information(this, "Traitement Fini", "Tous les fichiers on été traité");
+            else{
+                m_popup = new IhmPopup();
+                QObject::connect(m_popup,SIGNAL(exportHtml(QString)),m_document,SLOT(exportHtml(QString)));
+                m_popup->result(m_document->getDocumentEnrichi(1),m_document->getDocumentEnrichi(2),m_document->getListSource(),m_document->getNbSource(),m_document->getPrCentPlagier());
+            }
         }
     }
     enabelDisabel(true);
@@ -200,6 +220,8 @@ int Ihm::focusTab(){
         n=2;
     else if (focus == ui->tab_5)
         n=3;
+    else
+        n=4;
 
     return n;
 }
@@ -221,6 +243,19 @@ void Ihm::selectFile()
         else
             ui->lineEdit_4->setText("");
     }
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Ihm::selectDir()
+// Purpose:    Implementation of Ihm::selectDir()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void Ihm::selectDir()
+{
+    QString dir = QFileDialog::getExistingDirectory(this);
+
+    ui->lineEdit_5->setText(dir);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -256,6 +291,10 @@ bool Ihm::erreurChamp()
         result(true,"Vous devez selectioné un fichier");
         b=true;
     }
+    else if (n == 4 && ui->lineEdit_5->text() == "" ){
+        result(true,"Vous devez selectioné un dossier");
+        b=true;
+    }
 
     else if(n == 1 && !ui->checkBox_4->isChecked() && !ui->checkBox_5->isChecked() && !ui->checkBox_6->isChecked()){
         result(true,"Aucun moteur de recheche sélectioné");
@@ -271,7 +310,10 @@ bool Ihm::erreurChamp()
         result(true,"Aucun moteur de recheche sélectioné");
         b=true;
     }
-
+    else if(n == 4 && !ui->checkBox_13->isChecked() && !ui->checkBox_14->isChecked() && !ui->checkBox_15->isChecked()){
+        result(true,"Aucun moteur de recheche sélectioné");
+        b=true;
+    }
 
     return b;
 }
@@ -329,6 +371,22 @@ bool Ihm::isSelect(int idMoteurRecherche)
             break;
         case 2:
             b=ui->checkBox_11->isChecked();
+            break;
+        default:
+            b=false;
+            break;
+        }
+        break;
+    case 4:
+        switch(idMoteurRecherche){
+        case 0:
+            b=ui->checkBox_13->isChecked();
+            break;
+        case 1:
+            b=ui->checkBox_15->isChecked();
+            break;
+        case 2:
+            b=ui->checkBox_14->isChecked();
             break;
         default:
             b=false;

@@ -99,7 +99,7 @@ bool TextDocx::decompress()
 
     if(!QFile().exists(EXE_UNZIP))
     {
-        QMessageBox::warning(0,"Fichier manquant","Le programme nécessaire pour lire ce type de ficier est absent.\n\nVeuillez réinstaller l'application pour corriger le problème");
+        emit error(true,"Le programme nécessaire pour lire ce type de ficier est absent.\n\nVeuillez réinstaller l'application pour corriger le problème");
         return false;
     }
 
@@ -112,7 +112,7 @@ bool TextDocx::decompress()
 
     if(!file.exists("tmp/word/document.xml"))
     {
-        QMessageBox::information(0,"Fichier incorrect","Le fichier est endommagé ou d'un format inconnu. Impossible de continuer");
+        emit error(true,"Le fichier est endommagé ou d'un format inconnu. Impossible de continuer");
         return false;
     }
     file.open(QFile::ReadOnly);

@@ -37,6 +37,7 @@ public:
     QString getText();
     QString getNameFile();
     QString getDocument();
+    QString getDir();
     int focusTab();
     void enabelDisabel(bool b);
     bool erreurChamp();
@@ -53,6 +54,7 @@ public slots:
     void preference();
     void documentation();
     void selectFile();
+    void selectDir();
     void result(bool error = false , QString errorString = QString());
     void annulerTraitement();
 

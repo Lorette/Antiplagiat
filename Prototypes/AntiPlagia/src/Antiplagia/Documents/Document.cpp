@@ -22,6 +22,9 @@ Document::Document(Ihm* interface) : QObject()
     m_moteurRecherche << new Bing();
     m_ihm = interface;
     m_file = NULL;
+    QStringList filters;
+    filters << "*.pdf" << "*.docx" << "*.odt";
+    m_dir.setNameFilters(filters);
 
     // Quand la requete est terminer, execute traiterReponse
     QObject::connect(m_moteurRecherche[0], SIGNAL(requetFini(int)), this, SLOT(traiterReponse(int)));
@@ -98,7 +101,49 @@ void Document::traiterDocument()
 }
 
 ////////////////////////////////////////////////////////////////////////
+// Name:       Document::traiterDossier()
+// Purpose:    Implementation of Document::traiterDossier()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void Document::traiterDossier()
+{
+    m_listFile.clear();
+    m_dir.setPath(m_ihm->getDir());
+    m_indiceListFile = 0;
+    m_listFile = m_dir.entryList();
+
+    m_dir.mkdir("Anti-Plagiat Resultat");
+    traiterEnvoieDossier();
+}
+
+
+////////////////////////////////////////////////////////////////////////
 // Name:       Document::traiterEnvoie()
+// Purpose:    Implementation of Document::traiterEnvoieDossier()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void Document::traiterEnvoieDossier()
+{
+    // Parcour la liste des fichier jusqu'a en trouver un valide est le traite
+    for(int i=m_indiceListFile;i<m_listFile.size();i++){
+        if(setFile(m_dir.path()+"/"+m_listFile[m_indiceListFile])){
+            emit progress((int)((float)m_indiceListFile/(float)m_listFile.size()*100),"Traitement des fichiers... "+QString::number(m_indiceListFile)+"/"+QString::number(m_listFile.size()));
+            traiterDocument();
+            return;
+        }
+        else
+            m_indiceListFile++;
+    }
+
+    if(m_indiceListFile == m_listFile.size() )
+        emit traitementFini();
+}
+
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Document::traiterEnvoie(int idMoteurRecherche)
 // Purpose:    Implementation of Document::traiterEnvoie()
 // Return:     void
 ////////////////////////////////////////////////////////////////////////
@@ -108,13 +153,21 @@ void Document::traiterEnvoie(int idMoteurRecherche)
     if(!m_annuler){
         m_requet++;
         m_indiceCible[idMoteurRecherche]++;
-        if(m_requet == m_nbRequet) // Toute les requete on été traiter
-            emit traitementFini();//signal de fin
+        if(m_requet == m_nbRequet){ // Toute les requete on été traiter
+            if(m_ihm->focusTab() == 4){
+                exportHtml(m_dir.path()+"/Anti-Plagiat Resultat/"+m_listFile[m_indiceListFile]+".html");
+                m_indiceListFile++;
+                traiterEnvoieDossier();
+            }
+            else
+                emit traitementFini();//signal de fin
+        }
         else if(m_indiceCible[idMoteurRecherche] == m_textCible.size())
             ;// tout les requettes de ce moteur de recherche on été effectuer
         else{
-            if(m_ihm->focusTab() != 1)
+            if(m_ihm->focusTab() == 2 || m_ihm->focusTab() == 3)
                 emit progress(5+(int)((float)m_requet/(float)m_nbRequet*90),"Envoi des requetes... "+QString::number(m_requet)+"/"+QString::number(m_nbRequet));
+
             m_moteurRecherche[idMoteurRecherche]->setText(m_textCible[m_indiceCible[idMoteurRecherche]].getText());
             // Envoi la requette
             m_moteurRecherche[idMoteurRecherche]->sendRequest();
@@ -160,6 +213,11 @@ void Document::initialisation()
     if(focus == 1){//Par texte
         m_text=m_ihm->getText();
         m_textCible << TextCible(m_text.trimmed());
+    }
+    else if(focus == 4 ){ //Par dossier
+        m_text=m_file->getText();
+        determinTextCibleFile(m_ihm->getNbMots(),m_ihm->getParPolice(),m_ihm->getParTaille());
+        adaptNbCible(m_ihm->getPrCentATester(),m_ihm->nbMaxRequete(),m_ihm->getNbMots());
     }
     else{
         emit progress(0,"Selection des texts cible...");
@@ -306,7 +364,15 @@ bool Document::setFile(QString file)
     if(file.endsWith(".odt",Qt::CaseInsensitive))
         m_file = new TextOdt(file);
 
-    if(!m_file->fileIsValid())
+    if(m_ihm->focusTab() == 3)
+        QObject::connect(m_file,SIGNAL(error(bool,QString)),m_ihm,SLOT(result(bool,QString)));
+
+    bool valid=m_file->fileIsValid();
+
+    if(m_ihm->focusTab() == 3)
+        QObject::disconnect(m_file,SIGNAL(error(bool,QString)),m_ihm,SLOT(result(bool,QString)));
+
+    if(!valid)
     {
         delete m_file;
         m_file = NULL;

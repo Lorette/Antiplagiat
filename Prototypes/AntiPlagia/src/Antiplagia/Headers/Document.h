@@ -54,6 +54,7 @@ public:
    QString getText();
    void setText(QString text);
    void traiterDocument();
+   void traiterDossier();
    void traiterEnvoie(int idMoteurRecherche);
    void initialisation();
    void determinTextCible(int nbMots);
@@ -67,6 +68,7 @@ public:
    int getPrCentPlagier();
    QString getListSource();
    void adaptNbCible(int prCent,int maxReq,int nbMotsParTest);
+   void traiterEnvoieDossier();
 
 private:
    QString m_text;
@@ -78,6 +80,9 @@ private:
    ListTextCicble m_textCible;
    QList<MoteurRecherche*> m_moteurRecherche;
    Ihm *m_ihm;
+   QDir m_dir;
+   QStringList m_listFile;
+   int m_indiceListFile;
 
 
 public slots:
