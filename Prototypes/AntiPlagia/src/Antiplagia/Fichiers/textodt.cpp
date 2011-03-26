@@ -175,8 +175,8 @@ void TextOdt::extract_Text()
     }
 
     // Pour tester
-    for(int i = 0;i<m_textCibles.count();i++)
-        QMessageBox::information(0,"hhh",m_textCibles.at(i)->toString());
+    //for(int i = 0;i<m_textCibles.count();i++)
+        //QMessageBox::information(0,"hhh",m_textCibles.at(i)->toString());
 }
 
 ////////////////////////////////////////////////////////////////////////

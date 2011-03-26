@@ -118,7 +118,7 @@ void IhmPopup::changeMode()
 
 void IhmPopup::clickExportHtml()
 {
-    QString file = QFileDialog::getSaveFileName(this, "Enregistrer un fichier", QString(), "Images (*.html)");
+    QString file = QFileDialog::getSaveFileName(this, "Enregistrer un fichier", QString(), "Page Web (*.html)");
     if (file != "")
         emit exportHtml(file);
 }

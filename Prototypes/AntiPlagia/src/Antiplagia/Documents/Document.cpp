@@ -165,6 +165,7 @@ void Document::initialisation()
         emit progress(0,"Selection des texts cible...");
         if(focus == 2) {// Par document
             m_text=m_ihm->getDocument();
+            m_text.replace(QRegExp(" +")," ");
             determinTextCible(m_ihm->getNbMots());
         }
         else  // Par fichier
@@ -206,14 +207,12 @@ void Document::determinTextCible(int nbMots)
 {
         QStringList list = m_text.split(".");
         QStringList listFinal;
-        QStringList list2,list3;
+        QStringList list2;
         int n;
         QString s;
 
         for(int i=0;i<list.size();i++){
-            list3=(list[i]).split(" ");
-
-            //for(int j)
+            list2=(list[i]).split(" ");
 
             n=list2.size()/nbMots;
             for(int j=0;j < n ;j++){
@@ -260,7 +259,7 @@ QString Document::getUrlTextPlagier()
 ////////////////////////////////////////////////////////////////////////
 
 QString Document::getDocumentEnrichi(int mode){
-    QString doc=m_text;
+    QString doc="<html><head></head><body>"+m_text;
     if(mode == 1){
         emit progress(95,"Traitement des résultats... ");
         for(int i=0;i<m_textCible.size();i++)
@@ -284,6 +283,9 @@ QString Document::getDocumentEnrichi(int mode){
             list.clear();
         }
     }
+    doc.replace("\n","<br/>");
+    doc+="</body></html>";
+
     return doc;
 }
 
@@ -466,7 +468,6 @@ void Document::adaptNbCible(int prCent, int maxReq,int nbMotsParTest)
 
     if(maxReq != 0)
         nbReq=(nbReq > maxReq)? maxReq : nbReq;
-    QMessageBox::information(0,"",QString::number(nbReq));
 
     int n=m_textCible.size()-nbReq;
     if(n > 0)

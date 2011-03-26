@@ -71,6 +71,7 @@ bool TextPdf::fileIsValid()
 
 QString TextPdf::getText()
 {
+    m_text.replace(QRegExp(" +")," ");
     return m_text;
 }
 
