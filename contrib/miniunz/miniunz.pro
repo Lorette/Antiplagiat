@@ -19,5 +19,4 @@ else {
     SOURCES += ioapi.c miniunz.c unzip.c
  }
 
-LIBS += ../../../Antiplagia/contrib/miniunz/zlib.a
-
+LIBS += $$PWD/zlib.a
