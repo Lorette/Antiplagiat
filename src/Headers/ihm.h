@@ -64,43 +64,43 @@ public:
      */
     ~Ihm();
     /*!
-     *  \brief Recupere la phrasedans le cas d'une entrée par phrase.
+     *  \brief Recupere la phrase dans le cas d'une entree par phrase.
      *
      *  \return la phrase.
      */
     QString getText();
     /*!
-     *  \brief Recupere le nom du fichier dans le cas d'une entrée par fichier.
+     *  \brief Recupere le nom du fichier dans le cas d'une entree par fichier.
      *
      *  \return le nom du fichier.
      */
     QString getNameFile();
     /*!
-     *  \brief Recupere le texte dans le cas d'une entrée par paragraphe.
+     *  \brief Recupere le texte dans le cas d'une entree par paragraphe.
      *
-     *  \return le texte .
+     *  \return le texte.
      */
     QString getDocument();
     /*!
-     *  \brief Recupere le nom du dossier dans le cas d'une entrée par dossier.
+     *  \brief Recupere le nom du dossier dans le cas d'une entree par dossier.
      *
      *  \return le nom du fichier.
      */
     QString getDir();
     /*!
-     *  \brief Recupere l'onglet utilisé.
+     *  \brief Recupere l'onglet utilise.
      *
-     *  \return l'id de la méthode d'entrée utilisé.
+     *  \return l'id de la methode d'entree utilise.
      */
     int focusTab();
     /*!
      *  \brief Active/Desactive l'interaction utilisateur.
      *
-     *  \param b : true pour activer, false pour désactiver.
+     *  \param b : true pour activer, false pour desactiver.
      */
     void enabelDisabel(bool b);
     /*!
-     *  \brief Verifie les conditions nécessaires au lancement de la recherche.
+     *  \brief Verifie les conditions necessaires au lancement de la recherche.
      *
      *  \return true si il y'a des erreurs, false si il n'y en a pas.
      */
@@ -183,7 +183,7 @@ public slots:
     /*!
      *  \brief Slot pour afficher un resultat.
      *
-     *  Affiche un résultat d'operation : erreur ou non.
+     *  Affiche un resultat d'operation : erreur ou non.
      */
     void result(bool error = false , QString errorString = QString());
     /*!
@@ -195,7 +195,7 @@ public slots:
 
 private:
     Ui::Ihm *ui; /*!< Interface de la classe*/
-    Document *m_document; /*!< Instance de Document associée*/
+    Document *m_document; /*!< Instance de Document associee*/
     IhmPopup *m_popup; /*!< Instance de la popup de progression*/
     Settings *m_settings; /*!< Instance de la fenetre de preferences*/
 
