@@ -1,7 +1,7 @@
 /***********************************************************************
  * Module:  Document.h
  * Author:  fabien
- * Modified: vendredi 11 février 2011 16:33:13
+ * Modified: vendredi 11 fevrier 2011 16:33:13
  * Purpose: Declaration of the class Document
  ***********************************************************************/
 
@@ -105,7 +105,7 @@ public:
     *  \brief Traitement complet du document.
     *
     *  Recupere les information saisie par l'utilisateur depuis l'IHM,
-    *  initialise toute les variable et object, détermine les cible puis
+    *  initialise toute les variable et object, determine les cible puis
     *  envoie les requetes avec les differents moteur de recherche.
     */
    void traiterDocument();
@@ -113,7 +113,7 @@ public:
     *  \brief Traitement complet d'un dossier.
     *
     *  Fait appele a traiterDocument pour tout les fichier du dossier,
-    *  puis enregistre le résultat au forma HTM.
+    *  puis enregistre le resultat au forma HTM.
     */
    void traiterDossier();
    /*!
@@ -126,14 +126,14 @@ public:
     */
    void traiterEnvoie(int idMoteurRecherche);
    /*!
-    *  \brief Initialise les varaible, object et détermine les cible.
+    *  \brief Initialise les varaible, object et determine les cible.
     *
     */
    void initialisation();
    /*!
-    *  \brief Détermine les bouts de texte a teste pour la section "Par paragraphe".
+    *  \brief Determine les bouts de texte a teste pour la section "Par paragraphe".
     *
-    *  Détermine les cibles en fonction du nombres de mots pour chaque cible.
+    *  Determine les cibles en fonction du nombres de mots pour chaque cible.
     *  \param nbMots : Nombre de mots par cible.
     */
    void determinTextCible(int nbMots);
@@ -165,43 +165,107 @@ public:
     */
    QString getUrlTextPlagier();
    /*!
-    *  \brief Détermine les bouts de texte a teste pour la section "Par Document" et "Par Dossier".
+    *  \brief Determine les bouts de texte a tester pour la section "Par Document" et "Par Dossier".
     *
-    *  Détermine les cibles en fonction du nombres de mots, de la police et de la taille pour chaque cible.
+    *  Determine les cibles en fonction du nombres de mots, de la police et de la taille pour chaque cible.
     *  \param nbMots : Nombre de mots par cible.
     *  \param tri_police : Active la selection par police a true.
     *  \param tri_size : Active la selection par taille a true.
     */
    void determinTextCibleFile(int nbMots, bool tri_police, bool tri_size);
+   /*!
+    *  \brief Renvoi une liste de toute des sources pour le document.
+    *
+    *  Determine les sources du document par comparaison avec toutes les sources des requetes envoyees.
+    *  \param source : source du document.
+    *  \return la liste des sources unifies.
+    */
    QList<MemeSource> getMemeSource(QString source);
+   /*!
+    *  \brief Determine le nombre de sources du document.
+    *
+    *  Determine le nombre de source uniques du document.
+    *  \return le nombre de source.
+    */
    int getNbSource();
+   /*!
+    *  \brief Determine le pourcentage du document plagie.
+    *
+    *  Calcul le pourcentage de texte plagie dans le document courant.
+    *  \return le pourcentage de texte plagie.
+    */
    int getPrCentPlagier();
+   /*!
+    *  \brief Recupere la liste de toute les sources.
+    *
+    *  Renvoie la liste de toutes les sources uniques ou non.
+    *  \return toutes les sources du document.
+    */
    QString getListSource();
+   /*!
+    *  \brief Adapte le nombre de cible.
+    *
+    *  Adapte le nombre de cibles a tester en fonction des options du programme.
+    *  \param prCent : le pourcetage de document a tester
+    *  \param maxReq : le nombre maximum de requete autorisees
+    *  \param nbMotsParTest : nombre de mots par requete
+    */
    void adaptNbCible(int prCent,int maxReq,int nbMotsParTest);
+   /*!
+    *  \brief Traite le dossier pour la section "Par Dossier".
+    *
+    *  Parcours le dossier et traite chaque fichier rencontre.
+    */
    void traiterEnvoieDossier();
 
 private:
-   QString m_text;
-   Extension *m_file;
-   int m_indiceCible[3];
-   int m_nbRequet;
-   int m_requet;
-   bool m_annuler;
-   ListTextCicble m_textCible;
-   QList<MoteurRecherche*> m_moteurRecherche;
-   Ihm *m_ihm;
-   QDir m_dir;
-   QStringList m_listFile;
-   int m_indiceListFile;
+   QString m_text; /*!< Texte du document*/
+   Extension *m_file; /*!< Fichier a traiter*/
+   int m_indiceCible[3]; /*!< Indice de texte cible courant par moteur de recherche*/
+   int m_nbRequet; /*!< Nombre de requete totale*/
+   int m_requet; /*!< Requete courante*/
+   bool m_annuler; /*!< Action a annuler*/
+   ListTextCicble m_textCible; /*!< Liste de tout les textes a traiter*/
+   QList<MoteurRecherche*> m_moteurRecherche; /*!< Liste des moteurs de recherches*/
+   Ihm *m_ihm; /*!< Interface homme machine associee*/
+   QDir m_dir; /*!< Dossier a traiter*/
+   QStringList m_listFile; /*!< Liste de tout les fichiers dans le dossier*/
+   int m_indiceListFile; /*!< Iterateur de liste pour m_listFile*/
 
 
 public slots:
+   /*!
+    *  \brief Slot de traitement.
+    *
+    *  Traite la reponse du moteur de recherche donne.
+    *  \param idMoteurRecherche : identifiant moteur de rec<herche
+    */
    void traiterReponse(int idMoteurRecherche);
+   /*!
+    *  \brief Slot d'Annulation.
+    *
+    *  Stop toutes les actions entreprises
+    */
    void annulerTraitement();
+   /*!
+    *  \brief Slot d'export en HTML.
+    *
+    *  Exporte en html le resultat dans un fichier "file"
+    *  \param file : nom du fichier
+    */
    void exportHtml(QString file);
 
 signals:
+    /*!
+     *  \brief Signal emit lorsque le traitement est fini.
+     */
     void traitementFini();
+    /*!
+     *  \brief Signal emit lorsque la progression du traitement avance.
+     *
+     *  \param valeur : valeur de progression
+     *  \param text : texte associe a la valeur de progression
+     */
     void progress(int valeur,QString text = QString(""));
 
 };
