@@ -29,7 +29,7 @@ class MoteurRecherche;
 /*! \class Yahoo
   * \brief Classe Yahoo :
   *
-  *  Classe qui gere toutes les specificites du moteur de recherche Yahoo
+  *  Classe qui gere toutes les specificites du moteur de recherche Yahoo.
   */
 
 class Yahoo : public MoteurRecherche
@@ -39,13 +39,13 @@ public:
     /*!
      *  \brief Constructeur.
      *
-     *  Constructeur de la classe Yahoo
+     *  Constructeur de la classe Yahoo.
      */
     Yahoo();
     /*!
      *  \brief Destructeur.
      *
-     *  Destructeur de la classe Yahoo
+     *  Destructeur de la classe Yahoo.
      */
     ~Yahoo();
     /*!

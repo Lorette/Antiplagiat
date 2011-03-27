@@ -32,7 +32,7 @@ namespace Ui {
 /*! \class Settings
   * \brief Classe Settings :
   *
-  *  Classe graphique qui gere toutes les preferences de l'utilisateur et les enregistre avec la class QStrings
+  *  Classe graphique qui gere toutes les preferences de l'utilisateur et les enregistre avec la class QStrings.
   */
 
 class Settings : public QWidget
@@ -43,14 +43,14 @@ public:
     /*!
      *  \brief Constructeur.
      *
-     *  Constructeur de la classe Settings
+     *  Constructeur de la classe Settings.
      *  \param parent : pointeur sur le widget parent
      */
     explicit Settings(QWidget *parent = 0);
     /*!
      *  \brief Destructeur.
      *
-     *  Destructeur de la classe Settings
+     *  Destructeur de la classe Settings.
      */
     ~Settings();
     /*!
@@ -115,7 +115,7 @@ public slots:
     void click_close();
 
 private:
-    Ui::Settings *ui;/*!< Formulaire de l'affichage*/
+    Ui::Settings *ui; /*!< Formulaire de l'affichage*/
 };
 
 #endif // SETTINGS_H

@@ -29,7 +29,7 @@ class MoteurRecherche;
 /*! \class Google
   * \brief Classe Google :
   *
-  *  Classe qui gere toutes les specificites du moteur de recherche Google
+  *  Classe qui gere toutes les specificites du moteur de recherche Google.
   */
 
 class Google : public MoteurRecherche
@@ -39,13 +39,13 @@ public:
     /*!
      *  \brief Constructeur.
      *
-     *  Constructeur de la classe Google
+     *  Constructeur de la classe Google.
      */
    Google();
    /*!
     *  \brief Destructeur.
     *
-    *  Destructeur de la classe Google
+    *  Destructeur de la classe Google.
     */
    ~Google();
    /*!

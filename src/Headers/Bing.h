@@ -29,7 +29,7 @@ class MoteurRecherche;
 /*! \class Bing
   * \brief Classe Bing :
   *
-  *  Classe qui gere toutes les specificites du moteur de recherche Bing
+  *  Classe qui gere toutes les specificites du moteur de recherche Bing.
   */
 
 class Bing : public MoteurRecherche
@@ -39,13 +39,13 @@ public:
     /*!
      *  \brief Constructeur.
      *
-     *  Constructeur de la classe Bing
+     *  Constructeur de la classe Bing.
      */
     Bing();
     /*!
      *  \brief Destructeur.
      *
-     *  Destructeur de la classe Bing
+     *  Destructeur de la classe Bing.
      */
     ~Bing();
     /*!
