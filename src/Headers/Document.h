@@ -174,11 +174,10 @@ public:
     */
    void determinTextCibleFile(int nbMots, bool tri_police, bool tri_size);
    /*!
-    *  \brief Renvoi une liste de toute des sources pour le document.
+    *  \brief Renvoi une liste de toute les Cible plagier sur la meme source.
     *
-    *  Determine les sources du document par comparaison avec toutes les sources des requetes envoyees.
-    *  \param source : source du document.
-    *  \return la liste des sources unifies.
+    *  \param source : url a tester.
+    *  \return la liste des sources dans la structure MemeSource.
     */
    QList<MemeSource> getMemeSource(QString source);
    /*!
