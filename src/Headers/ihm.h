@@ -20,12 +20,6 @@
  * \date 26 mars 2011
  */
 
-/*! \class Ihm
-  * \brief Classe Ihm :
-  *
-  *  Classe maitresse, interface avec l'utilisateur.
-  */
-
 #include <QWebView>
 #include <QMainWindow>
 #include <QPushButton>
@@ -44,6 +38,12 @@ namespace Ui {
 class Document;
 class IhmPopup;
 class Settings;
+
+/*! \class Ihm
+  * \brief Classe Ihm :
+  *
+  *  Classe maitresse, interface avec l'utilisateur.
+  */
 
 class Ihm : public QMainWindow
 {

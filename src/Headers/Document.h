@@ -8,6 +8,18 @@
 #ifndef DOCUMENT_H
 #define	DOCUMENT_H
 
+/*!
+ * \file Document.h
+ * \brief Class pricipale.
+ * \author RONGIARD Fabien
+ *         DUREUIL Brice
+ *         CRESSON Thomas
+ *         NAJAR Soufiene
+ *         FATNI Elkhader
+ * \version 1.0
+ * \date 26 mars 2011
+ */
+
 #include <QString>
 #include "MoteurRecherche.h"
 #include "ihm.h"
@@ -51,18 +63,65 @@ struct MemeSource
 };
 
 
+/*! \class Document
+  * \brief Classe Document :
+  *
+  *  Classe principal du logiciel qui gere et organise
+  *  tout le traitement des taches a effectue.
+  */
+
 class Document : public QObject
 {
 
 Q_OBJECT
 
 public:
+    /*!
+     *  \brief Constructeur.
+     *
+     *  Constructeur de la classe Document.
+     *  \param interface : Interface de l'utilisateur
+     */
    Document(Ihm* interface);
+   /*!
+    *  \brief Destructeur.
+    *
+    *  Destructeur de la classe Document.
+    */
    ~Document();
+   /*!
+    *  \brief Retourne le texte du document.
+    *
+    *  \return QString contenant le texte.
+    */
    QString getText();
+   /*!
+    *  \brief Initialise le texte du document.
+    *
+    *  \param text : Nouveau texte.
+    */
    void setText(QString text);
+   /*!
+    *  \brief Traitement complet du document.
+    *
+    *  Recupere les information saisie par l'utilisateur depuis l'IHM,
+    *  initialise toute les variable et object, détermine les cible puis
+    *  envoie les requetes avec les differents moteur de recherche.
+    */
    void traiterDocument();
+   /*!
+    *  \brief Traitement complet d'un dossier.
+    *
+    *  Fait appele a traiterDocument pour tout les fichier du dossier,
+    *  puis enregistre le résultat au forma HTM.
+    */
    void traiterDossier();
+   /*!
+    *  \brief Traite l'envoi le la prochaine requete.
+    *
+    *  pour un moteur de recherche
+    *  \param idMoteurRecherche : Id du moteur de recherche
+    */
    void traiterEnvoie(int idMoteurRecherche);
    void initialisation();
    void determinTextCible(int nbMots);
