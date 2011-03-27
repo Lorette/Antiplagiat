@@ -33,7 +33,6 @@ class TextCible;
   *  Classe qui gere la liste de tous les TextCible.
   */
 
-
 class ListTextCicble : public QList<TextCible>
 {
 public:

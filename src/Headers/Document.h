@@ -35,11 +35,19 @@ class TextDocx;
 class TextPdf;
 class TextOdt;
 
+/**
+ * \struct MemeSource
+ * \brief Structure MemeSource :
+ *
+ * Structure utilise pour recupere un ensemble de texte ayant la
+ * meme url comme source de plagia, puis stocker sa position
+ * dans une liste.
+ */
 typedef struct MemeSource MemeSource;
 struct MemeSource
 {
-    int position;
-    QString text;
+    int position; /*!< Position dans la liste*/
+    QString text; /*!< Texte plagie provenant de la meme source*/
 };
 
 
