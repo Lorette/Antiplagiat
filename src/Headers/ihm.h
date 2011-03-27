@@ -8,6 +8,24 @@
 #ifndef IHM_H
 #define IHM_H
 
+/*!
+ * \file ihm.h
+ * \brief Interface Homme Machine
+ * \author RONGIARD Fabien
+ *         DUREUIL Brice
+ *         CRESSON Thomas
+ *         NAJAR Soufiene
+ *         FATNI Elkhader
+ * \version 1.0
+ * \date 26 mars 2011
+ */
+
+/*! \class Ihm
+  * \brief Classe Ihm :
+  *
+  *  Classe maitresse, interface avec l'utilisateur.
+  */
+
 #include <QWebView>
 #include <QMainWindow>
 #include <QPushButton>
@@ -32,38 +50,154 @@ class Ihm : public QMainWindow
     Q_OBJECT
 
 public:
+    /*!
+     *  \brief Constructeur.
+     *
+     *  Constructeur de la classe Ihm.
+     *  \param parent : pointeur sur le widget parent
+     */
     explicit Ihm(QWidget *parent = 0);
+    /*!
+     *  \brief Destructeur.
+     *
+     *  Destructeur de la classe Extension.
+     */
     ~Ihm();
-    QFile *m_file;
+    /*!
+     *  \brief Recupere la phrasedans le cas d'une entrée par phrase.
+     *
+     *  \return la phrase.
+     */
     QString getText();
+    /*!
+     *  \brief Recupere le nom du fichier dans le cas d'une entrée par fichier.
+     *
+     *  \return le nom du fichier.
+     */
     QString getNameFile();
+    /*!
+     *  \brief Recupere le texte dans le cas d'une entrée par paragraphe.
+     *
+     *  \return le texte .
+     */
     QString getDocument();
+    /*!
+     *  \brief Recupere le nom du dossier dans le cas d'une entrée par dossier.
+     *
+     *  \return le nom du fichier.
+     */
     QString getDir();
+    /*!
+     *  \brief Recupere l'onglet utilisé.
+     *
+     *  \return l'id de la méthode d'entrée utilisé.
+     */
     int focusTab();
+    /*!
+     *  \brief Active/Desactive l'interaction utilisateur.
+     *
+     *  \param b : true pour activer, false pour désactiver.
+     */
     void enabelDisabel(bool b);
+    /*!
+     *  \brief Verifie les conditions nécessaires au lancement de la recherche.
+     *
+     *  \return true si il y'a des erreurs, false si il n'y en a pas.
+     */
     bool erreurChamp();
+    /*!
+     *  \brief Verifie si un moteur de recherche est selectionne.
+     *
+     *  \param idMoteurRecherche : identifiant du moteur de recherche
+     *  \return true si il est selectionne, false sinon.
+     */
     bool isSelect(int idMoteurRecherche);
+    /*!
+     *  \brief Recupere le nombre de mots envoye par requete.
+     *
+     *  \return le nombre de mot.
+     */
     int getNbMots();
+    /*!
+     *  \brief Verifie la selection par taille.
+     *
+     *  \return true si active, false sinon.
+     */
     bool getParTaille();
+    /*!
+     *  \brief Verifie la selection par police.
+     *
+     *  \return true si active, false sinon.
+     */
     bool getParPolice();
+    /*!
+     *  \brief Recupere le pourcentage de document a tester.
+     *
+     *  \return le pourcentage.
+     */
     int getPrCentATester();
+    /*!
+     *  \brief Recupere le nombre maximum de requete.
+     *
+     *  \return le nombre maximum de requete.
+     */
     int nbMaxRequete();
 
 public slots:
+    /*!
+     *  \brief Slot pour lancer le traitement.
+     *
+     *  Enclenche le processus de tri et envoie les requetes.
+     */
     void traitement();
+    /*!
+     *  \brief Slot pour afficher les informations sur le programme.
+     *
+     *  Ouvre une nouvelle fenetre affichant les informations sur le programme.
+     */
     void aPropos();
+    /*!
+     *  \brief Slot pour afficher les options.
+     *
+     *  Ouvre une nouvelle fenetre affichant les preferences configurables par l'utilisateur.
+     */
     void preference();
+    /*!
+     *  \brief Slot pour afficher la documentation.
+     *
+     *  Ouvre une nouvelle fenetre affichant la documentation technique.
+     */
     void documentation();
+    /*!
+     *  \brief Slot pour selectionner un fichier.
+     *
+     *  Ouvre une nouvelle fenetre permettant de selectionner un fichier.
+     */
     void selectFile();
+    /*!
+     *  \brief Slot pour selectionner un dossier.
+     *
+     *  Ouvre une nouvelle fenetre permettant de selectionner un dossier.
+     */
     void selectDir();
+    /*!
+     *  \brief Slot pour afficher un resultat.
+     *
+     *  Affiche un résultat d'operation : erreur ou non.
+     */
     void result(bool error = false , QString errorString = QString());
+    /*!
+     *  \brief Slot pour arreter le traitement.
+     *
+     *  Stoppe le traitement en cours.
+     */
     void annulerTraitement();
 
 private:
-    Ui::Ihm *ui;
-    Document *m_document;
-    IhmPopup *m_popup;
-    Settings *m_settings;
+    Ui::Ihm *ui; /*!< Interface de la classe*/
+    Document *m_document; /*!< Instance de Document associée*/
+    IhmPopup *m_popup; /*!< Instance de la popup de progression*/
+    Settings *m_settings; /*!< Instance de la fenetre de preferences*/
 
 };
 

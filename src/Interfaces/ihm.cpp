@@ -22,7 +22,6 @@ Ihm::Ihm(QWidget *parent) : QMainWindow(parent), ui(new Ui::Ihm)
     m_settings = new Settings(this);
 
     m_popup = NULL;
-    m_file = NULL;
 
     QObject::connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(traitement()));
     QObject::connect(ui->pushButton_2, SIGNAL(clicked()), this, SLOT(traitement()));
@@ -50,8 +49,6 @@ Ihm::~Ihm()
 
     if (m_popup != NULL)
         delete m_popup;
-    if (m_file != NULL )
-        delete m_file;
 }
 
 ////////////////////////////////////////////////////////////////////////
