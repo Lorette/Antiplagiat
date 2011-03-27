@@ -119,16 +119,59 @@ public:
    /*!
     *  \brief Traite l'envoi le la prochaine requete.
     *
-    *  pour un moteur de recherche
-    *  \param idMoteurRecherche : Id du moteur de recherche
+    *  Verifie si le moteur de recherche qui a terminer
+    *  sa derniere requete a fini, et si il na pas fini effectue
+    *  sa prochaine requete.
+    *  \param idMoteurRecherche : Id du moteur de recherche qui a fini sa derniere requete.
     */
    void traiterEnvoie(int idMoteurRecherche);
+   /*!
+    *  \brief Initialise les varaible, object et détermine les cible.
+    *
+    */
    void initialisation();
+   /*!
+    *  \brief Détermine les bouts de texte a teste pour la section "Par paragraphe".
+    *
+    *  Détermine les cibles en fonction du nombres de mots pour chaque cible.
+    *  \param nbMots : Nombre de mots par cible.
+    */
    void determinTextCible(int nbMots);
+   /*!
+    *  \brief Pour la section "Par phrase" determine si cette phrase est plagie.
+    *
+    *  \return true si elle est plagie, false sinon.
+    */
    bool textIsPlagier();
+   /*!
+    *  \brief Initialise le fichier a traiter, et teste si il est valide.
+    *
+    *  \param file : Nom du fichier.
+    *  \return true si le fichier est valide, false sinon.
+    */
    bool setFile(QString file);
+   /*!
+    *  \brief Retourne le document enrichie avec du HTML/CSS.
+    *
+    *  Retourne le document enrichie pour afficher en coleur les bouts de texte plagie.
+    *  \param mode : 1 pour une seul couleur, 2 pour une couleur differente pour chaque source.
+    *  \return QString contenant le texte enrichie..
+    */
    QString getDocumentEnrichi(int mode);
+   /*!
+    *  \brief Pour la section "Par phrase" retourne l'URL d'ou provient le texte.
+    *
+    *  \return QString contenant l'URL.
+    */
    QString getUrlTextPlagier();
+   /*!
+    *  \brief Détermine les bouts de texte a teste pour la section "Par Document" et "Par Dossier".
+    *
+    *  Détermine les cibles en fonction du nombres de mots, de la police et de la taille pour chaque cible.
+    *  \param nbMots : Nombre de mots par cible.
+    *  \param tri_police : Active la selection par police a true.
+    *  \param tri_size : Active la selection par taille a true.
+    */
    void determinTextCibleFile(int nbMots, bool tri_police, bool tri_size);
    QList<MemeSource> getMemeSource(QString source);
    int getNbSource();
