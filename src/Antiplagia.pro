@@ -64,3 +64,5 @@ SOURCES += main.cpp \
 RESOURCES += Ressources/antiplagia.qrc
 
 win32:RC_FILE += Ressources/ico.rc
+
+TRANSLATIONS = antiplagia_en.ts antiplagia_es.ts antiplagia_it.ts antiplagia_de.ts antiplagia_ar.ts
