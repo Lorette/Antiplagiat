@@ -130,14 +130,14 @@ QString Ihm::getDir(){
 void Ihm::result(bool error, QString errorString)
 {
     if (error)
-        QMessageBox::critical(this, "Erreur", errorString);
+        QMessageBox::critical(this, QObject::tr("Erreur"), errorString);
     else{
         int n=focusTab();
         if(n == 1){ // Par text
             if(m_document->textIsPlagier()) // text plagier
-                ui->label->setText("<h3>Ce texte a été plagié</h3>\nSource: <a href=\""+m_document->getUrlTextPlagier()+"\"> "+m_document->getUrlTextPlagier()+" </a>");
+                ui->label->setText("<h3>"+QObject::tr("Ce texte a été plagié")+"</h3>\n"+QObject::tr("Source: ")+"<a href=\""+m_document->getUrlTextPlagier()+"\"> "+m_document->getUrlTextPlagier()+" </a>");
             else
-                ui->label->setText("<h3>Ce texte n'a pas été plagié</h3>");
+                ui->label->setText("<h3>"+QObject::tr("Ce texte n'a pas été plagié")+"</h3>");
         }
         else{// Par document
             QObject::disconnect(m_document,SIGNAL(progress(int,QString)),m_popup,SLOT(progressDL(int,QString)));
@@ -146,7 +146,7 @@ void Ihm::result(bool error, QString errorString)
             delete m_popup;
             m_popup = NULL;
             if(n == 4)
-                QMessageBox::information(this, "Traitement Fini", "Tous les fichiers on été traité");
+                QMessageBox::information(this, QObject::tr("Traitement Fini"), QObject::tr("Tous les fichiers on été traité"));
             else{
                 m_popup = new IhmPopup();
                 QObject::connect(m_popup,SIGNAL(exportHtml(QString)),m_document,SLOT(exportHtml(QString)));
@@ -168,7 +168,7 @@ void Ihm::aPropos()
 {
     QDialog* action_propos = new QDialog (this);
     QVBoxLayout *layout = new QVBoxLayout;
-    QString propos = "<strong>Projet Anti-Plagiat</strong>:<br/><br/><u><i>Réalisé par</i></u>:<ul><li>Fabien RONGIARD</li><li>Brice DUREUIL</li><li>Elkader FATNI</li><li>Soufi&egrave;ne NAJAR</li><li>Thomas CRESSON</li></ul><br/><u><i>Langage de programmation utilisé</u></i>:<ul><li>Langage C++</li></ul><br/><u><i>Framework utilisée</u></i>:<ul><li>Qt 4.7</li></ul><br/><br/>Pour de plus amples informations visitez notre <a href=\"http://lorette.fr.nf\">site web</a>.";
+    QString propos = "<strong>"+QObject::tr("Projet Anti-Plagiat")+"</strong>:<br/><br/><u><i>"+QObject::tr("Réalisé par")+"</i></u>:<ul><li>Fabien RONGIARD</li><li>Brice DUREUIL</li><li>Elkader FATNI</li><li>Soufi&egrave;ne NAJAR</li><li>Thomas CRESSON</li></ul><br/><u><i>"+QObject::tr("Langage de programmation utilisé")+"</u></i>:<ul><li>"+QObject::tr("Langage C++")+"</li></ul><br/><u><i>"+QObject::tr("Framework utilisée")+"</u></i>:<ul><li>Qt 4.7</li></ul><br/><br/>"+QObject::tr("Pour de plus amples informations visitez notre")+" <a href=\"http://lorette.fr.nf\">"+QObject::tr("site web")+"</a>.";
     QLabel *text = new QLabel(propos);
     text->setOpenExternalLinks(true);
     layout->addWidget(text);
@@ -234,7 +234,7 @@ int Ihm::focusTab(){
 
 void Ihm::selectFile()
 {
-    QString file = QFileDialog::getOpenFileName(this, "Ouvrir un fichier", QString(), "Fichier (*.pdf *.docx *.odt)");
+    QString file = QFileDialog::getOpenFileName(this, QObject::tr("Ouvrir un fichier"), QString(), QObject::tr("Fichier")+" (*.pdf *.docx *.odt)");
 
     if(file != "")
     {
@@ -280,38 +280,38 @@ bool Ihm::erreurChamp()
     bool b=false;
     int n=focusTab();
     if(n == 1 && ui->lineEdit_3->text() == ""){
-        result(true,"Vous devez saisir un texte à tester");
+        result(true,QObject::tr("Vous devez saisir un texte à tester"));
         b=true;
     }
     else if (n == 2 && ui->textEdit_2->toPlainText() == ""){
-        result(true,"Vous devez saisir le texte du document à tester");
+        result(true,QObject::tr("Vous devez saisir le texte du document à tester"));
         b=true;
     }
     else if (n == 3 && ui->lineEdit_4->text() == "" ){
-        result(true,"Vous devez selectioné un fichier");
+        result(true,QObject::tr("Vous devez selectioné un fichier"));
         b=true;
     }
     else if (n == 4 && ui->lineEdit_5->text() == "" ){
-        result(true,"Vous devez selectioné un dossier");
+        result(true,QObject::tr("Vous devez selectioné un dossier"));
         b=true;
     }
 
     else if(n == 1 && !ui->checkBox_4->isChecked() && !ui->checkBox_5->isChecked() && !ui->checkBox_6->isChecked()){
-        result(true,"Aucun moteur de recheche sélectioné");
+        result(true,QObject::tr("Aucun moteur de recheche sélectioné"));
         b=true;
     }
 
     else if(n == 2 && !ui->checkBox_7->isChecked() && !ui->checkBox_8->isChecked() && !ui->checkBox_9->isChecked()){
-        result(true,"Aucun moteur de recheche sélectioné");
+        result(true,QObject::tr("Aucun moteur de recheche sélectioné"));
         b=true;
     }
 
     else if(n == 3 && !ui->checkBox_10->isChecked() && !ui->checkBox_11->isChecked() && !ui->checkBox_12->isChecked()){
-        result(true,"Aucun moteur de recheche sélectioné");
+        result(true,QObject::tr("Aucun moteur de recheche sélectioné"));
         b=true;
     }
     else if(n == 4 && !ui->checkBox_13->isChecked() && !ui->checkBox_14->isChecked() && !ui->checkBox_15->isChecked()){
-        result(true,"Aucun moteur de recheche sélectioné");
+        result(true,QObject::tr("Aucun moteur de recheche sélectioné"));
         b=true;
     }
 

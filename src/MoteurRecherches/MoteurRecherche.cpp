@@ -186,5 +186,5 @@ void MoteurRecherche::downloadFinish()
 
 void MoteurRecherche::downloadError(QNetworkReply::NetworkError){
     QNetworkReply *r = qobject_cast<QNetworkReply*>(sender());
-    emit erreurRequet(true,"Erreur lors du chargement. Vérifiez votre connexion internet ou réessayez plus tard <br /><br /> Code de l'erreur : <br /><em>" + r->errorString()+"</em>");
+    emit erreurRequet(true,QObject::tr("Erreur lors du chargement. Vérifiez votre connexion internet ou réessayez plus tard")+" <br /><br /> "+QObject::tr("Code de l'erreur")+" : <br /><em>" + r->errorString()+"</em>");
 }

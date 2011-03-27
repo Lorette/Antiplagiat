@@ -129,7 +129,7 @@ void Document::traiterEnvoieDossier()
     // Parcour la liste des fichier jusqu'a en trouver un valide est le traite
     for(int i=m_indiceListFile;i<m_listFile.size();i++){
         if(setFile(m_dir.path()+"/"+m_listFile[m_indiceListFile])){
-            emit progress((int)((float)m_indiceListFile/(float)m_listFile.size()*100),"Traitement des fichiers... "+QString::number(m_indiceListFile)+"/"+QString::number(m_listFile.size()));
+            emit progress((int)((float)m_indiceListFile/(float)m_listFile.size()*100),QObject::tr("Traitement des fichiers")+"... "+QString::number(m_indiceListFile)+"/"+QString::number(m_listFile.size()));
             traiterDocument();
             return;
         }
@@ -166,7 +166,7 @@ void Document::traiterEnvoie(int idMoteurRecherche)
             ;// tout les requettes de ce moteur de recherche on été effectuer
         else{
             if(m_ihm->focusTab() == 2 || m_ihm->focusTab() == 3)
-                emit progress(5+(int)((float)m_requet/(float)m_nbRequet*90),"Envoi des requetes... "+QString::number(m_requet)+"/"+QString::number(m_nbRequet));
+                emit progress(5+(int)((float)m_requet/(float)m_nbRequet*90),QObject::tr("Envoi des requetes")+"... "+QString::number(m_requet)+"/"+QString::number(m_nbRequet));
 
             m_moteurRecherche[idMoteurRecherche]->setText(m_textCible[m_indiceCible[idMoteurRecherche]].getText());
             // Envoi la requette
@@ -220,7 +220,7 @@ void Document::initialisation()
         adaptNbCible(m_ihm->getPrCentATester(),m_ihm->nbMaxRequete(),m_ihm->getNbMots());
     }
     else{
-        emit progress(0,"Selection des texts cible...");
+        emit progress(0,QObject::tr("Selection des texts cible")+"...");
         if(focus == 2) {// Par document
             m_text=m_ihm->getDocument();
             m_text.replace(QRegExp(" +")," ");
@@ -319,7 +319,7 @@ QString Document::getUrlTextPlagier()
 QString Document::getDocumentEnrichi(int mode){
     QString doc="<html><head></head><body>"+m_text;
     if(mode == 1){
-        emit progress(95,"Traitement des résultats... ");
+        emit progress(95,QObject::tr("Traitement des résultats")+"... ");
         for(int i=0;i<m_textCible.size();i++)
             if(m_textCible[i].isPlagier())
                 doc.replace(m_textCible[i].getText(),"<a style=\"text-decoration:none;background:yellow;color:black;\" href=\""+m_textCible[i].getUrl()+"\" >"+m_textCible[i].getText()+"</a>");
@@ -510,7 +510,7 @@ void Document::exportHtml(QString file)
     html+=css;
     html+="<script language=\"Javascript\"> window.onload = function() { document.styleSheets[2].disabled=false; } </script><script language=\"Javascript\"> function changeMode(){ if ( document.styleSheets[1].disabled == false ) { document.styleSheets[1].disabled=true; document.styleSheets[2].disabled=false; } else{ document.styleSheets[1].disabled=false; document.styleSheets[2].disabled=true; } } </script>";
 
-    html+="</head><body><div id=\"contenu\" ><div id=\"info\" ><table><tr><td><strong>Texte plagié à "+QString::number(getPrCentPlagier())+"%</strong></td><td><p class=\"boutton\" onClick=\"changeMode()\">Changer Mode Couleur</p></td><td><strong>Nombres de sources: "+QString::number(getNbSource())+"</strong></td></tr></table></div><div id=\"text\">";
+    html+="</head><body><div id=\"contenu\" ><div id=\"info\" ><table><tr><td><strong>"+QObject::tr("Texte plagié à")+" "+QString::number(getPrCentPlagier())+"%</strong></td><td><p class=\"boutton\" onClick=\"changeMode()\">"+QObject::tr("Changer Mode Couleur")+"</p></td><td><strong>"+QObject::tr("Nombres de sources")+": "+QString::number(getNbSource())+"</strong></td></tr></table></div><div id=\"text\">";
     html+=doc;
     html+="</div><div id=\"source\">";
     html+=getListSource();

@@ -70,8 +70,8 @@ void IhmPopup::result(QString text1,QString text2,QString listSource,int nbSourc
     ui2 = new Ui::Resultat();
     ui2->setupUi(this);
     ui2->textBrowser->setText(text1);
-    ui2->label_2->setText("<strong>Nombres de sources: "+QString::number(nbSource)+"</strong>");
-    ui2->label->setText("<strong>Texte plagié à "+QString::number(prCenPlagier)+"% </strong>");
+    ui2->label_2->setText("<strong>"+QObject::tr("Nombres de sources")+": "+QString::number(nbSource)+"</strong>");
+    ui2->label->setText("<strong>"+QObject::tr("Texte plagié à")+" "+QString::number(prCenPlagier)+"% </strong>");
     ui2->textBrowser_2->setText(listSource);
     m_text1=text1;
     m_text2=text2;
@@ -118,7 +118,7 @@ void IhmPopup::changeMode()
 
 void IhmPopup::clickExportHtml()
 {
-    QString file = QFileDialog::getSaveFileName(this, "Enregistrer un fichier", QString(), "Page Web (*.html)");
+    QString file = QFileDialog::getSaveFileName(this, QObject::tr("Enregistrer un fichier"), QString(), QObject::tr("Page Web")+" (*.html)");
     if (file != "")
         emit exportHtml(file);
 }

@@ -1011,6 +1011,7 @@ color: rgb(0, 0, 127);</string>
      <addaction name="actionDeutsch"/>
      <addaction name="actionEspa_ol"/>
      <addaction name="actionItaliano"/>
+     <addaction name="action"/>
     </widget>
     <addaction name="actionPr_f_rences"/>
     <addaction name="menuLangue"/>
@@ -1093,6 +1094,14 @@ color: rgb(0, 0, 127);</string>
    </property>
    <property name="text">
     <string>Italiano</string>
+   </property>
+  </action>
+  <action name="action">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>العربية</string>
    </property>
   </action>
  </widget>
