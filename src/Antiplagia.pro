@@ -65,9 +65,9 @@ RESOURCES += Ressources/antiplagia.qrc
 
 win32:RC_FILE += Ressources/ico.rc
 
-TRANSLATIONS = antiplagia_en.ts \
-               antiplagia_es.ts \
-               antiplagia_it.ts \
-               antiplagia_de.ts \
-               antiplagia_ar.ts \
-               antiplagia_fr.ts
+TRANSLATIONS = Traduction/antiplagia_en.ts \
+               Traduction/antiplagia_es.ts \
+               Traduction/antiplagia_it.ts \
+               Traduction/antiplagia_de.ts \
+               Traduction/antiplagia_ar.ts \
+               Traduction/antiplagia_fr.ts
