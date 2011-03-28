@@ -181,9 +181,14 @@ p, li { white-space: pre-wrap; }
         <translation>Treating Files</translation>
     </message>
     <message>
-        <location filename="Documents/Document.cpp" line="169"/>
+        <location filename="Documents/Document.cpp" line="132"/>
         <source>Traitement des fichiers</source>
         <translation>Sending queries</translation>
+    </message>
+    <message>
+        <location filename="Documents/Document.cpp" line="169"/>
+        <source>Envoi des requetes</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Documents/Document.cpp" line="223"/>
@@ -259,7 +264,7 @@ You need to reinstall this application to solve the problem</translation>
     <message>
         <location filename="Interfaces/ihm.cpp" line="140"/>
         <source>Ce texte n&apos;a pas été plagié</source>
-        <translation>This text is not plagiarized></translation>
+        <translation>This text is not plagiarized&gt;</translation>
     </message>
     <message>
         <location filename="Interfaces/ihm.cpp" line="149"/>
@@ -374,7 +379,7 @@ You need to reinstall this application to solve the problem</translation>
     </message>
     <message utf8="true">
         <location filename="Formulaires/resultat.ui" line="77"/>
-       <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -387,7 +392,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="Formulaires/resultat.ui" line="88"/>
-       <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
