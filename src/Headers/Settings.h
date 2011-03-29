@@ -117,6 +117,7 @@ public slots:
      *  Lors de la fermeture de la fenetre, les preferences sont enregistre.
      */
     void click_close();
+    void changeEvent(QEvent *event);
 
 private:
     Ui::Settings *ui; /*!< Formulaire de l'affichage*/

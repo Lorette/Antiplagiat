@@ -225,6 +225,7 @@ public slots:
      *
      */
     void traductionAr();
+    void changeEvent(QEvent *event);
 
 private:
     Ui::Ihm *ui; /*!< Interface de la classe*/

@@ -93,6 +93,7 @@ public slots:
      *
      */
     void clickExportHtml();
+    void changeEvent(QEvent *event);
 
 signals:
     /*!

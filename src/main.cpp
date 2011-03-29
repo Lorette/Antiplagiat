@@ -22,8 +22,11 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
     Ihm w;
     a.setStyle(new QPlastiqueStyle);
+
+
     w.show();
 
     return a.exec();

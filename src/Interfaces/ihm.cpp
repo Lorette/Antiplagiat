@@ -594,3 +594,13 @@ void Ihm::traductionAr()
     ui->actionItaliano->setChecked(false);
     ui->action->setChecked(true);
 }
+
+void Ihm::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+    else
+         QWidget::changeEvent(event);
+}

@@ -126,3 +126,14 @@ void IhmPopup::clickExportHtml()
     if (file != "")
         emit exportHtml(file);
 }
+
+void IhmPopup::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+        ui2->retranslateUi(this);
+    }
+    else
+         QWidget::changeEvent(event);
+}
