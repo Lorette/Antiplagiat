@@ -31,7 +31,6 @@
 #include "textdocx.h"
 #include "textPdf.h"
 #include "textodt.h"
-#include <QWidget>
 #include <QObject>
 #include <QStringList>
 #include <QtGlobal>

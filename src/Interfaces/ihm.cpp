@@ -33,6 +33,13 @@ Ihm::Ihm(QWidget *parent) : QMainWindow(parent), ui(new Ui::Ihm)
     QObject::connect(ui->actionPr_f_rences,SIGNAL(triggered()),this,SLOT(preference()));
     QObject::connect(ui->toolButton_2,SIGNAL(clicked()),this,SLOT(selectFile()));
     QObject::connect(ui->toolButton_3,SIGNAL(clicked()),this,SLOT(selectDir()));
+
+    QObject::connect(ui->actionFran_ais,SIGNAL(triggered()),this,SLOT(traductionFr()));
+    QObject::connect(ui->actionEnglish,SIGNAL(triggered()),this,SLOT(traductionEn()));
+    QObject::connect(ui->actionDeutsch,SIGNAL(triggered()),this,SLOT(traductionDe()));
+    QObject::connect(ui->actionEspa_ol,SIGNAL(triggered()),this,SLOT(traductionEs()));
+    QObject::connect(ui->actionItaliano,SIGNAL(triggered()),this,SLOT(traductionIt()));
+    QObject::connect(ui->action,SIGNAL(triggered()),this,SLOT(traductionAr()));
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -468,4 +475,82 @@ int Ihm::getPrCentATester()
 int Ihm::nbMaxRequete()
 {
     return m_settings->nbMaxRequete();
+}
+
+void Ihm::traductionFr()
+{
+    QTranslator* translator = new QTranslator();
+    translator->load("Traduction/antiplagia_fr");
+    qApp->installTranslator(translator);
+    ui->actionFran_ais->setChecked(true);;
+    ui->actionEnglish->setChecked(false);
+    ui->actionDeutsch->setChecked(false);
+    ui->actionEspa_ol->setChecked(false);
+    ui->actionItaliano->setChecked(false);
+    ui->action->setChecked(false);
+}
+
+void Ihm::traductionEn()
+{
+    QTranslator* translator = new QTranslator();
+    translator->load("Traduction/antiplagia_en");
+    qApp->installTranslator(translator);
+    ui->actionFran_ais->setChecked(false);
+    ui->actionEnglish->setChecked(true);
+    ui->actionDeutsch->setChecked(false);
+    ui->actionEspa_ol->setChecked(false);
+    ui->actionItaliano->setChecked(false);
+    ui->action->setChecked(false);
+}
+
+void Ihm::traductionDe()
+{
+    QTranslator* translator = new QTranslator();
+    translator->load("Traduction/antiplagia_de");
+    qApp->installTranslator(translator);
+    ui->actionFran_ais->setChecked(false);
+    ui->actionEnglish->setChecked(false);
+    ui->actionDeutsch->setChecked(true);
+    ui->actionEspa_ol->setChecked(false);
+    ui->actionItaliano->setChecked(false);
+    ui->action->setChecked(false);
+}
+
+void Ihm::traductionEs()
+{
+    QTranslator* translator = new QTranslator();
+    translator->load("Traduction/antiplagia_es");
+    qApp->installTranslator(translator);
+    ui->actionFran_ais->setChecked(false);
+    ui->actionEnglish->setChecked(false);
+    ui->actionDeutsch->setChecked(false);
+    ui->actionEspa_ol->setChecked(true);
+    ui->actionItaliano->setChecked(false);
+    ui->action->setChecked(false);
+}
+
+void Ihm::traductionIt()
+{
+    QTranslator* translator  = new QTranslator();
+    translator->load("Traduction/antiplagia_it");
+    qApp->installTranslator(translator);
+    ui->actionFran_ais->setChecked(false);
+    ui->actionEnglish->setChecked(false);
+    ui->actionDeutsch->setChecked(false);
+    ui->actionEspa_ol->setChecked(false);
+    ui->actionItaliano->setChecked(true);
+    ui->action->setChecked(false);
+}
+
+void Ihm::traductionAr()
+{
+    QTranslator* translator = new QTranslator();
+    translator->load("Traduction/antiplagia_ar");
+    qApp->installTranslator(translator);
+    ui->actionFran_ais->setChecked(false);
+    ui->actionEnglish->setChecked(false);
+    ui->actionDeutsch->setChecked(false);
+    ui->actionEspa_ol->setChecked(false);
+    ui->actionItaliano->setChecked(false);
+    ui->action->setChecked(true);
 }

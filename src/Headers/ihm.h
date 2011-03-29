@@ -22,12 +22,11 @@
 
 #include <QWebView>
 #include <QMainWindow>
-#include <QPushButton>
-#include <QLineEdit>
 #include <QMessageBox>
 #include <QString>
 #include <QFile>
 #include <QFileDialog>
+#include <QTranslator>
 #include "document.h"
 #include "ihmPopup.h"
 #include "settings.h"
@@ -192,6 +191,36 @@ public slots:
      *  Stoppe le traitement en cours.
      */
     void annulerTraitement();
+    /*!
+     *  \brief Slot de traduction Francais.
+     *
+     */
+    void traductionFr();
+    /*!
+     *  \brief Slot de traduction Anglais.
+     *
+     */
+    void traductionEn();
+    /*!
+     *  \brief Slot de traduction Allemand.
+     *
+     */
+    void traductionDe();
+    /*!
+     *  \brief Slot de traduction Espagnol.
+     *
+     */
+    void traductionEs();
+    /*!
+     *  \brief Slot de traduction Italien.
+     *
+     */
+    void traductionIt();
+    /*!
+     *  \brief Slot de traduction Arabe.
+     *
+     */
+    void traductionAr();
 
 private:
     Ui::Ihm *ui; /*!< Interface de la classe*/
