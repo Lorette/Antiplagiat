@@ -26,7 +26,7 @@ HEADERS += Headers/bing.h \
            Headers/google.h \
            Headers/ihm.h \
            Headers/ihmPopup.h \
-           Headers/listTextCicble.h \
+           Headers/listTextCible.h \
            Headers/moteurRecherche.h \
            Headers/textCible.h \
            Headers/textdocx.h \
@@ -45,7 +45,7 @@ FORMS += Formulaires/ihm.ui \
 
 SOURCES += main.cpp \
            Documents/document.cpp \
-           Documents/listTextCicble.cpp \
+           Documents/listTextCible.cpp \
            Documents/textCible.cpp \
            Documents/xstring.cpp \
            Fichiers/extension.cpp \
