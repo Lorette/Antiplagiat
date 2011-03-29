@@ -172,44 +172,44 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../Documents/Document.cpp" line="132"/>
+        <location filename="../Documents/document.cpp" line="132"/>
         <source>Traitement des fichiers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Documents/Document.cpp" line="169"/>
+        <location filename="../Documents/document.cpp" line="169"/>
         <source>Envoi des requetes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Documents/Document.cpp" line="223"/>
+        <location filename="../Documents/document.cpp" line="223"/>
         <source>Selection des texts cible</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Documents/Document.cpp" line="322"/>
+        <location filename="../Documents/document.cpp" line="322"/>
         <source>Traitement des résultats</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Documents/Document.cpp" line="513"/>
-        <location filename="../Interfaces/IhmPopup.cpp" line="74"/>
+        <location filename="../Documents/document.cpp" line="513"/>
+        <location filename="../Interfaces/ihmPopup.cpp" line="74"/>
         <source>Texte plagié à</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Documents/Document.cpp" line="513"/>
+        <location filename="../Documents/document.cpp" line="513"/>
         <source>Changer Mode Couleur</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Documents/Document.cpp" line="513"/>
-        <location filename="../Interfaces/IhmPopup.cpp" line="73"/>
+        <location filename="../Documents/document.cpp" line="513"/>
+        <location filename="../Interfaces/ihmPopup.cpp" line="73"/>
         <source>Nombres de sources</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Fichiers/TextPdf.cpp" line="42"/>
+        <location filename="../Fichiers/textPdf.cpp" line="42"/>
         <location filename="../Fichiers/textdocx.cpp" line="102"/>
         <location filename="../Fichiers/textodt.cpp" line="102"/>
         <source>Le programme nécessaire pour lire ce type de ficier est absent.
@@ -218,20 +218,20 @@ Veuillez réinstaller l&apos;application pour corriger le problème</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Fichiers/TextPdf.cpp" line="51"/>
-        <location filename="../Fichiers/TextPdf.cpp" line="65"/>
+        <location filename="../Fichiers/textPdf.cpp" line="51"/>
+        <location filename="../Fichiers/textPdf.cpp" line="65"/>
         <location filename="../Fichiers/textdocx.cpp" line="115"/>
         <location filename="../Fichiers/textodt.cpp" line="115"/>
         <source>Le fichier est endommagé ou d&apos;un format inconnu. Impossible de continuer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Interfaces/IhmPopup.cpp" line="121"/>
+        <location filename="../Interfaces/ihmPopup.cpp" line="121"/>
         <source>Enregistrer un fichier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../Interfaces/IhmPopup.cpp" line="121"/>
+        <location filename="../Interfaces/ihmPopup.cpp" line="121"/>
         <source>Page Web</source>
         <translation type="unfinished"></translation>
     </message>
@@ -339,12 +339,12 @@ Veuillez réinstaller l&apos;application pour corriger le problème</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../MoteurRecherches/MoteurRecherche.cpp" line="189"/>
+        <location filename="../MoteurRecherches/moteurRecherche.cpp" line="189"/>
         <source>Erreur lors du chargement. Vérifiez votre connexion internet ou réessayez plus tard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../MoteurRecherches/MoteurRecherche.cpp" line="189"/>
+        <location filename="../MoteurRecherches/moteurRecherche.cpp" line="189"/>
         <source>Code de l&apos;erreur</source>
         <translation type="unfinished"></translation>
     </message>

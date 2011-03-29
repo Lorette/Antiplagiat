@@ -1106,6 +1106,31 @@ color: rgb(0, 0, 127);</string>
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>lineEdit_3</tabstop>
+  <tabstop>checkBox_6</tabstop>
+  <tabstop>checkBox_4</tabstop>
+  <tabstop>checkBox_5</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>textEdit_2</tabstop>
+  <tabstop>checkBox_7</tabstop>
+  <tabstop>checkBox_8</tabstop>
+  <tabstop>checkBox_9</tabstop>
+  <tabstop>pushButton_2</tabstop>
+  <tabstop>lineEdit_4</tabstop>
+  <tabstop>toolButton_2</tabstop>
+  <tabstop>checkBox_10</tabstop>
+  <tabstop>checkBox_11</tabstop>
+  <tabstop>checkBox_12</tabstop>
+  <tabstop>pushButton_3</tabstop>
+  <tabstop>lineEdit_5</tabstop>
+  <tabstop>toolButton_3</tabstop>
+  <tabstop>checkBox_13</tabstop>
+  <tabstop>checkBox_14</tabstop>
+  <tabstop>checkBox_15</tabstop>
+  <tabstop>pushButton_4</tabstop>
+ </tabstops>
  <resources>
   <include location="../Ressources/antiplagia.qrc"/>
  </resources>
