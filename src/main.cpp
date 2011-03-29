@@ -12,6 +12,7 @@
 #include <QtGui/QApplication>
 #include "ihm.h"
 #include <QPlastiqueStyle>
+#include <QTranslator>
 
 ////////////////////////////////////////////////////////////////////////
 // Name:       int main(int argc, char *argv[])
