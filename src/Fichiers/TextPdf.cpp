@@ -47,7 +47,7 @@ bool TextPdf::fileIsValid()
         return false;
     }
 
-    QProcess::execute(QString(EXE_TTOPDF) +" -eol dos \""+m_file +"\" tmp.txt");
+    QProcess::execute(QString(EXE_TTOPDF) +" \""+m_file +"\" tmp.txt");
 
     QFile file("tmp.txt");
 
