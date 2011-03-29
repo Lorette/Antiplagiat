@@ -21,7 +21,7 @@
  */
 
 #include <QList>
-#include "TextCible.h"
+#include "textCible.h"
 #include <QString>
 
 

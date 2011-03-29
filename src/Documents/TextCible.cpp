@@ -5,7 +5,7 @@
  * Purpose: Implementation of the class TextCible
  ***********************************************************************/
 
-#include "TextCible.h"
+#include "textCible.h"
 
 ////////////////////////////////////////////////////////////////////////
 // Name:       TextCible::TextCible()

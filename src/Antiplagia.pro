@@ -20,21 +20,21 @@ DEPENDPATH += . \
 INCLUDEPATH += . Headers
 
 # Input
-HEADERS += Headers/Bing.h \
-           Headers/Document.h \
-           Headers/Extension.h \
-           Headers/Google.h \
+HEADERS += Headers/bing.h \
+           Headers/document.h \
+           Headers/extension.h \
+           Headers/google.h \
            Headers/ihm.h \
-           Headers/IhmPopup.h \
-           Headers/ListTextCicble.h \
-           Headers/MoteurRecherche.h \
-           Headers/TextCible.h \
+           Headers/ihmPopup.h \
+           Headers/listTextCicble.h \
+           Headers/moteurRecherche.h \
+           Headers/textCible.h \
            Headers/textdocx.h \
            Headers/textodt.h \
-           Headers/TextPdf.h \
+           Headers/textPdf.h \
            Headers/xstring.h \
-           Headers/Yahoo.h \
-           Headers/Settings.h
+           Headers/yahoo.h \
+           Headers/settings.h
 
 
 FORMS += Formulaires/ihm.ui \
@@ -44,21 +44,21 @@ FORMS += Formulaires/ihm.ui \
 
 
 SOURCES += main.cpp \
-           Documents/Document.cpp \
-           Documents/ListTextCicble.cpp \
-           Documents/TextCible.cpp \
+           Documents/document.cpp \
+           Documents/listTextCicble.cpp \
+           Documents/textCible.cpp \
            Documents/xstring.cpp \
-           Fichiers/Extension.cpp \
+           Fichiers/extension.cpp \
            Fichiers/textdocx.cpp \
            Fichiers/textodt.cpp \
-           Fichiers/TextPdf.cpp \
+           Fichiers/textPdf.cpp \
            Interfaces/ihm.cpp \
-           Interfaces/IhmPopup.cpp \
-           MoteurRecherches/Bing.cpp \
-           MoteurRecherches/Google.cpp \
-           MoteurRecherches/MoteurRecherche.cpp \
-           MoteurRecherches/Yahoo.cpp \
-           Interfaces/Settings.cpp
+           Interfaces/ihmPopup.cpp \
+           MoteurRecherches/bing.cpp \
+           MoteurRecherches/google.cpp \
+           MoteurRecherches/moteurRecherche.cpp \
+           MoteurRecherches/yahoo.cpp \
+           Interfaces/settings.cpp
 
 
 RESOURCES += Ressources/antiplagia.qrc

@@ -5,7 +5,7 @@
  * Purpose: Implementation of the class MoteurRecherche
  ***********************************************************************/
 
-#include "MoteurRecherche.h"
+#include "moteurRecherche.h"
 
 ////////////////////////////////////////////////////////////////////////
 // Name:       MoteurRecherche::MoteurRecherche()

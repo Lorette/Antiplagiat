@@ -28,9 +28,9 @@
 #include <QString>
 #include <QFile>
 #include <QFileDialog>
-#include "Document.h"
-#include "IhmPopup.h"
-#include "Settings.h"
+#include "document.h"
+#include "ihmPopup.h"
+#include "settings.h"
 
 namespace Ui {
     class Ihm;

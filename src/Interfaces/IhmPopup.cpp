@@ -5,7 +5,7 @@
  * Purpose: Implementation of the class IhmPopup
  ***********************************************************************/
 
-#include "IhmPopup.h"
+#include "ihmPopup.h"
 
 ////////////////////////////////////////////////////////////////////////
 // Name:       IhmPopup::IhmPopup(QWidget *parent) : QWidget(parent)

@@ -5,7 +5,7 @@
  * Purpose: Implementation of the class Settings
  ***********************************************************************/
 
-#include "Settings.h"
+#include "settings.h"
 #include "ui_settings.h"
 
 

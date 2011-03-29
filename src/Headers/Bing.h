@@ -20,7 +20,7 @@
  * \date 26 mars 2011
  */
 
-#include "MoteurRecherche.h"
+#include "moteurRecherche.h"
 #include <QString>
 #include <QUrl>
 

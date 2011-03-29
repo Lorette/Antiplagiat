@@ -21,15 +21,15 @@
  */
 
 #include <QString>
-#include "MoteurRecherche.h"
+#include "moteurRecherche.h"
 #include "ihm.h"
-#include "Google.h"
-#include "Yahoo.h"
-#include "Bing.h"
-#include "ListTextCicble.h"
-#include "TextCible.h"
+#include "google.h"
+#include "yahoo.h"
+#include "bing.h"
+#include "listTextCicble.h"
+#include "textCible.h"
 #include "textdocx.h"
-#include "TextPdf.h"
+#include "textPdf.h"
 #include "textodt.h"
 #include <QWidget>
 #include <QObject>

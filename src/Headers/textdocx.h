@@ -29,7 +29,7 @@
 #include <QStringList>
 #include <QMessageBox>
 #include "xstring.h"
-#include "Extension.h"
+#include "extension.h"
 
 #ifdef _WIN32
 #define EXE_UNZIP ("miniunz.exe")

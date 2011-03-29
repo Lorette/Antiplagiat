@@ -26,7 +26,7 @@
 #include <QMessageBox>
 #include <QProcess>
 #include <QTextStream>
-#include "Extension.h"
+#include "extension.h"
 
 class Extension;
 
