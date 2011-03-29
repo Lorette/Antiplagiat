@@ -32,6 +32,12 @@
 #include <QTextStream>
 #include "extension.h"
 
+#ifdef _WIN32
+#define EXE_TTOPDF ("pdftotext.exe")
+#else
+#define EXE_TTOPDF ("/usr/bin/pdftotext")
+#endif
+
 class Extension;
 
 /*! \class TextPdf

@@ -41,13 +41,13 @@ TextPdf::~TextPdf()
 
 bool TextPdf::fileIsValid()
 {
-    if(!QFile().exists("pdftotext.exe"))
+    if(!QFile().exists(EXE_TTOPDF))
     {
         emit error(true,QObject::tr("Le programme nécessaire pour lire ce type de ficier est absent.\n\nVeuillez réinstaller l'application pour corriger le problème"));
         return false;
     }
 
-    QProcess::execute("pdftotext.exe -eol dos \""+m_file +"\" tmp.txt");
+    QProcess::execute(QString(EXE_TTOPDF) +" -eol dos \""+m_file +"\" tmp.txt");
 
     QFile file("tmp.txt");
 
