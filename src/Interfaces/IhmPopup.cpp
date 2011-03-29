@@ -127,6 +127,12 @@ void IhmPopup::clickExportHtml()
         emit exportHtml(file);
 }
 
+////////////////////////////////////////////////////////////////////////
+// Name:       IhmPopup::changeEvent(QEvent *event)
+// Purpose:    Implementation of IhmPopup::changeEvent()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
 void IhmPopup::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange)

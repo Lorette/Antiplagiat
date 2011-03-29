@@ -595,6 +595,12 @@ void Ihm::traductionAr()
     ui->action->setChecked(true);
 }
 
+////////////////////////////////////////////////////////////////////////
+// Name:       Ihm::changeEvent(QEvent *event)
+// Purpose:    Implementation of Ihm::changeEvent()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
 void Ihm::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange)

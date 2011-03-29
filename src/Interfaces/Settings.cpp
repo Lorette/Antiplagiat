@@ -153,6 +153,12 @@ void Settings::closeEvent(QCloseEvent *event)
     close();
 }
 
+////////////////////////////////////////////////////////////////////////
+// Name:       Settings::changeEvent(QEvent *event)
+// Purpose:    Implementation of Settings::changeEvent()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
 void Settings::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange)

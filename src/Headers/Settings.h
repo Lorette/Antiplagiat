@@ -117,6 +117,10 @@ public slots:
      *  Lors de la fermeture de la fenetre, les preferences sont enregistre.
      */
     void click_close();
+    /*!
+     *  \brief Event pour le changement de langue.
+     *
+     */
     void changeEvent(QEvent *event);
 
 private:

@@ -225,6 +225,10 @@ public slots:
      *
      */
     void traductionAr();
+    /*!
+     *  \brief Event pour le changement de langue.
+     *
+     */
     void changeEvent(QEvent *event);
 
 private:

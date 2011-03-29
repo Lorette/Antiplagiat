@@ -93,6 +93,10 @@ public slots:
      *
      */
     void clickExportHtml();
+    /*!
+     *  \brief Event pour le changement de langue.
+     *
+     */
     void changeEvent(QEvent *event);
 
 signals:

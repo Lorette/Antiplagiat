@@ -25,8 +25,6 @@ int main(int argc, char *argv[])
 
     Ihm w;
     a.setStyle(new QPlastiqueStyle);
-
-
     w.show();
 
     return a.exec();

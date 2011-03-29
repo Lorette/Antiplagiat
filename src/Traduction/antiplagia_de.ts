@@ -124,7 +124,7 @@
     <message>
         <location filename="../Formulaires/ihm.ui" line="1072"/>
         <source>English</source>
-        <translation>Ebglish</translation>
+        <translation>English</translation>
     </message>
     <message>
         <location filename="../Formulaires/ihm.ui" line="1080"/>
