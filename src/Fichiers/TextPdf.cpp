@@ -1,7 +1,11 @@
 /***********************************************************************
  * Module:  TextPdf.cpp
- * Author:  fabien
- * Modified: vendredi 11 février 2011 16:33:13
+ * Author:  RONGIARD Fabien
+ *          DUREUIL Brice
+ *          CRESSON Thomas
+ *          NAJAR Soufiene
+ *          FATNI Elkhader
+ * Modified: vendredi 26 mars 2011 16:46:28
  * Purpose: Implementation of the class TextPdf
  ***********************************************************************/
 

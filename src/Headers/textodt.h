@@ -1,7 +1,11 @@
 /***********************************************************************
  * Module:  textodt.h
- * Author:  fabien
- * Modified: vendredi 20 mars 2011 19:37:28
+ * Author:  RONGIARD Fabien
+ *          DUREUIL Brice
+ *          CRESSON Thomas
+ *          NAJAR Soufiene
+ *          FATNI Elkhader
+ * Modified: vendredi 26 mars 2011 16:46:28
  * Purpose: Declaration of the class TextOdt
  ***********************************************************************/
 

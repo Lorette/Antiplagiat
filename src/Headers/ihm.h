@@ -1,7 +1,11 @@
 /***********************************************************************
  * Module:  Ihm.h
- * Author:  fabien
- * Modified: vendredi 11 février 2011 16:46:28
+ * Author:  RONGIARD Fabien
+ *          DUREUIL Brice
+ *          CRESSON Thomas
+ *          NAJAR Soufiene
+ *          FATNI Elkhader
+ * Modified: vendredi 26 mars 2011 16:46:28
  * Purpose: Declaration of the class Ihm
  ***********************************************************************/
 

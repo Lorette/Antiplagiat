@@ -1,7 +1,11 @@
 /***********************************************************************
  * Module:  Ihm.cpp
- * Author:  fabien
- * Modified: vendredi 11 février 2011 16:44:15
+ * Author:  RONGIARD Fabien
+ *          DUREUIL Brice
+ *          CRESSON Thomas
+ *          NAJAR Soufiene
+ *          FATNI Elkhader
+ * Modified: vendredi 26 mars 2011 16:46:28
  * Purpose: Implementation of the class Ihm
  ***********************************************************************/
 
@@ -477,6 +481,12 @@ int Ihm::nbMaxRequete()
     return m_settings->nbMaxRequete();
 }
 
+////////////////////////////////////////////////////////////////////////
+// Name:       Ihm::traductionFr()
+// Purpose:    Implementation of Ihm::traductionFr()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
 void Ihm::traductionFr()
 {
     QTranslator* translator = new QTranslator();
@@ -489,6 +499,12 @@ void Ihm::traductionFr()
     ui->actionItaliano->setChecked(false);
     ui->action->setChecked(false);
 }
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Ihm::traductionEn()
+// Purpose:    Implementation of Ihm::traductionEn()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
 
 void Ihm::traductionEn()
 {
@@ -503,6 +519,12 @@ void Ihm::traductionEn()
     ui->action->setChecked(false);
 }
 
+////////////////////////////////////////////////////////////////////////
+// Name:       Ihm::traductionDe()
+// Purpose:    Implementation of Ihm::traductionDe()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
 void Ihm::traductionDe()
 {
     QTranslator* translator = new QTranslator();
@@ -515,6 +537,12 @@ void Ihm::traductionDe()
     ui->actionItaliano->setChecked(false);
     ui->action->setChecked(false);
 }
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Ihm::traductionEs()
+// Purpose:    Implementation of Ihm::traductionEs()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
 
 void Ihm::traductionEs()
 {
@@ -529,6 +557,12 @@ void Ihm::traductionEs()
     ui->action->setChecked(false);
 }
 
+////////////////////////////////////////////////////////////////////////
+// Name:       Ihm::traductionIt()
+// Purpose:    Implementation of Ihm::traductionIt()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
 void Ihm::traductionIt()
 {
     QTranslator* translator  = new QTranslator();
@@ -541,6 +575,12 @@ void Ihm::traductionIt()
     ui->actionItaliano->setChecked(true);
     ui->action->setChecked(false);
 }
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Ihm::traductionAr()
+// Purpose:    Implementation of Ihm::traductionAr()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
 
 void Ihm::traductionAr()
 {
