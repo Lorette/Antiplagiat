@@ -22,7 +22,9 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
+    QTranslator translator;
+    translator.load("Traduction/antiplagia_fr");
+    a.installTranslator(&translator);
     Ihm w;
     a.setStyle(new QPlastiqueStyle);
     w.show();
