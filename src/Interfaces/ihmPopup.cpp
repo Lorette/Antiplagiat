@@ -137,8 +137,10 @@ void IhmPopup::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange)
     {
-        ui->retranslateUi(this);
-        ui2->retranslateUi(this);
+        if(ui != NULL)
+			ui->retranslateUi(this);
+        if(ui2 != NULL)
+			ui2->retranslateUi(this);
     }
     else
          QWidget::changeEvent(event);
